@@ -5,14 +5,11 @@ $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 $first_name = $_POST['first_name'] ?? '';
 $last_name = $_POST['last_name'] ?? '';
-$id_card = $_POST['id_card'] ?? ''; //ไม่ได้ใช้ตัวนี้
 $birthdate = $_POST['birthdate'] ?? '';
-$email = $_POST['email'] ?? '';
 $phone_number = $_POST['phone_number'] ?? '';
 $nationality = $_POST['nationality'] ?? '';
 $citizen_id = $_POST['citizen_id'] ?? '';
 $religion = $_POST['religion'] ?? '';
-$address = $_POST['address'] ?? '';
 $enrollment_date = $_POST['enrollment_date'] ?? '';
 $grade_level = $_POST['grade_level'] ?? '';
 $status = $_POST['status'] ?? '';
@@ -27,8 +24,8 @@ $result = $connect->query($sql);
 $last_id = $connect->insert_id;
 if ($result) {
     // insert ข้อมูลลงในตาราง students
-    $sql2 = "INSERT INTO students (first_name, last_name, birthdate, email, phone_number, nationality, religion, address, enrollment_date, grade_level, status, user_id) 
-             VALUES ('$first_name', '$last_name', '$birthdate', '$email', '$phone_number', '$nationality', '$religion', '$address', '$enrollment_date', '$grade_level', '$status', '$last_id')";
+    $sql2 = "INSERT INTO students (first_name, last_name, birthdate, nationality, religion, enrollment_date, grade_level, status, user_id) 
+             VALUES ('$first_name', '$last_name', '$birthdate', '$nationality', '$religion', '$enrollment_date', '$grade_level', '$status', '$last_id')";
     $result2 = $connect->query($sql2);
 
     if ($result2) {
