@@ -1,3 +1,34 @@
+
+<?php
+include('../../config/database.php');
+$id = $_GET['id'] ?? '';
+if ($id) {
+
+
+
+    $sql = "SELECT * FROM administrators WHERE admin_id = $id";
+    $result = $connect->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        // select users table
+        $sql = "SELECT * FROM user WHERE id = " . $row['user_id'];
+        $result = $connect->query($sql);
+        $user = $result->fetch_assoc();
+    } else {
+        echo "<script>
+                alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+                window.location.href = 'admin_manage.php';
+            </script>";
+    }
+} else {
+    echo "<script>
+            alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+            window.location.href = 'admin_manage.php';
+        </script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,73 +49,71 @@
             <h3 class="text-3xl font-medium text-gray-700">แก้ไขข้อมูลผู้ดูแลระบบ</h3>
             <div class="flex flex-col mt-8">
                 <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <form action="insert_admin.php" method="POST" class="grid grid-cols-2 gap-4  inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+                    <form action="update_admin.php" method="POST" class="grid grid-cols-2 gap-4  inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
                         <!-- Row 1 -->
                         <div class="col-span-1">
                             <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                            <input type="text" name="username" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="username" class="border border-gray-400 p-2 w-full" value="<?php echo $user['username']; ?>"  required>
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <input type="hidden" name="old_username" value="<?php echo $user['username']; ?>">
                         </div>
                         <div class="col-span-1">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" name="password" class="border border-gray-400 p-2 w-full" required>
+                            <input type="password" name="password" class="border border-gray-400 p-2 w-full" value="<?php echo $user['password']; ?>" required>
                         </div>
+
 
                         <!-- Row 2 -->
                         <div class="col-span-1">
                             <label for="first_name" class="block text-sm font-medium text-gray-700">ชื่อ</label>
-                            <input type="text" name="first_name" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="first_name" class="border border-gray-400 p-2 w-full" value="<?php echo $row['first_name']; ?>" required>
                         </div>
                         <div class="col-span-1">
                             <label for="last_name" class="block text-sm font-medium text-gray-700">นามสกุล</label>
-                            <input type="text" name="last_name" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="last_name" class="border border-gray-400 p-2 w-full" value="<?php echo $row['last_name']; ?>" required>
                         </div>
 
-                        <!-- Row 3 -->
-                        <div class="col-span-2">
-                            <label for="position" class="block text-sm font-medium text-gray-700">ตำแหน่ง</label>
-                            <input type="text" name="position" class="border border-gray-400 p-2 w-full" required>
-                        </div>
 
                         <!-- Row 4 -->
                         <div class="col-span-2">
-                            <label for="id_card" class="block text-sm font-medium text-gray-700">เลขประจำตัวประชาชน</label>
-                            <input type="text" name="id_card" class="border border-gray-400 p-2 w-full" required>
+                            <label for="citizen_id" class="block text-sm font-medium text-gray-700">เลขประจำตัวประชาชน</label>
+                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" value="<?php echo $row['citizen_id']; ?>" required>
                         </div>
 
                         <!-- Row 5 -->
                         <div class="col-span-1">
                             <label for="birthdate" class="block text-sm font-medium text-gray-700">วัน/เดือน/ปี เกิด</label>
-                            <input type="date" name="birthdate" class="border border-gray-400 p-2 w-full" required>
+                            <input type="date" name="birthdate" class="border border-gray-400 p-2 w-full" value="<?php echo $row['birthdate']; ?>" required>
                         </div>
                         <div class="col-span-1">
                             <label for="email" class="block text-sm font-medium text-gray-700">อีเมล์</label>
-                            <input type="email" name="email" class="border border-gray-400 p-2 w-full" required>
+                            <input type="email" name="email" class="border border-gray-400 p-2 w-full" value="<?php echo $row['email']; ?>" required>
                         </div>
 
                         <!-- Row 6 -->
                         <div class="col-span-1">
                             <label for="phone_number" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
-                            <input type="text" name="phone_number" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="phone_number" class="border border-gray-400 p-2 w-full" value="<?php echo $row['phone_number']; ?>" required>
                         </div>
                         <div class="col-span-1">
                             <label for="nationality" class="block text-sm font-medium text-gray-700">เชื้อชาติ</label>
-                            <input type="text" name="nationality" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="nationality" class="border border-gray-400 p-2 w-full" value="<?php echo $row['nationality']; ?>" required>
                         </div>
 
                         <!-- Row 7 -->
                         <div class="col-span-1">
-                            <label for="citizen_id" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
-                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" required>
+                            <label for="ethnicity" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
+                            <input type="text" name="ethnicity" class="border border-gray-400 p-2 w-full" value="<?php echo $row['ethnicity']; ?>" required>
                         </div>
                         <div class="col-span-1">
                             <label for="religion" class="block text-sm font-medium text-gray-700">ศาสนา</label>
-                            <input type="text" name="religion" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="religion" class="border border-gray-400 p-2 w-full" value="<?php echo $row['religion']; ?>" required>
                         </div>
 
                         <!-- Row 8 -->
                         <div class="col-span-2">
                             <label for="address" class="block text-sm font-medium text-gray-700">ที่อยู่</label>
-                            <input type="text" name="address" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="address" class="border border-gray-400 p-2 w-full" value="<?php echo $row['address'] ?>" required>
                         </div>
 
                         <!-- Row 9 -->

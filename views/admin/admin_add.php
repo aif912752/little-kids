@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +43,8 @@
 
                         <!-- Row 4 -->
                         <div class="col-span-2">
-                            <label for="id_card" class="block text-sm font-medium text-gray-700">เลขประจำตัวประชาชน</label>
-                            <input type="text" name="id_card" class="border border-gray-400 p-2 w-full" required>
+                            <label for="citizen_id" class="block text-sm font-medium text-gray-700">เลขประจำตัวประชาชน</label>
+                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" required>
                         </div>
 
                         <!-- Row 5 -->
@@ -68,8 +69,8 @@
 
                         <!-- Row 7 -->
                         <div class="col-span-1">
-                            <label for="citizen_id" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
-                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" required>
+                            <label for="ethnicity" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
+                            <input type="text" name="ethnicity" class="border border-gray-400 p-2 w-full" required>
                         </div>
                         <div class="col-span-1">
                             <label for="religion" class="block text-sm font-medium text-gray-700">ศาสนา</label>
