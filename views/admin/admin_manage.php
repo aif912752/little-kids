@@ -54,8 +54,8 @@
                                     <td class="py-2 border border-black"><?php echo $row['phone_number']; ?></td>
                                     <td class="py-2 border border-black"><?php echo $row['email']; ?></td>
                                     <td class="py-2 border border-black">
-                                        <a href="admin_edit.php?id=<?php echo $row['id']; ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                        <a href="admin_delete.php?id=<?php echo $row['id']; ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                        <a href="admin_edit.php?id=<?php echo $row['admin_id']; ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                        <a href="admin_delete.php?id=<?php echo $row['admin_id']; ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
                                     </td>
                                 </tr>
                                 

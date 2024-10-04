@@ -39,7 +39,4 @@ if ($username && $password && $first_name && $last_name && $position && $id_card
         echo $connect->error;
     }
 
-
-
-
 }
