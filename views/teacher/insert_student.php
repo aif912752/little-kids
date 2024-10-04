@@ -24,8 +24,8 @@ $result = $connect->query($sql);
 $last_id = $connect->insert_id;
 if ($result) {
     // insert ข้อมูลลงในตาราง students
-    $sql2 = "INSERT INTO students (first_name, last_name, birthdate, nationality, religion, enrollment_date, grade_level, status, user_id) 
-             VALUES ('$first_name', '$last_name', '$birthdate', '$nationality', '$religion', '$enrollment_date', '$grade_level', '$status', '$last_id')";
+    $sql2 = "INSERT INTO students (first_name, last_name, birthdate, nationality, religion, enrollment_date, grade_level, status, user_id,citizen_id) 
+             VALUES ('$first_name', '$last_name', '$birthdate', '$nationality', '$religion', '$enrollment_date', '$grade_level', '$status', '$last_id', '$citizen_id')";
     $result2 = $connect->query($sql2);
 
     if ($result2) {
