@@ -18,7 +18,7 @@
             <h3 class="text-3xl font-medium text-gray-700">เพิ่มข้อมูลผู้ดูแลระบบ</h3>
             <div class="flex flex-col mt-8">
                 <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <form class="grid grid-cols-2 gap-4  inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+                    <form action="insert_admin.php" method="POST" class="grid grid-cols-2 gap-4  inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
                         <!-- Row 1 -->
                         <div class="col-span-1">
                             <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
@@ -73,8 +73,8 @@
 
                         <!-- Row 7 -->
                         <div class="col-span-1">
-                            <label for="citizenship" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
-                            <input type="text" name="citizenship" class="border border-gray-400 p-2 w-full" required>
+                            <label for="citizen_id" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
+                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" required>
                         </div>
                         <div class="col-span-1">
                             <label for="religion" class="block text-sm font-medium text-gray-700">ศาสนา</label>
