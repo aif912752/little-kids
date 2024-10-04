@@ -4,7 +4,6 @@ $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 $first_name = $_POST['first_name'] ?? '';
 $last_name = $_POST['last_name'] ?? '';
-$position = $_POST['position'] ?? '';
 $id_card = $_POST['id_card'] ?? '';
 $birthdate = $_POST['birthdate'] ?? '';
 $email = $_POST['email'] ?? '';
@@ -14,9 +13,8 @@ $citizen_id = $_POST['citizen_id'] ?? '';
 $religion = $_POST['religion'] ?? '';
 $address = $_POST['address'] ?? '';
 // เช็คว่ามีข้อมูลที่ส่งมาหรือไม่
-if ($username && $password && $first_name && $last_name && $position && $id_card && $birthdate && $email && $phone_number && $nationality && $citizen_id && $religion && $address) {
-    // ถ้ามีข้อมูลให้ทำการเพิ่มข้อมูลลงในฐานข้อมูล\
-
+if ($username && $password && $first_name && $last_name && $id_card && $birthdate && $email && $phone_number && $nationality && $citizen_id && $religion && $address) {
+    // ถ้ามีข้อมูลให้ทำการเพิ่มข้อมูลลงในฐานข้อมูล
     // insert ข้อมูลลงในตาราง  user
     $sql = "INSERT INTO user (username, password,name,role) VALUES ('$username', '$password','$first_name','1')";
     $result = $connect->query($sql);

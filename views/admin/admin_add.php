@@ -39,11 +39,6 @@
                             <input type="text" name="last_name" class="border border-gray-400 p-2 w-full" required>
                         </div>
 
-                        <!-- Row 3 -->
-                        <div class="col-span-2">
-                            <label for="position" class="block text-sm font-medium text-gray-700">ตำแหน่ง</label>
-                            <input type="text" name="position" class="border border-gray-400 p-2 w-full" required>
-                        </div>
 
                         <!-- Row 4 -->
                         <div class="col-span-2">
