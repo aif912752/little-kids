@@ -24,6 +24,7 @@ if ($username && $password && $first_name && $last_name && $position && $birthda
                 alert('Username นี้ถูกใช้ไปแล้ว กรุณาใช้ username อื่น');
                 window.history.back();
               </script>";
+        return;
     } else {
         // ถ้า username ไม่มีซ้ำ ให้ทำการเพิ่มข้อมูลลงในฐานข้อมูล
 
