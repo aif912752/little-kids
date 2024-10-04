@@ -1,13 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>จัดการข้อมูลผู้ดูแลระบบ</title>
+    <title>เพิ่มข้อมูลผู้ดูแลระบบ</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  
+
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -15,53 +15,84 @@
 
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
         <div class="container px-6 py-8 mx-auto">
-            <h3 class="text-3xl font-medium text-gray-700">จัดการข้อมูลผู้ดูแลระบบ</h3>
+            <h3 class="text-3xl font-medium text-gray-700">เพิ่มข้อมูลผู้ดูแลระบบ</h3>
             <div class="flex flex-col mt-8">
                 <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
-                        
-                        <!-- ชิดขวา -->
-                        <div class="flex justify-end p-3">
-                            <a href="admin_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
+                    <form class="grid grid-cols-2 gap-4  inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+                        <!-- Row 1 -->
+                        <div class="col-span-1">
+                            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                            <input type="text" name="username" class="border border-gray-400 p-2 w-full" required>
                         </div>
-                            
+                        <div class="col-span-1">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" name="password" class="border border-gray-400 p-2 w-full" required>
+                        </div>
 
-                        <table id="example" class="display pt-8" style="width:100%">
-                            <thead class="bg-slate-200">
-                                <th class="py-2 border border-black">ชื่อ-นามสกุล</th>
-                                <th class="py-2 border border-black">ตำแหน่ง</th>
-                                <th class="py-2 border border-black">วัน/เดือน/ปี</th>
-                                <th class="py-2 border border-black">หมายเลขโทรศัพท์</th>
-                                <th class="py-2 border border-black">อีเมล์</th>
-                                <th class="py-2 border border-black">จัดการ</th>
-                            </thead>
-                            <tbody>
+                        <!-- Row 2 -->
+                        <div class="col-span-1">
+                            <label for="first_name" class="block text-sm font-medium text-gray-700">ชื่อ</label>
+                            <input type="text" name="first_name" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="last_name" class="block text-sm font-medium text-gray-700">นามสกุล</label>
+                            <input type="text" name="last_name" class="border border-gray-400 p-2 w-full" required>
+                        </div>
 
-                                <?php 
-                                    if($result->num_rows > 0){
-                                        while($row = $result->fetch_assoc()){
-                                ?>
+                        <!-- Row 3 -->
+                        <div class="col-span-2">
+                            <label for="position" class="block text-sm font-medium text-gray-700">ตำแหน่ง</label>
+                            <input type="text" name="position" class="border border-gray-400 p-2 w-full" required>
+                        </div>
 
-                                <tr>
-                                    <td class="py-2 border border-black"><?php echo $row['first_name'].' '.$row['last_name']; ?></td>
-                                    <td class="py-2 border border-black"><?php echo $row['position']; ?></td>
-                                    <td class="py-2 border border-black"><?php echo $row['birthdate']; ?></td>
-                                    <td class="py-2 border border-black"><?php echo $row['phone_number']; ?></td>
-                                    <td class="py-2 border border-black"><?php echo $row['email']; ?></td>
-                                    <td class="py-2 border border-black">
-                                        <a href="admin_edit.php?id=<?php echo $row['id']; ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                        <a href="admin_delete.php?id=<?php echo $row['id']; ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
-                                    </td>
-                                </tr>
-                                
-                                <?php 
-                                        }
-                                    }
-                                ?>
-                               
-                            </tbody>
-                        </table>
-                    </div>
+                        <!-- Row 4 -->
+                        <div class="col-span-2">
+                            <label for="id_card" class="block text-sm font-medium text-gray-700">เลขประจำตัวประชาชน</label>
+                            <input type="text" name="id_card" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+
+                        <!-- Row 5 -->
+                        <div class="col-span-1">
+                            <label for="birthdate" class="block text-sm font-medium text-gray-700">วัน/เดือน/ปี เกิด</label>
+                            <input type="date" name="birthdate" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="email" class="block text-sm font-medium text-gray-700">อีเมล์</label>
+                            <input type="email" name="email" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+
+                        <!-- Row 6 -->
+                        <div class="col-span-1">
+                            <label for="phone_number" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
+                            <input type="text" name="phone_number" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="nationality" class="block text-sm font-medium text-gray-700">เชื้อชาติ</label>
+                            <input type="text" name="nationality" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+
+                        <!-- Row 7 -->
+                        <div class="col-span-1">
+                            <label for="citizenship" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
+                            <input type="text" name="citizenship" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="religion" class="block text-sm font-medium text-gray-700">ศาสนา</label>
+                            <input type="text" name="religion" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+
+                        <!-- Row 8 -->
+                        <div class="col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700">ที่อยู่</label>
+                            <input type="text" name="address" class="border border-gray-400 p-2 w-full" required>
+                        </div>
+
+                        <!-- Row 9 -->
+                        <div class="col-span-2 text-center">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">บันทึก</button>
+                            <a href="admin_manage.php" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ยกเลิก</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
