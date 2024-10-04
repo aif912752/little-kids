@@ -31,7 +31,7 @@ if ($result) {
     if ($result2) {
         echo "<script>
                 alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-                window.location.href = 'admin_manage.php';
+                window.location.href = 'student.php';
               </script>";
     } else {
         echo $connect->error;

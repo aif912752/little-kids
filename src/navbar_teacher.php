@@ -19,10 +19,10 @@
 <body>
 
         <!-- Desktop sidebar -->
-        <aside class="z-20 flex-shrink-0 hidden w-60 pl-2 overflow-y-auto bg-gray-800 md:block">
+        <aside class="z-20 flex-shrink-0 hidden w-60 pl-2 overflow-y-auto border-r bg-white md:block">
             <div>
-                <div class="text-white">
-                    <div class="flex p-2  bg-gray-800">
+                <div class="text-gray-800">
+                    <div class="flex p-2  ">
                         <div class="flex py-3 px-2 items-center">
                             <p class="text-2xl text-green-500 font-semibold"></p <p class="ml-2 font-semibold italic">
                             อนุบาลลิตเติ้ลคิดส์ </p>
@@ -31,14 +31,14 @@
                     <div class="flex justify-center">
                         <div class="">
                             <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-green-400"
-                                src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="">
+                                src="../public/student.jpg" alt="">
                             <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">คุณครู</p>
                         </div>
                     </div>
                     <div>
                         <ul class="mt-6 leading-10">
                             <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500" 
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 cursor-pointer hover:text-green-500" 
                                     href=" #">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +49,7 @@
                                 </a>
                             </li>
                             <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500" 
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 cursor-pointer hover:text-green-500" 
                                     href="student.php">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,7 @@
                                 </a>
                             </li>
                             <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500" 
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 cursor-pointer hover:text-green-500" 
                                     href="student.php">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -74,7 +74,7 @@
                                 <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer"
                                     x-on:click="Open = !Open">
                                     <span
-                                        class="inline-flex items-center  text-sm font-semibold text-white hover:text-green-400">
+                                        class="inline-flex items-center  text-sm font-semibold text-gray-800 hover:text-green-400">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -83,7 +83,7 @@
                                         <span class="ml-4">ข้อมูลนักเรียน</span>
                                     </span>
                                     <svg xmlns="http://www.w3.org/2000/svg" x-show="!Open"
-                                        class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                        class="ml-1  text-gray-800 w-4 h-4" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor" style="display: none;">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 19l-7-7 7-7" />

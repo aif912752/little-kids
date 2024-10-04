@@ -19,7 +19,7 @@
 </head>
 
 <body class=" font-inter">
-<div class="flex h-screen bg-gray-800 " :class="{ 'overflow-hidden': isSideMenuOpen }">
+<div class="flex h-screen bg-white " :class="{ 'overflow-hidden': isSideMenuOpen }">
 
 
 
