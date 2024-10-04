@@ -1,9 +1,4 @@
-<?php 
-    include '../../config/database.php';
-    $sql = "SELECT * FROM administrators ";
-    $result = $connect->query($sql);
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +7,7 @@
     <title>จัดการข้อมูลผู้ดูแลระบบ</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -76,15 +71,3 @@
 </body>
 
 </html>
-
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- DataTables JS CDN -->
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable(); // เรียกใช้งาน DataTables
-    });
-</script>
