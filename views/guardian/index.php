@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    สวัสดีครับ คุณครู
+    สวัสดี ครับ ผู้ปกครอง
 </body>
 </html>
