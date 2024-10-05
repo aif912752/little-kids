@@ -60,29 +60,21 @@ if ($username && $password && $first_name && $last_name && $position && $email &
         $img = '';
     }
 
-    // select teacher
-    $sql = 'SELECT * FROM teacher WHERE teacher_id = ?';
-    $stmt = $connect->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if($result->num_rows > 0) {
-        $teacher = $result->fetch_assoc();
         // update user
         $sql2 = "UPDATE user SET username = ?, password = ? WHERE id = ?";
         $stmt2 = $connect->prepare($sql2);
-        $stmt2->bind_param('ssi', $username, $password, $teacher['user_id']);
+        $stmt2->bind_param('ssi', $username, $password, $id);
         $stmt2->execute();
-        if($stmt2->affected_rows > 0) {
-            $sql3 = "UPDATE teacher SET first_name = ?, last_name = ?, position =?, email = ?, ethnicity = ?,nationality =?,religion=?,citizen_id=?,birthdate=?,phone_number=?,teacher_address=?,class_taught=?,img=? WHERE teacher_id = ?";
+        if($stmt2) {
+            $sql3 = "UPDATE teacher SET first_name = ?, last_name = ?, position =?, email = ?, ethnicity = ?,nationality =?,religion=?,citizen_id=?,birthdate=?,phone_number=?,teacher_address=?,class_taught=?,img=? WHERE user_id = ?";
             $stmt3 = $connect->prepare($sql3);
             $stmt3->bind_param('sssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $class_taught, $img, $id);
             $stmt3->execute();
-            if($stmt3->affected_rows > 0) {
+            if($stmt3) {
                 $_SESSION['status'] = 'success';
                 $_SESSION['alert'] = 'แก้ไขข้อมูลเรียบร้อยแล้ว';
                 echo "<script>
-                        window.location.href = 'teacher_manage.php';
+                        window.location.href = 'profile.php';
                       </script>";
                 return;
             }else{
@@ -93,17 +85,14 @@ if ($username && $password && $first_name && $last_name && $position && $email &
                       </script>";
                 return;
             }
+        }else{
+            $_SESSION['status'] = 'error';
+            $_SESSION['alert'] = 'แก้ไขข้อมูลไม่สำเร็จ';
+            echo "<script>
+                    window.history.back();
+                  </script>";
+            return;
         }
-    }else{
-        $_SESSION['status'] = 'error';
-        $_SESSION['alert'] = 'ไม่พบข้อมูลครู';
-        echo "<script>
-                window.history.back();
-              </script>";
-        return;
-    }
-
-    
 }else{
     $_SESSION['status'] = 'error';
     $_SESSION['alert'] = 'กรุณากรอกข้อมูลให้ครบถ้วน';
@@ -115,3 +104,4 @@ if ($username && $password && $first_name && $last_name && $position && $email &
 
 
 ?>
+

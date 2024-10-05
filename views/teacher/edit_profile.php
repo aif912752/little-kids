@@ -131,7 +131,7 @@
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">ที่อยู่</label>
-                                                <textarea name="teacher_address" rows="4" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>                      
+                                                <textarea name="teacher_address" rows="4" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"><?= $row['teacher_address'] ?></textarea>                      
                                             </div>
                                         </div>
                                     
@@ -183,9 +183,32 @@
     </div>
     <!--end of project-->
     </main>
+    
 </body>
-
+                                                        
 </html>
+
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+<?php 
+    // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+    
+    if(isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        
+        echo "<script>
+            Swal.fire({
+                icon: '".$_SESSION['status']."',
+                title: 'เกิดข้อผิดพลาด',
+                text: '$alert',
+            })
+        </script>";
+        unset($_SESSION['status']);
+        unset($_SESSION['alert']);
+    }
+
+?>
+
 <script>
     function previewImage(input) {
         var preview = document.getElementById('preview');
@@ -213,3 +236,7 @@
         }
     }
 </script>
+
+
+
+
