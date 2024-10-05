@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="mt-24">
-                        <img src="assets/image/home-img.png" alt="Image">
+                        <img src="/little-kids/public/humans.png" alt="Image">
                     </div>
                 </div>
 
