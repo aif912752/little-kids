@@ -62,7 +62,7 @@ $result = $connect->query($sql);
 
                                                 <tr>
                                                     <td class="py-5 border-b border-l border-gray-200 bg-white">
-                                                        <div class="flex items-center text-sm">
+                                                        <div class="flex items-center text-sm py-4">
                                                           
                                                             <div>
                                                                 <p class="font-semibold text-black"> <?php echo $row['student_name'] . ' ' . $row['student_lastname']; ?></p>
