@@ -88,22 +88,22 @@
                                                 </select>
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                            <div class="md:flex">
-        <div class="w-full p-3">
-            <div id="upload-box" class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-                <div class="absolute">
-                    <div class="flex flex-col items-center">
-                        <i class="fa fa-folder-open fa-4x text-blue-700"></i>
-                        <span class="block text-gray-400 font-normal">อัพโหลดรูปนักเรียน</span>
-                    </div>
-                </div>
-                <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
-            </div>
-            <div id="preview" class="mt-3 hidden">
-                <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
-            </div>
-        </div>
-    </div>
+                                                <div class="md:flex">
+                                                    <div class="w-full p-3">
+                                                        <div id="upload-box" class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                                                            <div class="absolute">
+                                                                <div class="flex flex-col items-center">
+                                                                    <i class="fa fa-folder-open fa-4x text-blue-700"></i>
+                                                                    <span class="block text-gray-400 font-normal">อัพโหลดรูปนักเรียน</span>
+                                                                </div>
+                                                            </div>
+                                                            <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
+                                                        </div>
+                                                        <div id="preview" class="mt-3 hidden">
+                                                            <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -132,26 +132,27 @@
     </main>
 </body>
 <script>
-function previewImage(input) {
-    var preview = document.getElementById('preview');
-    var previewImg = document.getElementById('preview-img');
-    var uploadBox = document.getElementById('upload-box');
+    function previewImage(input) {
+        var preview = document.getElementById('preview');
+        var previewImg = document.getElementById('preview-img');
+        var uploadBox = document.getElementById('upload-box');
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-            preview.classList.remove('hidden');
-            uploadBox.classList.add('hidden');
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.classList.remove('hidden');
+                uploadBox.classList.add('hidden');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = "";
+            preview.classList.add('hidden');
+            uploadBox.classList.remove('hidden');
         }
-
-        reader.readAsDataURL(input.files[0]);
-    } else {
-        previewImg.src = "";
-        preview.classList.add('hidden');
-        uploadBox.classList.remove('hidden');
     }
-}
 </script>
+
 </html>
