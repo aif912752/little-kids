@@ -8,16 +8,16 @@ if ($id) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        echo "<script>
-                alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-                window.location.href = 'student.php';
-            </script>";
+        // echo "<script>
+        //         alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+        //         window.location.href = 'attendance_edit.php';
+        //     </script>";
     }
 } else {
-    echo "<script>
-            alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-            window.location.href = 'student.php';
-        </script>";
+    // echo "<script>
+    //         alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+    //         window.location.href = 'attendance_edit.php';
+    //     </script>";
 }
 ?>
 
@@ -52,11 +52,12 @@ if ($id) {
                             <div class="bg-gradient-to-b from-blue-500 to-blue-300 h-96"></div>
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
-                                    <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลนักเรียน</p>
-                                    <form action="update_student.php" method="post" enctype="multipart/form-data">
+                                    <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลการเข้าเรียน</p>
+                                    <form action="update_attendance.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">ชื่อ</label>
+                                                <input type="hidden" name="id" value="<?php echo $id; ?>">
                                                 <input type="text" name="student_name" value="<?= $row['student_name'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
