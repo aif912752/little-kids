@@ -1,54 +1,79 @@
 <?php
 include('../../config/database.php');
 
+// แสดงค่าที่ส่งมาทั้งหมด
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 // รับค่าจากฟอร์ม
-$student_id = $_POST['student_id'] ?? '';
-$check_in_time = $_POST['check_in_time'] ?? '';
-$check_out_time = $_POST['check_out_time'] ?? '';
-$status = $_POST['status'] ?? '';
-$attendance_date = date('Y-m-d'); // วันที่ปัจจุบัน
-$student_name = $_POST['first_name'] ?? '';
-$student_lastname = $_POST['last_name'] ?? '';
+$status_data = $_POST['status'] ?? [];
+$attendance_date = $_POST['attendance_date'] ?? date('Y-m-d');
 
-// ตรวจสอบว่ามี student_id ถูกส่งมาหรือไม่
-if (!empty($student_id)) {
-    // ดึงข้อมูลชื่อและนามสกุลของนักเรียนจาก student_id
-    $sql_student = "SELECT first_name, last_name FROM students WHERE student_id = '$student_id'";
-    $result_student = $connect->query($sql_student);
+// แสดงค่า status_data
+echo "<pre>";
+print_r($status_data);
+echo "</pre>";
 
-    if ($result_student->num_rows > 0) {
-        $row = $result_student->fetch_assoc();
-        $student_name = $row['first_name']; // ดึง first_name จากผลลัพธ์ query
-        $student_lastname = $row['last_name']; // ดึง last_name จากผลลัพธ์ query
-        
-        // เพิ่มข้อมูลลงในตาราง attendance
-        $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, check_in_time, check_out_time, status) 
-                VALUES ('$student_id', '$student_name', '$student_lastname', '$attendance_date', '$check_in_time', '$check_out_time', '$status')";
+// ตรวจสอบว่ามีข้อมูลการเข้าเรียนถูกส่งมาหรือไม่
+if (!empty($status_data)) {
+    $success_count = 0;
+    $error_count = 0;
 
-        // ตรวจสอบ SQL Query
-        echo $sql . "<br>";
+    foreach ($status_data as $student_id => $status) {
+        echo "Processing student_id: $student_id, status: $status<br>";
 
-        $result = $connect->query($sql);
+        // ดึงข้อมูลชื่อและนามสกุลของนักเรียนจาก student_id
+        $sql_student = "SELECT first_name, last_name FROM students WHERE student_id = ?";
+        $stmt = $connect->prepare($sql_student);
+        $stmt->bind_param("s", $student_id);
+        $stmt->execute();
+        $result_student = $stmt->get_result();
 
-        if ($result) {
-            echo "<script>
-                    alert('บันทึกข้อมูลการมาเรียนเรียบร้อยแล้ว');
-                    window.location.href = 'attendance.php'; // แก้ไขเป็นหน้าที่ต้องการให้กลับไป
-                  </script>";
+        if ($result_student->num_rows > 0) {
+            $row = $result_student->fetch_assoc();
+            $student_name = $row['first_name'];
+            $student_lastname = $row['last_name'];
+            
+            // เพิ่มข้อมูลลงในตาราง attendance
+            $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, status) 
+                    VALUES (?, ?, ?, ?, ?)";
+            $stmt = $connect->prepare($sql);
+            $stmt->bind_param("sssss", $student_id, $student_name, $student_lastname, $attendance_date, $status);
+            
+            if ($stmt->execute()) {
+                $success_count++;
+                echo "Inserted successfully for student_id: $student_id<br>";
+            } else {
+                $error_count++;
+                echo "Error inserting for student_id: $student_id. Error: " . $stmt->error . "<br>";
+            }
         } else {
-            echo "Error: " . $sql . "<br>" . $connect->error;
+            $error_count++;
+            echo "Student not found for student_id: $student_id<br>";
         }
+    }
+
+    echo "Total success: $success_count, Total errors: $error_count<br>";
+
+    if ($error_count == 0) {
+        echo "<script>
+                alert('บันทึกข้อมูลการมาเรียนเรียบร้อยแล้วทั้งหมด {$success_count} รายการ');
+                window.location.href = 'attendance.php';
+              </script>";
     } else {
         echo "<script>
-                alert('ไม่พบข้อมูลนักเรียน');
-                window.history.back();
+                alert('บันทึกข้อมูลสำเร็จ {$success_count} รายการ และไม่สำเร็จ {$error_count} รายการ');
+                window.location.href = 'attendance.php';
               </script>";
     }
 } else {
+    echo "ไม่ได้รับข้อมูลการเข้าเรียน (status_data is empty)<br>";
     echo "<script>
-            alert('ไม่ได้รับ student_id');
+            alert('ไม่ได้รับข้อมูลการเข้าเรียน');
             window.history.back();
           </script>";
 }
 
 $connect->close();
+?>
