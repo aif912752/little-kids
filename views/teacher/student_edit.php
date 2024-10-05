@@ -59,7 +59,7 @@ if ($id) {
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                                     <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลนักเรียน</p>
-                                    <form action="update_student.php" method="post">
+                                    <form action="update_student.php" method="post"  enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">Username</label>
@@ -179,3 +179,30 @@ if ($id) {
 </body>
 
 </html>
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('preview');
+        var previewImg = document.getElementById('preview-img');
+        var uploadBox = document.getElementById('upload-box');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.classList.remove('hidden');
+                uploadBox.classList.add('hidden');
+            }
+            // ปิด id current-img ถ้ามีการเลือกไฟล์ใหม่
+            var currentImg = document.getElementById('current-img');
+            if (currentImg) {
+                currentImg.remove();
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = "";
+            preview.classList.add('hidden');
+            uploadBox.classList.remove('hidden');
+        }
+    }
+</script>

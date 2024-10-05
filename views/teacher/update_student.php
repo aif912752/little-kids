@@ -35,9 +35,56 @@ $sql = "UPDATE user SET username = '$username', password = '$password' WHERE id 
 $result = $connect->query($sql);
 
 if ($result) {
-    // การจัดการการอัปโหลดไฟล์รูปภาพ
-    $image = $_FILES['image']['name'] ?? ''; // รับชื่อไฟล์รูปภาพ
-    $image_tmp = $_FILES['image']['tmp_name'] ?? ''; // รับไฟล์ชั่วคราว
+   
+    $upload_dir = 'uploads/'; // เปลี่ยนเส้นทางตามที่ต้องการ
+
+    // ตรวจสอบว่าโฟลเดอร์นี้มีอยู่แล้วหรือไม่ ถ้าไม่มีก็สร้างใหม่
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true); // สร้างโฟลเดอร์พร้อมกำหนดสิทธิ์ 0777
+    }
+
+    // ตรวจสอบว่ามีการอัปโหลดไฟล์รูปภาพหรือไม่
+    if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+        // select  ข้อมูลเดิม
+        $sql = "SELECT img FROM students WHERE student_id = $id";
+        $result = $connect->query($sql);
+        $data = $result->fetch_assoc();
+        $old_img = $data['img'];
+        // ทำการ ลบ รูปเดิม
+        if ($old_img != '') {
+            // เช็คว่าไฟล์มีอยู่หรือไม่
+            if (file_exists($upload_dir . $old_img))
+            {
+                unlink($upload_dir . $old_img);
+            }
+           
+        }
+
+        $img = $_FILES['img'];
+        $img_name = uniqid() . '-' . basename($img['name']); // สร้างชื่อไฟล์ที่ไม่ซ้ำกัน
+        $img_tmp_name = $img['tmp_name'];
+
+        $target_file = $upload_dir . $img_name;
+
+        // ตรวจสอบว่าการย้ายไฟล์สำเร็จหรือไม่
+        if (move_uploaded_file($img_tmp_name, $target_file)) {
+            echo "Upload successful!";
+            
+        } else {
+            echo "Upload failed!";
+            exit;
+     }
+     $imgstring = ",img = '$img_name'";
+    } else {
+        echo "No file uploaded or file error!";
+        $imgstring = "";
+    }
+
+   
+    // อัปเดตข้อมูลในตาราง students
+    $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' ".$imgstring."  WHERE student_id = $id";
+    $result2 = $connect->query($sql2);
+
 
     // ถ้ามีการอัปโหลดรูปภาพใหม่
     if (!empty($image)) {

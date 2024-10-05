@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../config/database.php');
 
 $username = $_POST['username'] ?? '';
@@ -36,7 +37,7 @@ if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
     }
 } else {
     echo "No file uploaded or file error!";
-    exit;
+   
 }
 
 // ใช้ citizen_id เป็น username
@@ -55,13 +56,24 @@ if ($result) {
     $result2 = $connect->query($sql2);
 
     if ($result2) {
-        echo "<script>
-                alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+        $_SESSION['status'] = 'success';
+        $_SESSION['alert'] = 'บันทึกข้อมูลนักเรียนสำเร็จ';
+        echo "<script>      
                 window.location.href = 'student.php';
               </script>";
     } else {
+        $_SESSION['status'] = 'error';
+        $_SESSION['alert'] = 'ไม่สามารถบันทึกข้อมูลได้';
+        echo "<script>
+    window.history.back();
+    </script>";
         echo $connect->error;
     }
 } else {
+    $_SESSION['status'] = 'error';
+    $_SESSION['alert'] = 'กรอกข้อมูลไม่ครบ';
+    echo "<script>
+window.history.back();
+</script>";
     echo $connect->error;
 }

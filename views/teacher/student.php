@@ -18,7 +18,13 @@ $result = $connect->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+        <style>
+            .dataTables_length select {
+                width: 50px;
+                /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
 
+            }
+        </style>
 </head>
 
 <body class=" bg-surface">
@@ -112,3 +118,62 @@ $result = $connect->query($sql);
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+<?php
+// เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+if (isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    if ($_SESSION['status'] == 'error') {
+        echo "<script>
+            Swal.fire({
+                position: 'center',
+                icon: '" . $_SESSION['status'] . "',
+                title: 'เกิดข้อผิดพลาด',
+                text: '$alert',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            </script>";
+    } else {
+        echo "<script>
+            Swal.fire({
+                position: 'center',
+                icon: '" . $_SESSION['status'] . "',
+                title: 'สำเร็จ!',
+                text: '$alert',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            </script>";
+    }
+
+    unset($_SESSION['status']);
+    unset($_SESSION['alert']);
+}
+
+?>
+
+
+<script>
+    function confirmDelete(event, adminId) {
+        event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
+
+        Swal.fire({
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'ใช่, ลบเลย!',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'admin_delete.php?id=' + adminId; // ดำเนินการลบเมื่อยืนยัน
+            }
+        });
+    }
+</script>
