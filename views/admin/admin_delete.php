@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include('../../config/database.php');
     $id = $_GET['id'] ?? '';
    
@@ -16,24 +17,38 @@
                     $sql = "DELETE FROM administrators WHERE admin_id = $id";
                     $result = $connect->query($sql);
                     if($result){
+                        $_SESSION['status'] = 'success';
+                        $_SESSION['alert'] = 'ลบข้อมูลสำเร็จ';
                         echo "<script>
-                                alert('ลบข้อมูลเรียบร้อยแล้ว');
                                 window.location.href = 'admin_manage.php';
                             </script>";
                     }else{
                         echo $connect->error;
+                        $_SESSION['status'] = 'error';
+                        $_SESSION['alert'] = 'ลบข้อมูลไม่สำเร็จ';
+                    echo "<script>
+                    window.location.href = 'admin_manage.php';
+                </script>"; 
                     }
                 }else{
                     echo $connect->error;
+                    $_SESSION['status'] = 'error';
+                    $_SESSION['alert'] = 'ลบข้อมูลไม่สำเร็จ';
+                    echo "<script>
+                    window.location.href = 'admin_manage.php';
+                </script>"; 
                 }
             }else{
                 echo $connect->error;
+                $_SESSION['status'] = 'error';
+                $_SESSION['alert'] = 'ไม่พบข้อมูลที่ต้องการลบ';
                 echo "<script>
-                        alert('ไม่พบข้อมูลที่ต้องการลบ');
                         window.location.href = 'admin_manage.php';
                     </script>"; 
             }         
         } else {
+            $_SESSION['status'] = 'error';
+                $_SESSION['alert'] = 'ไม่พบข้อมูลที่ต้องการลบ';
             echo "<script>
                     alert('ไม่พบข้อมูลที่ต้องการลบ');
                     window.location.href = 'admin_manage.php';

@@ -14,6 +14,16 @@
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <style>
+        .dataTables_length select {
+            width:50px; /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
+            
+        }
+        .swal2-confirm {
+            background-color: #2563EB !important; 
+            color: white !important;
+        }
+    </style>
 </head>
 
 <body class=" bg-surface">
@@ -26,8 +36,11 @@
                 <!-- Main Content -->
                 <main class="h-full  max-w-full">
                     <div class="container full-container p-0 flex flex-col gap-6">
+                    <div>
+                        <h3 class="text-3xl font-medium text-black">จัดการข้อมูลผู้ดูแลระบบ</h3>    
+                    </div>
                         
-<div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+                    <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
                         
                         <!-- ชิดขวา -->
                         <div class="flex justify-end p-3">
@@ -58,8 +71,8 @@
                                     <td class="py-2 border border-black"><?php echo $row['phone_number']; ?></td>
                                     <td class="py-2 border border-black"><?php echo $row['email']; ?></td>
                                     <td class="py-2 border border-black">
-                                        <a href="admin_edit.php?id=<?php echo $row['admin_id']; ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                        <a href="admin_delete.php?id=<?php echo $row['admin_id']; ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                        <a href="admin_edit.php?id=<?php echo $row['admin_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                        <a href="admin_delete.php?id=<?php echo $row['admin_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
                                     </td>
                                 </tr>
                                 
@@ -103,13 +116,30 @@
     // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
     if(isset($_SESSION['alert'])) {
         $alert = $_SESSION['alert'];
-        echo "<script>
+        if($_SESSION['status'] == 'error') {
+            echo "<script>
             Swal.fire({
+                position: 'center',
+                icon: '".$_SESSION['status']."',
+                title: 'เกิดข้อผิดพลาด',
+                text: '$alert',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            </script>";
+        } else {
+            echo "<script>
+            Swal.fire({
+                position: 'center',
                 icon: '".$_SESSION['status']."',
                 title: 'สำเร็จ!',
                 text: '$alert',
+                showConfirmButton: false,
+                timer: 1500
             })
-        </script>";
+            </script>";
+        }
+       
         unset($_SESSION['status']);
         unset($_SESSION['alert']);
     }

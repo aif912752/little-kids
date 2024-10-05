@@ -37,7 +37,7 @@ if ($username && $password && $first_name && $last_name && $citizen_id && $birth
             $result2 = $connect->query($sql2);
             if ($result2) {
                 $_SESSION['status'] = 'success';
-                $_SESSION['alert'] = 'บันทึกข้อมูลไม่สำเร็จ';
+                $_SESSION['alert'] = 'บันทึกข้อมูลสำเร็จ';
                 echo "<script>
                 
                 window.location.href = 'admin_manage.php';
