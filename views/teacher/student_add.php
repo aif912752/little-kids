@@ -110,10 +110,12 @@
 
 
 
-                                        <div class="flex items-center justify-center w-full">
+                                        <div class="flex items-center justify-center w-full gap-4">
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
                                                 บันทึก
                                             </button>
+                                            <a href="student.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
+
                                         </div>
                                     </form>
                                 </div>

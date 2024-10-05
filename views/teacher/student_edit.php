@@ -168,8 +168,6 @@ if ($id) {
                         </div>
 
                     </div>
-
-
             </div>
     </main>
     </div>

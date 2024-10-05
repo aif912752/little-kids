@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../config/database.php');
 
 // รับข้อมูลจากแบบฟอร์ม
@@ -42,21 +43,35 @@ if ($username && $password && $first_name && $last_name && $position && $birthda
             $result2 = $connect->query($sql2);
 
             if ($result2) {
+                $_SESSION['status'] = 'success';
+                $_SESSION['alert'] = 'บันทึกข้อมูลสำเร็จ';
                 echo "<script>
-                        alert('บันทึกข้อมูลเรียบร้อยแล้ว');
                         window.location.href = 'director_manage.php';
                       </script>";
             } else {
                 echo "Error: " . $connect->error;
+                // ถ้าไม่มีข้อมูลให้แจ้งเตือน
+                $_SESSION['status'] = 'error';
+                $_SESSION['alert'] = 'บันทึกข้อมูลไม่สำเร็จ';
+                echo "<script>
+                    window.history.back();
+                </script>";
             }
         } else {
             echo "Error: " . $connect->error;
+            // ถ้าไม่มีข้อมูลให้แจ้งเตือน
+            $_SESSION['status'] = 'error';
+            $_SESSION['alert'] = 'บันทึกข้อมูลไม่สำเร็จ';
+            echo "<script>
+                window.history.back();
+            </script>";
         }
     }
 } else {
-    // แจ้งเตือนถ้าข้อมูลไม่ครบ
-    echo "<script>
-            alert('กรุณากรอกข้อมูลให้ครบถ้วน');
-            window.history.back();
-          </script>";
+   // ถ้าไม่มีข้อมูลให้แจ้งเตือน
+   $_SESSION['status'] = 'error';
+   $_SESSION['alert'] = 'กรุณากรอกข้อมูลให้ครบถ้วน';
+   echo "<script>
+    window.history.back();
+   </script>";
 }
