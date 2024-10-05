@@ -23,18 +23,18 @@ if ($id) {
             if ($stmt->affected_rows > 0) {
                 echo "<script>
                         alert('ลบข้อมูลเรียบร้อยแล้ว');
-                        window.location.href = 'activity.php';
+                        window.location.href = 'eventcalendar.php';
                     </script>";
             } else {
                 echo "<script>
                         alert('ไม่สามารถลบข้อมูลได้');
-                        window.location.href = 'activity.php';
+                        window.location.href = 'eventcalendar.php';
                     </script>";
             }
         } else {
             echo "<script>
                     alert('ไม่พบข้อมูลที่ต้องการลบ');
-                    window.location.href = 'activity.php';
+                    window.location.href = 'eventcalendar.php';
                 </script>";
         }
     } else {
@@ -44,6 +44,6 @@ if ($id) {
 
     echo "<script>
             alert('ไม่พบข้อมูลที่ต้องการลบ');
-            window.location.href = 'activity.php';
+            window.location.href = 'eventcalendar.php';
         </script>";
 }

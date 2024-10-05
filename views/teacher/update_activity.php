@@ -32,7 +32,7 @@ $result = $connect->query($sql);
 if ($result) {
     $_SESSION['status'] = 'success';
     $_SESSION['alert'] = 'แก้ไขข้อมูลในตาราง activity เรียบร้อยแล้ว';
-    echo "<script>window.location.href = 'activity.php';</script>"; // เปลี่ยนไปยังหน้า activity.php
+    echo "<script>window.location.href = 'eventcalendar.php';</script>"; 
 } else {
     echo "Error: " . $connect->error;
     $_SESSION['status'] = 'error';
