@@ -65,6 +65,13 @@ session_start();
                                 <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลผู้อำนวยการ</span>
                             </a>
                         </li>
+                        
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/room_manage.php">
+                                <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลห้อง</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/teacher_manage.php">
                                 <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลครู</span>
