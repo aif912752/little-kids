@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include('../../config/database.php');
@@ -32,7 +33,7 @@ if ($username && $password && $first_name && $last_name && $position && $email &
             return;
         }
     }
-    $upload_dir = 'uploads/teacher/'; // เปลี่ยนเส้นทางตามที่ต้องการ
+    $upload_dir = '../teacher/uploads/teacher/'; // กำหนดเส้นทางในการเก็บไฟล์อัปโหลด
 
     // ตรวจสอบว่าโฟลเดอร์นี้มีอยู่แล้วหรือไม่ ถ้าไม่มีก็สร้างใหม่
     if (!is_dir($upload_dir)) {
@@ -69,28 +70,29 @@ if ($username && $password && $first_name && $last_name && $position && $email &
             if($img != '') {
                 // ถ้ามีการอัปโหลดรูปภาพ ให้ทำการอัปเดตรูปภาพด้วย
                 $sql3 = "UPDATE teacher 
-                         SET first_name = ?, last_name = ?, position = ?, email = ?, ethnicity = ?, nationality = ?, religion = ?, citizen_id = ?, birthdate = ?, phone_number = ?, teacher_address = ?, class_taught = ?, img = ? 
-                         WHERE user_id = ?";
+                         SET first_name = ?, last_name = ?, position =?, email = ?, ethnicity = ?, nationality =?, religion =?, citizen_id =?, birthdate =?, phone_number =?, teacher_address =?, class_taught =?, img = ? 
+                         WHERE teacher_id = ?";
                 $stmt3 = $connect->prepare($sql3);
                 $stmt3->bind_param('sssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $class_taught, $img, $id);
             } else {
                 // ถ้าไม่มีการอัปโหลดรูปภาพ ให้ทำการอัปเดตโดยไม่รวมรูปภาพ
                 $sql3 = "UPDATE teacher 
                          SET first_name = ?, last_name = ?, position = ?, email = ?, ethnicity = ?, nationality = ?, religion = ?, citizen_id = ?, birthdate = ?, phone_number = ?, teacher_address = ?, class_taught = ? 
-                         WHERE user_id = ?";
+                         WHERE teacher_id = ?";
                 $stmt3 = $connect->prepare($sql3);
                 $stmt3->bind_param('ssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $class_taught, $id);
             }
-            
+           
             $stmt3->execute();
-            if($stmt3) {
+            if($stmt3->execute()) {
                 $_SESSION['status'] = 'success';
                 $_SESSION['alert'] = 'แก้ไขข้อมูลเรียบร้อยแล้ว';
                 echo "<script>
-                        window.location.href = 'profile.php';
+                        window.location.href = 'teacher_manage.php';
                       </script>";
                 return;
             }else{
+                echo "Error: " . $connect->error;
                 $_SESSION['status'] = 'error';
                 $_SESSION['alert'] = 'แก้ไขข้อมูลไม่สำเร็จ';
                 echo "<script>
