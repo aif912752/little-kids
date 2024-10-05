@@ -1,380 +1,105 @@
 <!DOCTYPE html>
-<html x-data="data()" lang="en">
+<html  lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet" />
+
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
+	
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+		rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
 
 </head>
 <style>
-        body {
-            font-family: 'Kanit', sans-serif;
-        }
-    </style>
+    body {
+        font-family: 'Kanit', sans-serif;
+    }
+</style>
+
 <body>
 
-        <!-- Desktop sidebar -->
-        <aside class="z-20 flex-shrink-0 hidden w-60 pl-2 overflow-y-auto border-r bg-white md:block">
-            <div>
-                <div class="text-gray-800">
-                    <div class="flex p-2  ">
-                        <div class="flex py-3 px-2 items-center">
-                            <p class="text-2xl text-green-500 font-semibold"></p <p class="ml-2 font-semibold italic">
-                            อนุบาลลิตเติ้ลคิดส์ </p>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="">
-                            <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-green-400"
-                                src="../public/student.jpg" alt="">
-                            <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">คุณครู</p>
-                        </div>
-                    </div>
-                    <div>
-                        <ul class="mt-6 leading-10">
-                            <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 cursor-pointer hover:text-green-500" 
-                                    href=" #">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>
-                                    <span class="ml-4">หน้าหลัก</span>
-                                </a>
-                            </li>
-                            <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 cursor-pointer hover:text-green-500" 
-                                    href="student.php">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>
-                                    <span class="ml-4">ข้อมูลนักเรียน</span>
-                                </a>
-                            </li>
-                            <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 cursor-pointer hover:text-green-500" 
-                                    href="student.php">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>
-                                    <span class="ml-4">ข้อมูลผู้ปกครอง</span>
-                                </a>
-                            </li>
-                            <li class="relative px-2 py-1" x-data="{ Open : false  }">
-                                <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer"
-                                    x-on:click="Open = !Open">
-                                    <span
-                                        class="inline-flex items-center  text-sm font-semibold text-gray-800 hover:text-green-400">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
-                                        </svg>
-                                        <span class="ml-4">ข้อมูลนักเรียน</span>
-                                    </span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x-show="!Open"
-                                        class="ml-1  text-gray-800 w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" style="display: none;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 19l-7-7 7-7" />
-                                    </svg>
+    <aside id="application-sidebar-brand"
+        class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full  transform hidden xl:block xl:translate-x-0 xl:end-auto xl:bottom-0 fixed xl:top-5 xl:left-auto top-0 left-0 with-vertical h-screen z-[999] shrink-0  w-[270px] shadow-md xl:rounded-md rounded-none bg-white left-sidebar   transition-all duration-300">
+        <!-- ---------------------------------- -->
+        <!-- Start Vertical Layout Sidebar -->
+        <!-- ---------------------------------- -->
+        <div class="p-4 flex justify-center">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" x-show="Open"
-                                        class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" style="display: none;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
+         
+            <span class="text-nowrap text-gray-800 text-xl  font-semibold">
+            ลิตเติ้ลคิดส์ 
+            </span>   
 
-                                <div x-show.transition="Open" style="display:none;">
-                                    <ul x-transition:enter="transition-all ease-in-out duration-300"
-                                        x-transition:enter-start="opacity-25 max-h-0"
-                                        x-transition:enter-end="opacity-100 max-h-xl"
-                                        x-transition:leave="transition-all ease-in-out duration-300"
-                                        x-transition:leave-start="opacity-100 max-h-xl"
-                                        x-transition:leave-end="opacity-0 max-h-0"
-                                        class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium  rounded-md shadow-inner  bg-green-400"
-                                        aria-label="submenu">
-
-                                        <li class="px-2 py-1 text-white transition-colors duration-150">
-                                            <div class="px-1 hover:text-gray-800 hover:bg-gray-100 rounded-md">
-                                                <div class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                                    </svg>
-                                                    <a href="#"
-                                                        class="w-full ml-2  text-sm font-semibold text-white hover:text-gray-800">Item
-                                                        1</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Mobile sidebar -->
-        <!-- Backdrop -->
-        <div x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
-            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
-
-        <aside
-            class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto  bg-gray-900 dark:bg-gray-800 md:hidden"
-            x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
-            x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
-            @keydown.escape="closeSideMenu">
-            <div>
-                <div class="text-white">
-                    <div class="flex p-2  bg-gray-800">
-                        <div class="flex py-3 px-2 items-center">
-                            <p class="text-2xl text-green-500 font-semibold">SA</p <p class="ml-2 font-semibold italic">
-                            DASHBOARD</p>
-                        </div>
-                    </div>
-                    <div>
-                        <ul class="mt-6 leading-10">
-                            <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
-                                    href=" #">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>
-                                    <span class="ml-4">DASHBOARD</span>
-                                </a>
-                            </li>
-                            <li class="relative px-2 py-1" x-data="{ Open : false  }">
-                                <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer"
-                                    x-on:click="Open = !Open">
-                                    <span
-                                        class="inline-flex items-center  text-sm font-semibold text-white hover:text-green-400">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
-                                        </svg>
-                                        <span class="ml-4">ITEM</span>
-                                    </span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x-show="!Open"
-                                        class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" style="display: none;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 19l-7-7 7-7" />
-                                    </svg>
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" x-show="Open"
-                                        class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" style="display: none;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-
-                                <div x-show.transition="Open" style="display:none;">
-                                    <ul x-transition:enter="transition-all ease-in-out duration-300"
-                                        x-transition:enter-start="opacity-25 max-h-0"
-                                        x-transition:enter-end="opacity-100 max-h-xl"
-                                        x-transition:leave="transition-all ease-in-out duration-300"
-                                        x-transition:leave-start="opacity-100 max-h-xl"
-                                        x-transition:leave-end="opacity-0 max-h-0"
-                                        class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium  rounded-md shadow-inner  bg-green-400"
-                                        aria-label="submenu">
-
-                                        <li class="px-2 py-1 text-white transition-colors duration-150">
-                                            <div class="px-1 hover:text-gray-800 hover:bg-gray-100 rounded-md">
-                                                <div class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                                    </svg>
-                                                    <a href="#"
-                                                        class="w-full ml-2  text-sm font-semibold text-white hover:text-gray-800">Item
-                                                        1</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <div class="flex flex-col flex-1 w-full overflow-y-auto">
-            <header class="z-40 py-4  bg-gray-800  ">
-                <div class="flex items-center justify-between h-8 px-6 mx-auto">
-                    <!-- Mobile hamburger -->
-                    <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
-                        @click="toggleSideMenu" aria-label="Menu">
-                        <x-heroicon-o-menu class="w-6 h-6 text-white" />
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h7" />
-                        </svg>
-                    </button>
-                </div>
-            </header>
-            
         
+
         </div>
- 
-    
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-        function data() {
-          
-            return {
-               
-                isSideMenuOpen: false,
-                toggleSideMenu() {
-                    this.isSideMenuOpen = !this.isSideMenuOpen
-                },
-                closeSideMenu() {
-                    this.isSideMenuOpen = false
-                },
-                isNotificationsMenuOpen: false,
-                toggleNotificationsMenu() {
-                    this.isNotificationsMenuOpen = !this.isNotificationsMenuOpen
-                },
-                closeNotificationsMenu() {
-                    this.isNotificationsMenuOpen = false
-                },
-                isProfileMenuOpen: false,
-                toggleProfileMenu() {
-                    this.isProfileMenuOpen = !this.isProfileMenuOpen
-                },
-                closeProfileMenu() {
-                    this.isProfileMenuOpen = false
-                },
-                isPagesMenuOpen: false,
-                togglePagesMenu() {
-                    this.isPagesMenuOpen = !this.isPagesMenuOpen
-                },
-               
-            }
-        }
-    </script>
-    <script>
-        var chart = document.querySelector('#chartline')
-        var options = {
-            series: [{
-                name: 'TEAM A',
-                type: 'area',
-                data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33]
-            }, {
-                name: 'TEAM B',
-                type: 'line',
-                data: [55, 69, 45, 61, 43, 54, 37, 52, 44, 61, 43]
-            }],
-            chart: {
-                height: 350,
-                type: 'line',
-                zoom: {
-                    enabled: false
-                }
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            fill: {
-                type: 'solid',
-                opacity: [0.35, 1],
-            },
-            labels: ['Dec 01', 'Dec 02', 'Dec 03', 'Dec 04', 'Dec 05', 'Dec 06', 'Dec 07', 'Dec 08', 'Dec 09 ',
-                'Dec 10', 'Dec 11'
-            ],
-            markers: {
-                size: 0
-            },
-            yaxis: [{
-                    title: {
-                        text: 'Series A',
-                    },
-                },
-                {
-                    opposite: true,
-                    title: {
-                        text: 'Series B',
-                    },
-                },
-            ],
-            tooltip: {
-                shared: true,
-                intersect: false,
-                y: {
-                    formatter: function(y) {
-                        if (typeof y !== "undefined") {
-                            return y.toFixed(0) + " points";
-                        }
-                        return y;
-                    }
-                }
-            }
-        };
-        var chart = new ApexCharts(chart, options);
-        chart.render();
-    </script>
-    <script>
-        var chart = document.querySelector('#chartpie')
-        var options = {
-            series: [44, 55, 67, 83],
-            chart: {
-                height: 350,
-                type: 'radialBar',
-            },
-            plotOptions: {
-                radialBar: {
-                    dataLabels: {
-                        name: {
-                            fontSize: '22px',
-                        },
-                        value: {
-                            fontSize: '16px',
-                        },
-                        total: {
-                            show: true,
-                            label: 'Total',
-                            formatter: function(w) {
-                                // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                                return 249
-                            }
-                        }
-                    }
-                }
-            },
-            labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
-        };
-        var chart = new ApexCharts(chart, options);
-        chart.render();
-    </script>
+        <div class="scroll-sidebar" data-simplebar="">
+            <nav class=" w-full flex flex-col sidebar-nav px-4 mt-5">
+                <ul id="sidebarnav" class="text-gray-600 text-sm">
+                    <li class="text-xs font-bold pb-[5px]">
+                        <i class="ti ti-dots nav-small-cap-icon text-lg hidden text-center"></i>
+                        <span class="text-xs text-gray-400 font-semibold">HOME</span>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full"
+                            href="index.php">
+                            <i class="ti ti-layout-dashboard ps-2  text-2xl"></i> <span>หน้าหลัก</span>
+                        </a>
+                    </li>
+
+                    <li class="text-xs font-bold mb-4 mt-6">
+                        <i class="ti ti-dots nav-small-cap-icon text-lg hidden text-center"></i>
+                        <span class="text-xs text-gray-400 font-semibold">นักเรียน</span>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                            href="student.php">
+                            <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลนักเรียน</span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                            href="./components/cards.html">
+                            <i class="ti ti-cards ps-2 text-2xl"></i> <span>ข้อมูลผู้ปกครอง</span>
+                        </a>
+                    </li>
+
+                  
+      
+
+              
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Bottom Upgrade Option -->
+        <div class="m-4  relative grid">
+            <button class="text-base font-semibold hover:bg-blue-700 btn">ออกจากระบบ</button>
+        </div>
+        <!-- </aside> -->
+    </aside>
+
+
+	<script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+	<script src="../../assets/libs/simplebar/dist/simplebar.min.js"></script>
+	<script src="../../assets/libs/iconify-icon/dist/iconify-icon.min.js"></script>
+	<script src="../../assets/libs/@preline/dropdown/index.js"></script>
+	<script src="../../assets/libs/@preline/overlay/index.js"></script>
+	<script src="../../assets/js/sidebarmenu.js"></script>
+	
+    <script src="../../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="../../assets/js/dashboard.js"></script>
+
 </body>
+
 </html>

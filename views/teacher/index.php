@@ -9,246 +9,696 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <title>Admin Panel</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
 </head>
 
-<body class=" ">
-    <div class="flex min-h-screen bg-gray-800 " :class="{ 'overflow-hidden': isSideMenuOpen }">
+<body class=" bg-surface">
+    <main>
+        <div id="main-wrapper" class=" flex p-5 xl:pr-0">
+            <?php include '../../src/navbar_teacher.php'; ?>
 
-        <?php include '../../src/navbar_teacher.php'; ?>
-        <div class="flex flex-col  w-full overflow-y-auto">
+            <div class=" w-full page-wrapper xl:px-6 px-0">
 
-            <main class="">
-                <div class="grid mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-green-400">
+                <!-- Main Content -->
+                <main class="h-full  max-w-full">
+                    <div class="container full-container p-0 flex flex-col gap-6">
+                        <!--  Header Start -->
+                        <header class=" bg-white shadow-md rounded-md w-full text-sm py-4 px-6">
 
-                    <div class="grid grid-cols-12 gap-6">
-                        <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
-                            <div class="col-span-12 mt-8">
-                                <div class="flex items-center h-10 intro-y">
-                                    <h2 class="mr-5 text-lg font-medium truncate">Dashboard</h2>
+
+                            <!-- ========== HEADER ========== -->
+
+                            <nav class=" w-ful flex items-center justify-between" aria-label="Global">
+                                <ul class="icon-nav flex items-center gap-4">
+                                    <li class="relative xl:hidden">
+                                        <a class="text-xl  icon-hover cursor-pointer text-heading" id="headerCollapse"
+                                            data-hs-overlay="#application-sidebar-brand"
+                                            aria-controls="application-sidebar-brand" aria-label="Toggle navigation"
+                                            href="javascript:void(0)">
+                                            <i class="ti ti-menu-2 relative z-1"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="relative">
+
+                                        <div
+                                            class="hs-dropdown relative inline-flex [--placement:bottom-left] sm:[--trigger:hover]">
+                                            <a class="relative hs-dropdown-toggle inline-flex hover:text-gray-500 text-gray-300"
+                                                href="#">
+                                                <i class="ti ti-bell-ringing text-xl relative z-[1]"></i>
+                                                <div
+                                                    class="absolute inline-flex items-center justify-center  text-white text-[11px] font-medium  bg-blue-600 w-2 h-2 rounded-full -top-[1px] -right-[6px]">
+                                                </div>
+                                            </a>
+                                            <div class="card hs-dropdown-menu transition-[opacity,margin] rounded-md duration hs-dropdown-open:opacity-100 opacity-0 mt-2 min-w-max  w-[300px] hidden z-[12]"
+                                                aria-labelledby="hs-dropdown-custom-icon-trigger">
+                                                <div>
+                                                    <h3 class="text-gray-500 font-semibold text-base px-6 py-3">
+                                                        Notification</h3>
+                                                    <ul class="list-none  flex flex-col">
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">Roman
+                                                                    Joined the Team!</p>
+                                                                <p class="text-xs text-gray-400 font-medium">
+                                                                    Congratulate him</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">New message
+                                                                    received</p>
+                                                                <p class="text-xs text-gray-400 font-medium">Salma sent
+                                                                    you new message</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">New Payment
+                                                                    received</p>
+                                                                <p class="text-xs text-gray-400 font-medium">Check your
+                                                                    earnings</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">Jolly
+                                                                    completed tasks</p>
+                                                                <p class="text-xs text-gray-400 font-medium">Assign her
+                                                                    new tasks</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">Roman
+                                                                    Joined the Team!</p>
+                                                                <p class="text-xs text-gray-400 font-medium">
+                                                                    Congratulate him</p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                                <div class="flex items-center gap-4">
+                                    <a href="#" class="btn text-base font-medium hover:bg-blue-700"
+                                        aria-current="page">Upgrade to Pro</a>
+                                    <div
+                                        class="hs-dropdown relative inline-flex [--placement:bottom-right] sm:[--trigger:hover]">
+                                        <a class="relative hs-dropdown-toggle cursor-pointer align-middle rounded-full">
+                                            <img class="object-cover w-9 h-9 rounded-full"
+                                                src="./assets/images/profile/user-1.jpg" alt="" aria-hidden="true">
+                                        </a>
+                                        <div class="card hs-dropdown-menu transition-[opacity,margin] rounded-md duration hs-dropdown-open:opacity-100 opacity-0 mt-2 min-w-max  w-[200px] hidden z-[12]"
+                                            aria-labelledby="hs-dropdown-custom-icon-trigger">
+                                            <div class="card-body p-0 py-2">
+                                                <a href="javscript:void(0)"
+                                                    class="flex gap-2 items-center font-medium px-4 py-1.5 hover:bg-gray-200 text-gray-400">
+                                                    <i class="ti ti-user  text-xl "></i>
+                                                    <p class="text-sm ">My Profile</p>
+                                                </a>
+                                                <a href="javscript:void(0)"
+                                                    class="flex gap-2 items-center font-medium px-4 py-1.5 hover:bg-gray-200 text-gray-400">
+                                                    <i class="ti ti-mail  text-xl"></i>
+                                                    <p class="text-sm ">My Account</p>
+                                                </a>
+                                                <a href="javscript:void(0)"
+                                                    class="flex gap-2 items-center font-medium px-4 py-1.5 hover:bg-gray-200 text-gray-400">
+                                                    <i class="ti ti-list-check  text-xl "></i>
+                                                    <p class="text-sm ">My Task</p>
+                                                </a>
+                                                <div class="px-4 mt-[7px] grid">
+                                                    <a href="../../pages/authentication-login.html"
+                                                        class="btn-outline-primary font-medium text-[15px] w-full hover:bg-blue-600 hover:text-white">Logout</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                                <div class="grid grid-cols-12 gap-6 mt-5">
-                                    <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
-                                        href="#">
-                                        <div class="p-5">
-                                            <div class="flex justify-between">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                                                </svg>
-                                                <div
-                                                    class="bg-green-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                                    <span class="flex items-center">30%</span>
-                                                </div>
-                                            </div>
-                                            <div class="ml-2 w-full flex-1">
-                                                <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">4.510</div>
+                            </nav>
 
-                                                    <div class="mt-1 text-base text-gray-600">Item Sales</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
-                                        href="#">
-                                        <div class="p-5">
-                                            <div class="flex justify-between">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                                </svg>
-                                                <div
-                                                    class="bg-red-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                                    <span class="flex items-center">30%</span>
-                                                </div>
-                                            </div>
-                                            <div class="ml-2 w-full flex-1">
-                                                <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">4.510</div>
-
-                                                    <div class="mt-1 text-base text-gray-600">Item Sales</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
-                                        href="#">
-                                        <div class="p-5">
-                                            <div class="flex justify-between">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-pink-600"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
-                                                </svg>
-                                                <div
-                                                    class="bg-yellow-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                                    <span class="flex items-center">30%</span>
-                                                </div>
-                                            </div>
-                                            <div class="ml-2 w-full flex-1">
-                                                <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">4.510</div>
-
-                                                    <div class="mt-1 text-base text-gray-600">Item Sales</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
-                                        href="#">
-                                        <div class="p-5">
-                                            <div class="flex justify-between">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-400"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                                                </svg>
-                                                <div
-                                                    class="bg-blue-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                                    <span class="flex items-center">30%</span>
-                                                </div>
-                                            </div>
-                                            <div class="ml-2 w-full flex-1">
-                                                <div>
-                                                    <div class="mt-3 text-3xl font-bold leading-8">4.510</div>
-
-                                                    <div class="mt-1 text-base text-gray-600">Item Sales</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-span-12 mt-5">
-                                <div class="grid gap-2 grid-cols-1 lg:grid-cols-2">
-                                    <div class="bg-white shadow-lg p-4" id="chartline"></div>
-                                    <div class="bg-white shadow-lg" id="chartpie"></div>
-                                </div>
-                            </div>
-                            <div class="col-span-12 mt-5">
-                                <div class="grid gap-2 grid-cols-1 lg:grid-cols-1">
-                                    <div class="bg-white p-4 shadow-lg rounded-lg">
-                                        <h1 class="font-bold text-base">Table</h1>
-                                        <div class="mt-4">
-                                            <div class="flex flex-col">
-                                                <div class="-my-2 overflow-x-auto">
-                                                    <div class="py-2 align-middle inline-block min-w-full">
-                                                        <div
-                                                            class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
-                                                            <table class="min-w-full divide-y divide-gray-200">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th
-                                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                                            <div class="flex cursor-pointer">
-                                                                                <span class="mr-2">PRODUCT NAME</span>
-                                                                            </div>
-                                                                        </th>
-                                                                        <th
-                                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                                            <div class="flex cursor-pointer">
-                                                                                <span class="mr-2">Stock</span>
-                                                                            </div>
-                                                                        </th>
-                                                                        <th
-                                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                                            <div class="flex cursor-pointer">
-                                                                                <span class="mr-2">STATUS</span>
-                                                                            </div>
-                                                                        </th>
-                                                                        <th
-                                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                                            <div class="flex cursor-pointer">
-                                                                                <span class="mr-2">ACTION</span>
-                                                                            </div>
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="bg-white divide-y divide-gray-200">
-                                                                    <tr>
-                                                                        <td
-                                                                            class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                                            <p>Apple MacBook Pro 13</p>
-                                                                            <p class="text-xs text-gray-400">PC & Laptop
-                                                                            </p>
-                                                                        </td>
-                                                                        <td
-                                                                            class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                                            <p>77</p>
-                                                                        </td>
-                                                                        <td
-                                                                            class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                                            <div class="flex text-green-500">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    class="w-5 h-5 mr-1" fill="none"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    stroke="currentColor">
-                                                                                    <path stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        stroke-width="2"
-                                                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                                </svg>
-                                                                                <p>Active</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td
-                                                                            class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                                            <div class="flex space-x-4">
-                                                                                <a href="#" class="text-blue-500 hover:text-blue-600">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                        class="w-5 h-5 mr-1"
-                                                                                        fill="none" viewBox="0 0 24 24"
-                                                                                        stroke="currentColor">
-                                                                                        <path stroke-linecap="round"
-                                                                                            stroke-linejoin="round"
-                                                                                            stroke-width="2"
-                                                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                                                    </svg>
-                                                                                    <p>Edit</p>
-                                                                                </a>
-                                                                                <a href="#" class="text-red-500 hover:text-red-600">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                        class="w-5 h-5 mr-1 ml-3"
-                                                                                        fill="none" viewBox="0 0 24 24"
-                                                                                        stroke="currentColor">
-                                                                                        <path stroke-linecap="round"
-                                                                                            stroke-linejoin="round"
-                                                                                            stroke-width="2"
-                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                                                    </svg>
-                                                                                    <p>Delete</p>
-                                                                                </a>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                            <!-- ========== END HEADER ========== -->
+                        </header>
+                        <!--  Header End -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6">
+                            <div class="col-span-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="flex  justify-between mb-5">
+                                            <h4 class="text-gray-500 text-lg font-semibold sm:mb-0 mb-2">Profit &
+                                                Expenses</h4>
+                                            <div
+                                                class="hs-dropdown relative inline-flex [--placement:bottom-right] sm:[--trigger:hover]">
+                                                <a
+                                                    class="relative hs-dropdown-toggle cursor-pointer align-middle rounded-full">
+                                                    <i class="ti ti-dots-vertical text-2xl text-gray-400"></i>
+                                                </a>
+                                                <div class="card hs-dropdown-menu transition-[opacity,margin] rounded-md duration hs-dropdown-open:opacity-100 opacity-0 mt-2 min-w-max  w-[150px] hidden z-[12]"
+                                                    aria-labelledby="hs-dropdown-custom-icon-trigger">
+                                                    <div class="card-body p-0 py-2">
+                                                        <a href="javscript:void(0)"
+                                                            class="flex gap-2 items-center font-medium px-4 py-2.5 hover:bg-gray-200 text-gray-400">
+                                                            <p class="text-sm ">Action</p>
+                                                        </a>
+                                                        <a href="javscript:void(0)"
+                                                            class="flex gap-2 items-center font-medium px-4 py-2.5 hover:bg-gray-200 text-gray-400">
+                                                            <p class="text-sm ">Another Action</p>
+                                                        </a>
+                                                        <a href="javscript:void(0)"
+                                                            class="flex gap-2 items-center font-medium px-4 py-2.5 hover:bg-gray-200 text-gray-400">
+                                                            <p class="text-sm ">Something else here</p>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div id="profit"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="text-gray-500 text-lg font-semibold mb-4">Traffic Distribution</h4>
+                                        <div class="flex items-center justify-between gap-12">
+                                            <div>
+                                                <h3 class="text-[22px] font-semibold text-gray-500 mb-4">$36,358</h3>
+                                                <div class="flex items-center gap-1 mb-3">
+                                                    <span
+                                                        class="flex items-center justify-center w-5 h-5 rounded-full bg-teal-400">
+                                                        <i class="ti ti-arrow-up-left text-teal-500"></i>
+                                                    </span>
+                                                    <p class="text-gray-500 text-sm font-normal ">+9%</p>
+                                                    <p class="text-gray-400 text-sm font-normal text-nowrap">last year
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-4">
+                                                    <div class="flex gap-2 items-center">
+                                                        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                                                        <p class="text-gray-400 font-normal text-xs">Oragnic</p>
+                                                    </div>
+                                                    <div class="flex gap-2 items-center">
+                                                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                                        <p class="text-gray-400 font-normal text-xs"> Refferal</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex  items-center">
+                                                <div id="grade"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="flex gap-6 items-center justify-between">
+                                            <div class="flex flex-col gap-4">
+                                                <h4 class="text-gray-500 text-lg font-semibold">Product Sales</h4>
+                                                <div class="flex flex-col gap-4">
+                                                    <h3 class="text-[22px] font-semibold text-gray-500">$6,820</h3>
+                                                    <div class="flex items-center gap-1">
+                                                        <span
+                                                            class="flex items-center justify-center w-5 h-5 rounded-full bg-red-400">
+                                                            <i class="ti ti-arrow-down-right text-red-500"></i>
+                                                        </span>
+                                                        <p class="text-gray-500 text-sm font-normal ">+9%</p>
+                                                        <p class="text-gray-400 text-sm font-normal text-nowrap">last
+                                                            year</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="w-11 h-11 flex justify-center items-center rounded-full bg-red-500 text-white self-start">
+                                                <i class="ti ti-currency-dollar text-xl"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="earning"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="text-gray-500 text-lg font-semibold mb-5">Upcoming Schedules</h4>
+                                    <ul class="timeline-widget relative">
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 text-sm min-w-[90px] py-[6px] pr-4 text-end">
+                                                9:30 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-normal">Payment received from John
+                                                    Doe of $385.90</p>
+                                            </div>
+                                        </li>
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 min-w-[90px] py-[6px] text-sm pr-4 text-end">
+                                                10:00 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-300 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4 text-sm">
+                                                <p class="text-gray-500  font-semibold">New sale recorded</p>
+                                                <a href="javascript:void('')" class="text-blue-600">#ML-3467</a>
+                                            </div>
+                                        </li>
+
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 min-w-[90px] text-sm py-[6px] pr-4 text-end">
+                                                12:00 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-teal-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-normal">Payment was made of $64.95
+                                                    to Michael</p>
+                                            </div>
+                                        </li>
+
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 min-w-[90px] text-sm py-[6px] pr-4 text-end">
+                                                9:30 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-yellow-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4 text-sm">
+                                                <p class="text-gray-500 font-semibold">New sale recorded</p>
+                                                <a href="javascript:void('')" class="text-blue-600">#ML-3467</a>
+                                            </div>
+                                        </li>
+
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 text-sm min-w-[90px] py-[6px] pr-4 text-end">
+                                                9:30 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-red-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-semibold">New arrival recorded</p>
+                                            </div>
+                                        </li>
+                                        <li class="timeline-item flex relative overflow-hidden">
+                                            <div
+                                                class="timeline-time text-gray-500 text-sm min-w-[90px] py-[6px] pr-4 text-end">
+                                                12:00 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-teal-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-normal">Payment Done</p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-span-2">
+                                <div class="card h-full">
+                                    <div class="card-body">
+                                        <h4 class="text-gray-500 text-lg font-semibold mb-5">Top Paying Clients</h4>
+                                        <div class="relative overflow-x-auto">
+                                            <!-- table -->
+                                            <table class="text-left w-full whitespace-nowrap text-sm text-gray-500">
+                                                <thead>
+                                                    <tr class="text-sm">
+                                                        <th scope="col" class="p-4 font-semibold">Profile</th>
+                                                        <th scope="col" class="p-4 font-semibold">Hour Rate</th>
+                                                        <th scope="col" class="p-4 font-semibold">Extra classes</th>
+                                                        <th scope="col" class="p-4 font-semibold">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-1.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">Mark J. Freeman</h3>
+                                                                    <span class="font-normal">Prof. English</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+53</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-teal-400 text-teal-500">Available</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-2.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">Nina R. Oldman</h3>
+                                                                    <span class="font-normal">Prof. History</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+68</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-blue-500 text-blue-600">In
+                                                                Class</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-3.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">Arya H. Shah</h3>
+                                                                    <span class="font-normal">Prof. Maths</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+94</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-red-400 text-red-500">Absent</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-4.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">June R. Smith</h3>
+                                                                    <span class="font-normal">Prof. Arts</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+27</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-yellow-400 text-yellow-500">Absent</span>
+                                                        </td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 gap-6">
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-1.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">Boat Headphone</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center ">
+                                            <h6 class=" text-gray-500 font-semibold text-base">$50</h6>
+                                            <span class="text-gray-400 font-medium text-sm opacity-80">
+                                                <del>$65</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-2.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">MacBook Air Pro</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center">
+                                            <h6 class="text-base text-gray-500 font-semibold">$650</h6>
+                                            <span class="text-gray-400 text-sm opacity-80">
+                                                <del>$900</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-3.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">Red Valvet Dress</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center">
+                                            <h6 class="text-base text-gray-500 font-semibold">$150</h6>
+                                            <span class="text-gray-400 text-sm opacity-80">
+                                                <del>$200</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-4.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">Cute Soft Teddybear</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center">
+                                            <h6 class="text-base text-gray-500 font-semibold">$285</h6>
+                                            <span class="text-gray-400 text-sm">
+                                                <del>$345</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer>
+                            <p class="text-base text-gray-400 font-normal p-3 text-center">
+                                Design and Developed by <a href="https://www.wrappixel.com/" target="_blank"
+                                    class="text-blue-600 underline hover:text-blue-700">wrappixel.com</a>
+                            </p>
+                        </footer>
                     </div>
-                </div>
-            </main>
-        </div>
-    </div>
 
+
+                </main>
+            </div>
+        </div>
+        <!--end of project-->
+    </main>
 </body>
+
+
 
 </html>

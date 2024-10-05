@@ -18,16 +18,15 @@
 
 </head>
 
-<body class=" font-inter">
-<div class="flex h-screen bg-white " :class="{ 'overflow-hidden': isSideMenuOpen }">
-
-
-
+<body class=" bg-surface">
+	<main>
+    <div id="main-wrapper" class=" flex p-5 xl:pr-0">
     <?php include '../../src/navbar_teacher.php'; ?>
-    <div class="flex flex-col w-full overflow-y-auto">
+   
+    <div class=" w-full page-wrapper xl:px-6 px-0">
 
         <div class="container px-6 py-8 mx-auto ">
-            <h3 class="text-3xl font-medium text-white">จัดการข้อมูลนักเรียน</h3>
+            <h3 class="text-3xl font-medium text-black">จัดการข้อมูลนักเรียน</h3>
            
       
            
@@ -84,22 +83,13 @@
             </div>
         </div>
   
-    </div>
-    </div>
-    </div>
+        </div>
+		</div>
+		<!--end of project-->
+	</main>
 </body>
 
 </html>
 
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- DataTables JS CDN -->
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable(); // เรียกใช้งาน DataTables
-    });
-</script>
 
