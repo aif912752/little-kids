@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,421 +9,696 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <title>Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
-   
 </head>
-<body class="text-gray-800 font-inter">
-<?php include '../../src/navbar.php'; ?>
 
-<main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                <div class="container px-6 py-8 mx-auto">
-                    <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
-    
-                    <div class="mt-4">
-                        <div class="flex flex-wrap -mx-6">
-                            <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
-                                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-                                    <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
-                                        <svg class="w-8 h-8 text-white" viewBox="0 0 28 30" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M18.2 9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373 9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2 6.64043 18.2 9.08889Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
-                                                fill="currentColor"></path>
-                                        </svg>
+<body class=" bg-surface">
+    <main>
+        <div id="main-wrapper" class=" flex p-5 xl:pr-0">
+            <?php include '../../src/navbar_teacher.php'; ?>
+
+            <div class=" w-full page-wrapper xl:px-6 px-0">
+
+                <!-- Main Content -->
+                <main class="h-full  max-w-full">
+                    <div class="container full-container p-0 flex flex-col gap-6">
+                        <!--  Header Start -->
+                        <header class=" bg-white shadow-md rounded-md w-full text-sm py-4 px-6">
+
+
+                            <!-- ========== HEADER ========== -->
+
+                            <nav class=" w-ful flex items-center justify-between" aria-label="Global">
+                                <ul class="icon-nav flex items-center gap-4">
+                                    <li class="relative xl:hidden">
+                                        <a class="text-xl  icon-hover cursor-pointer text-heading" id="headerCollapse"
+                                            data-hs-overlay="#application-sidebar-brand"
+                                            aria-controls="application-sidebar-brand" aria-label="Toggle navigation"
+                                            href="javascript:void(0)">
+                                            <i class="ti ti-menu-2 relative z-1"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="relative">
+
+                                        <div
+                                            class="hs-dropdown relative inline-flex [--placement:bottom-left] sm:[--trigger:hover]">
+                                            <a class="relative hs-dropdown-toggle inline-flex hover:text-gray-500 text-gray-300"
+                                                href="#">
+                                                <i class="ti ti-bell-ringing text-xl relative z-[1]"></i>
+                                                <div
+                                                    class="absolute inline-flex items-center justify-center  text-white text-[11px] font-medium  bg-blue-600 w-2 h-2 rounded-full -top-[1px] -right-[6px]">
+                                                </div>
+                                            </a>
+                                            <div class="card hs-dropdown-menu transition-[opacity,margin] rounded-md duration hs-dropdown-open:opacity-100 opacity-0 mt-2 min-w-max  w-[300px] hidden z-[12]"
+                                                aria-labelledby="hs-dropdown-custom-icon-trigger">
+                                                <div>
+                                                    <h3 class="text-gray-500 font-semibold text-base px-6 py-3">
+                                                        Notification</h3>
+                                                    <ul class="list-none  flex flex-col">
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">Roman
+                                                                    Joined the Team!</p>
+                                                                <p class="text-xs text-gray-400 font-medium">
+                                                                    Congratulate him</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">New message
+                                                                    received</p>
+                                                                <p class="text-xs text-gray-400 font-medium">Salma sent
+                                                                    you new message</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">New Payment
+                                                                    received</p>
+                                                                <p class="text-xs text-gray-400 font-medium">Check your
+                                                                    earnings</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">Jolly
+                                                                    completed tasks</p>
+                                                                <p class="text-xs text-gray-400 font-medium">Assign her
+                                                                    new tasks</p>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="py-3 px-6 block hover:bg-gray-200">
+                                                                <p class="text-sm text-gray-500 font-medium">Roman
+                                                                    Joined the Team!</p>
+                                                                <p class="text-xs text-gray-400 font-medium">
+                                                                    Congratulate him</p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                                <div class="flex items-center gap-4">
+                                    <a href="#" class="btn text-base font-medium hover:bg-blue-700"
+                                        aria-current="page">Upgrade to Pro</a>
+                                    <div
+                                        class="hs-dropdown relative inline-flex [--placement:bottom-right] sm:[--trigger:hover]">
+                                        <a class="relative hs-dropdown-toggle cursor-pointer align-middle rounded-full">
+                                            <img class="object-cover w-9 h-9 rounded-full"
+                                                src="./assets/images/profile/user-1.jpg" alt="" aria-hidden="true">
+                                        </a>
+                                        <div class="card hs-dropdown-menu transition-[opacity,margin] rounded-md duration hs-dropdown-open:opacity-100 opacity-0 mt-2 min-w-max  w-[200px] hidden z-[12]"
+                                            aria-labelledby="hs-dropdown-custom-icon-trigger">
+                                            <div class="card-body p-0 py-2">
+                                                <a href="javscript:void(0)"
+                                                    class="flex gap-2 items-center font-medium px-4 py-1.5 hover:bg-gray-200 text-gray-400">
+                                                    <i class="ti ti-user  text-xl "></i>
+                                                    <p class="text-sm ">My Profile</p>
+                                                </a>
+                                                <a href="javscript:void(0)"
+                                                    class="flex gap-2 items-center font-medium px-4 py-1.5 hover:bg-gray-200 text-gray-400">
+                                                    <i class="ti ti-mail  text-xl"></i>
+                                                    <p class="text-sm ">My Account</p>
+                                                </a>
+                                                <a href="javscript:void(0)"
+                                                    class="flex gap-2 items-center font-medium px-4 py-1.5 hover:bg-gray-200 text-gray-400">
+                                                    <i class="ti ti-list-check  text-xl "></i>
+                                                    <p class="text-sm ">My Task</p>
+                                                </a>
+                                                <div class="px-4 mt-[7px] grid">
+                                                    <a href="../../pages/authentication-login.html"
+                                                        class="btn-outline-primary font-medium text-[15px] w-full hover:bg-blue-600 hover:text-white">Logout</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
-    
-                                    <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
-                                        <div class="text-gray-500">New Users</div>
+
+
+                                </div>
+                            </nav>
+
+                            <!-- ========== END HEADER ========== -->
+                        </header>
+                        <!--  Header End -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6">
+                            <div class="col-span-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="flex  justify-between mb-5">
+                                            <h4 class="text-gray-500 text-lg font-semibold sm:mb-0 mb-2">Profit &
+                                                Expenses</h4>
+                                            <div
+                                                class="hs-dropdown relative inline-flex [--placement:bottom-right] sm:[--trigger:hover]">
+                                                <a
+                                                    class="relative hs-dropdown-toggle cursor-pointer align-middle rounded-full">
+                                                    <i class="ti ti-dots-vertical text-2xl text-gray-400"></i>
+                                                </a>
+                                                <div class="card hs-dropdown-menu transition-[opacity,margin] rounded-md duration hs-dropdown-open:opacity-100 opacity-0 mt-2 min-w-max  w-[150px] hidden z-[12]"
+                                                    aria-labelledby="hs-dropdown-custom-icon-trigger">
+                                                    <div class="card-body p-0 py-2">
+                                                        <a href="javscript:void(0)"
+                                                            class="flex gap-2 items-center font-medium px-4 py-2.5 hover:bg-gray-200 text-gray-400">
+                                                            <p class="text-sm ">Action</p>
+                                                        </a>
+                                                        <a href="javscript:void(0)"
+                                                            class="flex gap-2 items-center font-medium px-4 py-2.5 hover:bg-gray-200 text-gray-400">
+                                                            <p class="text-sm ">Another Action</p>
+                                                        </a>
+                                                        <a href="javscript:void(0)"
+                                                            class="flex gap-2 items-center font-medium px-4 py-2.5 hover:bg-gray-200 text-gray-400">
+                                                            <p class="text-sm ">Something else here</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="profit"></div>
                                     </div>
                                 </div>
                             </div>
-    
-                            <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-                                    <div class="p-3 bg-orange-600 bg-opacity-75 rounded-full">
-                                        <svg class="w-8 h-8 text-white" viewBox="0 0 28 28" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M4.19999 1.4C3.4268 1.4 2.79999 2.02681 2.79999 2.8C2.79999 3.57319 3.4268 4.2 4.19999 4.2H5.9069L6.33468 5.91114C6.33917 5.93092 6.34409 5.95055 6.34941 5.97001L8.24953 13.5705L6.99992 14.8201C5.23602 16.584 6.48528 19.6 8.97981 19.6H21C21.7731 19.6 22.4 18.9732 22.4 18.2C22.4 17.4268 21.7731 16.8 21 16.8H8.97983L10.3798 15.4H19.6C20.1303 15.4 20.615 15.1004 20.8521 14.6261L25.0521 6.22609C25.2691 5.79212 25.246 5.27673 24.991 4.86398C24.7357 4.45123 24.2852 4.2 23.8 4.2H8.79308L8.35818 2.46044C8.20238 1.83722 7.64241 1.4 6.99999 1.4H4.19999Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M22.4 23.1C22.4 24.2598 21.4598 25.2 20.3 25.2C19.1403 25.2 18.2 24.2598 18.2 23.1C18.2 21.9402 19.1403 21 20.3 21C21.4598 21 22.4 21.9402 22.4 23.1Z"
-                                                fill="currentColor"></path>
-                                            <path
-                                                d="M9.1 25.2C10.2598 25.2 11.2 24.2598 11.2 23.1C11.2 21.9402 10.2598 21 9.1 21C7.9402 21 7 21.9402 7 23.1C7 24.2598 7.9402 25.2 9.1 25.2Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                    </div>
-    
-                                    <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
-                                        <div class="text-gray-500">Total Orders</div>
+
+                            <div class="flex flex-col gap-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="text-gray-500 text-lg font-semibold mb-4">Traffic Distribution</h4>
+                                        <div class="flex items-center justify-between gap-12">
+                                            <div>
+                                                <h3 class="text-[22px] font-semibold text-gray-500 mb-4">$36,358</h3>
+                                                <div class="flex items-center gap-1 mb-3">
+                                                    <span
+                                                        class="flex items-center justify-center w-5 h-5 rounded-full bg-teal-400">
+                                                        <i class="ti ti-arrow-up-left text-teal-500"></i>
+                                                    </span>
+                                                    <p class="text-gray-500 text-sm font-normal ">+9%</p>
+                                                    <p class="text-gray-400 text-sm font-normal text-nowrap">last year
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-4">
+                                                    <div class="flex gap-2 items-center">
+                                                        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                                                        <p class="text-gray-400 font-normal text-xs">Oragnic</p>
+                                                    </div>
+                                                    <div class="flex gap-2 items-center">
+                                                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                                        <p class="text-gray-400 font-normal text-xs"> Refferal</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex  items-center">
+                                                <div id="grade"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-    
-                            <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
-                                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-                                    <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full">
-                                        <svg class="w-8 h-8 text-white" viewBox="0 0 28 28" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6.99998 11.2H21L22.4 23.8H5.59998L6.99998 11.2Z" fill="currentColor"
-                                                stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-                                            <path
-                                                d="M9.79999 8.4C9.79999 6.08041 11.6804 4.2 14 4.2C16.3196 4.2 18.2 6.08041 18.2 8.4V12.6C18.2 14.9197 16.3196 16.8 14 16.8C11.6804 16.8 9.79999 14.9197 9.79999 12.6V8.4Z"
-                                                stroke="currentColor" stroke-width="2"></path>
-                                        </svg>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="flex gap-6 items-center justify-between">
+                                            <div class="flex flex-col gap-4">
+                                                <h4 class="text-gray-500 text-lg font-semibold">Product Sales</h4>
+                                                <div class="flex flex-col gap-4">
+                                                    <h3 class="text-[22px] font-semibold text-gray-500">$6,820</h3>
+                                                    <div class="flex items-center gap-1">
+                                                        <span
+                                                            class="flex items-center justify-center w-5 h-5 rounded-full bg-red-400">
+                                                            <i class="ti ti-arrow-down-right text-red-500"></i>
+                                                        </span>
+                                                        <p class="text-gray-500 text-sm font-normal ">+9%</p>
+                                                        <p class="text-gray-400 text-sm font-normal text-nowrap">last
+                                                            year</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="w-11 h-11 flex justify-center items-center rounded-full bg-red-500 text-white self-start">
+                                                <i class="ti ti-currency-dollar text-xl"></i>
+                                            </div>
+
+                                        </div>
                                     </div>
-    
-                                    <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">215,542</h4>
-                                        <div class="text-gray-500">Available Products</div>
+                                    <div id="earning"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="text-gray-500 text-lg font-semibold mb-5">Upcoming Schedules</h4>
+                                    <ul class="timeline-widget relative">
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 text-sm min-w-[90px] py-[6px] pr-4 text-end">
+                                                9:30 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-normal">Payment received from John
+                                                    Doe of $385.90</p>
+                                            </div>
+                                        </li>
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 min-w-[90px] py-[6px] text-sm pr-4 text-end">
+                                                10:00 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-300 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4 text-sm">
+                                                <p class="text-gray-500  font-semibold">New sale recorded</p>
+                                                <a href="javascript:void('')" class="text-blue-600">#ML-3467</a>
+                                            </div>
+                                        </li>
+
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 min-w-[90px] text-sm py-[6px] pr-4 text-end">
+                                                12:00 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-teal-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-normal">Payment was made of $64.95
+                                                    to Michael</p>
+                                            </div>
+                                        </li>
+
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 min-w-[90px] text-sm py-[6px] pr-4 text-end">
+                                                9:30 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-yellow-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4 text-sm">
+                                                <p class="text-gray-500 font-semibold">New sale recorded</p>
+                                                <a href="javascript:void('')" class="text-blue-600">#ML-3467</a>
+                                            </div>
+                                        </li>
+
+                                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                            <div
+                                                class="timeline-time text-gray-500 text-sm min-w-[90px] py-[6px] pr-4 text-end">
+                                                9:30 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-red-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-semibold">New arrival recorded</p>
+                                            </div>
+                                        </li>
+                                        <li class="timeline-item flex relative overflow-hidden">
+                                            <div
+                                                class="timeline-time text-gray-500 text-sm min-w-[90px] py-[6px] pr-4 text-end">
+                                                12:00 am
+                                            </div>
+                                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                                <div
+                                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-teal-500 my-[10px]">
+                                                </div>
+                                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-100">
+                                                </div>
+                                            </div>
+                                            <div class="timeline-desc py-[6px] px-4">
+                                                <p class="text-gray-500 text-sm font-normal">Payment Done</p>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-span-2">
+                                <div class="card h-full">
+                                    <div class="card-body">
+                                        <h4 class="text-gray-500 text-lg font-semibold mb-5">Top Paying Clients</h4>
+                                        <div class="relative overflow-x-auto">
+                                            <!-- table -->
+                                            <table class="text-left w-full whitespace-nowrap text-sm text-gray-500">
+                                                <thead>
+                                                    <tr class="text-sm">
+                                                        <th scope="col" class="p-4 font-semibold">Profile</th>
+                                                        <th scope="col" class="p-4 font-semibold">Hour Rate</th>
+                                                        <th scope="col" class="p-4 font-semibold">Extra classes</th>
+                                                        <th scope="col" class="p-4 font-semibold">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-1.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">Mark J. Freeman</h3>
+                                                                    <span class="font-normal">Prof. English</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+53</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-teal-400 text-teal-500">Available</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-2.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">Nina R. Oldman</h3>
+                                                                    <span class="font-normal">Prof. History</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+68</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-blue-500 text-blue-600">In
+                                                                Class</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-3.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">Arya H. Shah</h3>
+                                                                    <span class="font-normal">Prof. Maths</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+94</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-red-400 text-red-500">Absent</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="p-4 text-sm">
+                                                            <div class="flex gap-6 items-center">
+                                                                <div class="h-12 w-12 inline-block"><img
+                                                                        src="./assets/images/profile/user-4.jpg" alt=""
+                                                                        class="rounded-full w-100"></div>
+                                                                <div class="flex flex-col gap-1 text-gray-500">
+                                                                    <h3 class=" font-bold">June R. Smith</h3>
+                                                                    <span class="font-normal">Prof. Arts</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium">$150/hour</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <h3 class="font-medium text-teal-500">+27</h3>
+                                                        </td>
+                                                        <td class="p-4">
+                                                            <span
+                                                                class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-yellow-400 text-yellow-500">Absent</span>
+                                                        </td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="mt-8">
-    
-                    </div>
-    
-                    <div class="flex flex-col mt-8">
-                        <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div
-                                class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                                <table class="min-w-full">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Name</th>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Title</th>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Status</th>
-                                            <th
-                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Role</th>
-                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-                                        </tr>
-                                    </thead>
-    
-                                    <tbody class="bg-white">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
-                                                    </div>
-    
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium leading-5 text-gray-900">John Doe
-                                                        </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                                            </td>
-    
-                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                <span
-                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
-                                            </td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                                Owner</td>
-    
-                                            <td
-                                                class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 gap-6">
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-1.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">Boat Headphone</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center ">
+                                            <h6 class=" text-gray-500 font-semibold text-base">$50</h6>
+                                            <span class="text-gray-400 font-medium text-sm opacity-80">
+                                                <del>$65</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-2.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">MacBook Air Pro</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center">
+                                            <h6 class="text-base text-gray-500 font-semibold">$650</h6>
+                                            <span class="text-gray-400 text-sm opacity-80">
+                                                <del>$900</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-3.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">Red Valvet Dress</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center">
+                                            <h6 class="text-base text-gray-500 font-semibold">$150</h6>
+                                            <span class="text-gray-400 text-sm opacity-80">
+                                                <del>$200</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card overflow-hidden">
+                                <div class="relative">
+                                    <a href="javascript:void(0)">
+                                        <img src="./assets/images/products/product-4.jpg" alt="product_img"
+                                            class="w-full">
+                                    </a>
+                                    <a href="javascript:void(0)"
+                                        class="bg-blue-600 w-8 h-8 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0 mr-4 -mb-3">
+                                        <i class="ti ti-basket text-base"></i>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-base font-semibold text-gray-500 mb-1">Cute Soft Teddybear</h6>
+                                    <div class="flex justify-between">
+                                        <div class="flex gap-2 items-center">
+                                            <h6 class="text-base text-gray-500 font-semibold">$285</h6>
+                                            <span class="text-gray-400 text-sm">
+                                                <del>$345</del>
+                                            </span>
+                                        </div>
+                                        <ul class="list-none flex gap-1">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star-filled text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="ti ti-star text-yellow-500 text-sm"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <footer>
+                            <p class="text-base text-gray-400 font-normal p-3 text-center">
+                                Design and Developed by <a href="https://www.wrappixel.com/" target="_blank"
+                                    class="text-blue-600 underline hover:text-blue-700">wrappixel.com</a>
+                            </p>
+                        </footer>
                     </div>
-                </div>
-            </main>
 
 
+                </main>
+            </div>
+        </div>
+        <!--end of project-->
+    </main>
 </body>
+
+
+
 </html>

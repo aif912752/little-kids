@@ -16,15 +16,18 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 </head>
 
-<body class="text-gray-800 font-inter">
-    <?php include '../../src/navbar.php'; ?>
+<body class=" bg-surface">
+    <main>
+        <div id="main-wrapper" class=" flex p-5 xl:pr-0">
+            <?php include '../../src/navbar_teacher.php'; ?>
 
-    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-        <div class="container px-6 py-8 mx-auto">
-            <h3 class="text-3xl font-medium text-gray-700">จัดการข้อมูลผู้ดูแลระบบ</h3>
-            <div class="flex flex-col mt-8">
-                <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+            <div class=" w-full page-wrapper xl:px-6 px-0">
+
+                <!-- Main Content -->
+                <main class="h-full  max-w-full">
+                    <div class="container full-container p-0 flex flex-col gap-6">
+                        
+<div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
                         
                         <!-- ชิดขวา -->
                         <div class="flex justify-end p-3">
@@ -68,15 +71,18 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                    </div>
+
+
+                </main>
             </div>
         </div>
+        <!--end of project-->
     </main>
-
-
 </body>
 
 </html>
+
 
 
 <!-- jQuery -->
