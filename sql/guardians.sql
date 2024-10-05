@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2024 at 02:57 PM
+-- Generation Time: Oct 05, 2024 at 06:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `guardians` (
   `guardian_id` int(11) NOT NULL COMMENT 'รหัสผู้ปกครอง',
+  `img` varchar(255) NOT NULL COMMENT 'รูปภาพ',
   `first_name` varchar(100) NOT NULL COMMENT 'ชื่อของผู้ปกครอง',
   `last_name` varchar(100) NOT NULL COMMENT 'นามสกุลของผู้ปกครอง',
   `phone_number` varchar(15) DEFAULT NULL COMMENT 'หมายเลขโทรศัพท์ของผู้ปกครอง',
@@ -36,7 +37,8 @@ CREATE TABLE `guardians` (
   `address` text DEFAULT NULL COMMENT 'ที่อยู่ของผู้ปกครอง',
   `relation_to_student` varchar(50) NOT NULL COMMENT 'ความสัมพันธ์ระหว่างผู้ปกครองกับนักเรียน เช่น พ่อ, แม่, ลุง, ป้า',
   `student_id` int(11) NOT NULL COMMENT 'ชื่อนามสกุลของนักเรียนที่ ref ไปหา',
-  `user_id` int(11) NOT NULL COMMENT 'รหัสที่ ref ไปหา user_id'
+  `user_id` int(11) NOT NULL COMMENT 'รหัสที่ ref ไปหา user_id',
+  `room_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาห้องเรียน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
