@@ -7,36 +7,48 @@ $check_in_time = $_POST['check_in_time'] ?? '';
 $check_out_time = $_POST['check_out_time'] ?? '';
 $status = $_POST['status'] ?? '';
 $attendance_date = date('Y-m-d'); // วันที่ปัจจุบัน
+$student_name = $_POST['first_name'] ?? '';
+$student_lastname = $_POST['last_name'] ?? '';
 
-// ดึงข้อมูลชื่อและนามสกุลของนักเรียนจาก student_id
-$sql_student = "SELECT first_name, last_name FROM students WHERE student_id = '$student_id'";
-$result_student = $connect->query($sql_student);
+// ตรวจสอบว่ามี student_id ถูกส่งมาหรือไม่
+if (!empty($student_id)) {
+    // ดึงข้อมูลชื่อและนามสกุลของนักเรียนจาก student_id
+    $sql_student = "SELECT first_name, last_name FROM students WHERE student_id = '$student_id'";
+    $result_student = $connect->query($sql_student);
 
-if ($result_student->num_rows > 0) {
-    $row = $result_student->fetch_assoc();
-    $student_name = $row['first_name'];
-    $student_lastname = $row['last_name'];
+    if ($result_student->num_rows > 0) {
+        $row = $result_student->fetch_assoc();
+        $student_name = $row['first_name']; // ดึง first_name จากผลลัพธ์ query
+        $student_lastname = $row['last_name']; // ดึง last_name จากผลลัพธ์ query
+        
+        // เพิ่มข้อมูลลงในตาราง attendance
+        $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, check_in_time, check_out_time, status) 
+                VALUES ('$student_id', '$student_name', '$student_lastname', '$attendance_date', '$check_in_time', '$check_out_time', '$status')";
 
-    // เพิ่มข้อมูลลงในตาราง attendance
-    $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, check_in_time, check_out_time, status) 
-            VALUES ('$student_id', '$student_name', '$student_lastname', '$attendance_date', '$check_in_time', '$check_out_time', '$status')";
-    
-    $result = $connect->query($sql);
+        // ตรวจสอบ SQL Query
+        echo $sql . "<br>";
 
-    if ($result) {
-        echo "<script>
-                alert('บันทึกข้อมูลการมาเรียนเรียบร้อยแล้ว');
-                window.location.href = 'attendance.php'; // แก้ไขเป็นหน้าที่ต้องการให้กลับไป
-              </script>";
+        $result = $connect->query($sql);
+
+        if ($result) {
+            echo "<script>
+                    alert('บันทึกข้อมูลการมาเรียนเรียบร้อยแล้ว');
+                    window.location.href = 'attendance.php'; // แก้ไขเป็นหน้าที่ต้องการให้กลับไป
+                  </script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . $connect->error;
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $connect->error;
+        echo "<script>
+                alert('ไม่พบข้อมูลนักเรียน');
+                window.history.back();
+              </script>";
     }
 } else {
     echo "<script>
-            alert('ไม่พบข้อมูลนักเรียน');
+            alert('ไม่ได้รับ student_id');
             window.history.back();
           </script>";
 }
 
 $connect->close();
-?>
