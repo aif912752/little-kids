@@ -59,7 +59,7 @@ if ($id) {
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                                     <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลนักเรียน</p>
-                                    <form action="update_admin.php" method="post">
+                                    <form action="update_student.php" method="post">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">Username</label>
@@ -142,6 +142,13 @@ if ($id) {
                                                             </div>
                                                             <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
                                                         </div>
+                                                        <?php if (!empty($row['img'])): ?>
+                                                            <div id="current-img" class="mt-3">
+                                                                <label class="block text-gray-700">รูปภาพปัจจุบัน:</label>
+                                                                <img src="uploads/<?= $row['img'] ?>" alt="รูปภาพปัจจุบัน" class="max-w-full h-auto rounded-lg shadow-lg">
+                                                            </div>
+                                                        <?php endif; ?>
+
                                                         <div id="preview" class="mt-3 hidden">
                                                             <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
                                                         </div>

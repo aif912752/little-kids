@@ -12,6 +12,33 @@ $religion = $_POST['religion'] ?? '';
 $enrollment_date = $_POST['enrollment_date'] ?? '';
 $status = $_POST['status'] ?? '';
 
+$upload_dir = 'uploads/'; // เปลี่ยนเส้นทางตามที่ต้องการ
+
+// ตรวจสอบว่าโฟลเดอร์นี้มีอยู่แล้วหรือไม่ ถ้าไม่มีก็สร้างใหม่
+if (!is_dir($upload_dir)) {
+    mkdir($upload_dir, 0777, true); // สร้างโฟลเดอร์พร้อมกำหนดสิทธิ์ 0777
+}
+
+// ตรวจสอบว่ามีการอัปโหลดไฟล์รูปภาพหรือไม่
+if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+    $img = $_FILES['img'];
+    $img_name = uniqid() . '-' . basename($img['name']); // สร้างชื่อไฟล์ที่ไม่ซ้ำกัน
+    $img_tmp_name = $img['tmp_name'];
+
+    $target_file = $upload_dir . $img_name;
+
+    // ตรวจสอบว่าการย้ายไฟล์สำเร็จหรือไม่
+    if (move_uploaded_file($img_tmp_name, $target_file)) {
+        echo "Upload successful!";
+    } else {
+        echo "Upload failed!";
+        exit;
+    }
+} else {
+    echo "No file uploaded or file error!";
+    exit;
+}
+
 // ใช้ citizen_id เป็น username
 $username = $citizen_id;
 
