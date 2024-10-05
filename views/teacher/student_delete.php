@@ -23,7 +23,7 @@ if($id) {
             if($result) {
                 echo "<script>
                         alert('ลบข้อมูลเรียบร้อยแล้ว');
-                        window.location.href = 'admin_manage.php';
+                        window.location.href = 'student.php';
                     </script>";
             } else {
                 echo $connect->error;
@@ -35,13 +35,13 @@ if($id) {
         echo $connect->error;
         echo "<script>
                 alert('ไม่พบข้อมูลที่ต้องการลบ');
-                window.location.href = 'admin_manage.php';
+                window.location.href = 'student.php';
             </script>"; 
     }         
 } else {
     echo "<script>
             alert('ไม่พบข้อมูลที่ต้องการลบ');
-            window.location.href = 'admin_manage.php';
+            window.location.href = 'student.php';
         </script>";
 }
 ?>
