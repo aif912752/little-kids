@@ -55,7 +55,7 @@
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                                     <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลครู</p>
-                                    <form action="update_student.php" method="post" enctype="multipart/form-data">
+                                    <form action="update_profile.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">Username</label>
@@ -125,6 +125,13 @@
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
                                                 <label class="font-semibold leading-none">ชั้นปีที่ </label>
                                                 <input type="text" name="class_taught" value="<?= $row['class_taught'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">ที่อยู่</label>
+                                                <textarea name="teacher_address" rows="4" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>                      
                                             </div>
                                         </div>
                                     
