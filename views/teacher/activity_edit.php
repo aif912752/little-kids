@@ -29,7 +29,7 @@ if ($id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แก้ไขข้อมูลผู้ดูแลระบบ</title>
+    <title>แก้ไขข้อมูลตารางกิจกรรม</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
@@ -67,62 +67,29 @@ if ($id) {
                                         </div>
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none"> เลขประจำตัวประชาชน </label>
-                                                <input type="text" name="citizen_id" value="<?= $row['citizen_id'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <label class="font-semibold leading-none">วัน/เดือน/ปี เกิด</label>
-                                                <input type="date" name="birthdate" value="<?= $row['birthdate'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <label class="font-semibold leading-none"> รายละเอียดกิจกรรม </label>
+                                                <input type="text" name="activity_description" value="<?= $row['activity_description'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                         </div>
                                         <div class="md:flex items-center mt-4">
-
-                                        </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full  flex flex-col">
-                                                <label class="font-semibold leading-none">ชั้นที่เรียน</label>
-                                                <input type="text" name="grade_level" value="<?= $row['grade_level'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-
-                                        </div>
-
-                                        <div class="md:flex items-start mt-4">
-                                            <div class="w-full  flex flex-col">
-                                                <label class="font-semibold leading-none">สถาณะนักเรียน</label>
-                                                <input type="text" name="status" value="<?= $row['status'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <div class="md:flex">
-                                                    <div class="w-full p-3">
-                                                        <div id="upload-box" class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-                                                            <div class="absolute">
-                                                                <div class="flex flex-col items-center">
-                                                                    <i class="fa fa-folder-open fa-4x text-blue-700"></i>
-                                                                    <span class="block text-gray-400 font-normal">อัพโหลดรูปนักเรียน</span>
-                                                                </div>
-                                                            </div>
-                                                            <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
-                                                        </div>
-                                                        <?php if (!empty($row['img'])): ?>
-                                                            <div id="current-img" class="mt-3">
-                                                                <label class="block text-gray-700">รูปภาพปัจจุบัน:</label>
-                                                                <img src="uploads/<?= $row['img'] ?>" alt="รูปภาพปัจจุบัน" class="max-w-full h-auto rounded-lg shadow-lg">
-                                                            </div>
-                                                        <?php endif; ?>
-
-                                                        <div id="preview" class="mt-3 hidden">
-                                                            <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
-                                                        </div>
-                                                    </div>
+                                            <div class="md:flex items-center mt-4">
+                                                <div class="w-full md:w-1/2 flex flex-col md:mr-5">
+                                                    <label class="font-semibold leading-none">เวลาเข้า</label>
+                                                    <input type="text" name="activity_date_start" value="<?= $row['activity_date_start'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                                 </div>
+                                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
+                                                    <label class="font-semibold leading-none">เวลาออก</label>
+                                                    <input type="text" name="activity_date_end" value="<?= $row['activity_date_end'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                </div>
+
                                             </div>
+
                                         </div>
                                         <div class="flex items-center justify-center w-full gap-4">
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
                                                 บันทึก
                                             </button>
-                                            <a href="student.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
+                                            <a href="activity.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
                                         </div>
                                     </form>
                                 </div>
