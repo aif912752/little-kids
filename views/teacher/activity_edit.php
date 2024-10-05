@@ -2,27 +2,21 @@
 include('../../config/database.php');
 $id = $_GET['id'] ?? '';
 if ($id) {
-
-
-
     $sql = "SELECT * FROM activity WHERE id = $id";
     $result = $connect->query($sql);
+
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        // select users table
-        $sql = "SELECT * FROM user WHERE id = " . $row['user_id'];
-        $result = $connect->query($sql);
-        $user = $result->fetch_assoc();
     } else {
         echo "<script>
                 alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-                window.location.href = 'student.php';
+                window.location.href = 'activity.php';
             </script>";
     }
 } else {
     echo "<script>
             alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-            window.location.href = 'student.php';
+            window.location.href = 'activity.php';
         </script>";
 }
 
@@ -58,28 +52,17 @@ if ($id) {
                             <div class="bg-gradient-to-b from-blue-500 to-blue-300 h-96"></div>
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
-                                    <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลนักเรียน</p>
-                                    <form action="update_student.php" method="post"  enctype="multipart/form-data">
+                                    <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลตารางกิจกรรม</p>
+                                    <form action="update_student.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">ชื่อกิจกรรม</label>
-                                                <input type="text" name="activity_name" value="<?php echo $user['activity_name']  ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="text" name="activity_name" value="<?php echo $row['activity_name']  ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                                <input type="hidden" name="old_username" value="<?php echo $user['username']; ?>">
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
                                                 <label class="font-semibold leading-none"> ประเภท </label>
-                                                <input type="text" name="activity_type" value="<?php echo $user['activity_type'];  ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">รายละเอียดกิจกรรม</label>
-                                                <input type="text" name="first_name" value="<?= $row['first_name'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <label class="font-semibold leading-none">นามสกุล</label>
-                                                <input type="text" name="last_name" value="<?= $row['last_name'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="text" name="activity_type" value="<?php echo $row['activity_type'];  ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                         </div>
                                         <div class="md:flex items-center mt-4">
@@ -93,27 +76,6 @@ if ($id) {
                                             </div>
                                         </div>
                                         <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">เชื้อชาติ</label>
-                                                <input type="text" name="ethnicity" value="<?= $row['ethnicity'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <label class="font-semibold leading-none">สัญชาติ</label>
-                                                <input type="text" name="nationality" value="<?= $row['nationality'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full  flex flex-col">
-                                                <label class="font-semibold leading-none">ศาสนา</label>
-                                                <input type="text" name="religion" value="<?= $row['religion'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-
-                                        </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full  flex flex-col">
-                                                <label class="font-semibold leading-none">วันที่ลงทะเบียนเข้าเรียน</label>
-                                                <input type="text" name="enrollment_date" value="<?= $row['enrollment_date'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
 
                                         </div>
                                         <div class="md:flex items-center mt-4">
