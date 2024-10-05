@@ -1,26 +1,3 @@
-<?php
-include('../../config/database.php');
-
-// ดึงข้อมูลครูจากตาราง teacher โดยใช้ user_id
-$sql = "SELECT t.*, u.username FROM teacher t
-        JOIN user u ON t.user_id = u.id
-        WHERE t.user_id = ?";
-$stmt = $connect->prepare($sql);
-
-if ($stmt === false) {
-    die("Error preparing SQL query: " . $connect->error);
-}
-
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows == 1) {
-    $teacher = $result->fetch_assoc();
-} else {
-    die("ไม่พบข้อมูลครู");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +14,27 @@ if ($result->num_rows == 1) {
     <main>
         <div id="main-wrapper" class=" flex p-5 xl:pr-0">
             <?php include '../../src/navbar_teacher.php'; ?>
+            <?php
+            include('../../config/database.php');
+
+            // ดึงข้อมูลครูจากตาราง teacher โดยใช้ user_id
+            $sql = "SELECT * FROM teacher WHERE user_id = ?";
+            $stmt = $connect->prepare($sql);
+
+            if ($stmt === false) {
+                die("Error preparing SQL query: " . $connect->error);
+            }
+
+            $stmt->bind_param("i", $_SESSION['user_id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows == 1) {
+                $teacher = $result->fetch_assoc();
+            } else {
+                die("ไม่พบข้อมูลครู");
+            }
+            ?>
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <div class="h-full  p-8">
@@ -46,7 +44,14 @@ if ($result->num_rows == 1) {
                             <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg">
                         </div>
                         <div class="flex flex-col items-center -mt-20">
-                            <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">
+                            <?php 
+                            if ($teacher['img'] != null) {
+                                // echo '<img src="data:image/jpeg;base64,' . base64_encode($teacher['profile_picture']) . '" class="w-40 border-4 border-white rounded-full">';
+                            } else {
+                                echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
+                            }
+                            ?>
+                            <!-- <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full"> -->
                             <div class="flex items-center space-x-2 mt-2">
                                 <p class="text-2xl"><?php echo $teacher['first_name'] . ' ' . $teacher['last_name']; ?></p>
                                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
@@ -59,16 +64,16 @@ if ($result->num_rows == 1) {
                             <p class="text-sm text-gray-500">New York, USA</p>
                         </div>
                         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
-                <div class="flex items-center space-x-4 mt-2">
-                    <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-                        </svg>
-                        <span>แก้ไขข้อมูลส่วนตัว</span>
-                    </button>
-              
-                </div>
-            </div>
+                            <div class="flex items-center space-x-4 mt-2">
+                                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+                                    </svg>
+                                    <span>แก้ไขข้อมูลส่วนตัว</span>
+                                </button>
+
+                            </div>
+                        </div>
                     </div>
 
                     <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
@@ -76,7 +81,7 @@ if ($result->num_rows == 1) {
                             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
                                 <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
                                 <ul class="mt-2 text-gray-700">
-                              
+
                                     <li class="flex border-b py-2">
                                         <span class="font-bold w-24">วันเกิด:</span>
                                         <span class="text-gray-700">24 Jul, 1991</span>
@@ -86,7 +91,7 @@ if ($result->num_rows == 1) {
                                         <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
                                     </li>
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">เชื้อชาติ	:</span>
+                                        <span class="font-bold w-24">เชื้อชาติ :</span>
                                         <span class="text-gray-700">(123) 123-1234</span>
                                     </li>
                                     <li class="flex border-b py-2">
@@ -113,7 +118,7 @@ if ($result->num_rows == 1) {
                                         <span class="font-bold w-24">ชั้นที่สอน:</span>
                                         <span class="text-gray-700">English, Spanish</span>
                                     </li>
-                                
+
                                 </ul>
                             </div>
 

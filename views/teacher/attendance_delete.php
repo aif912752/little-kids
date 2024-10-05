@@ -1,6 +1,7 @@
 <?php
 include('../../config/database.php');
-$id = $_GET['attendance_id'] ?? '';
+$id = $_GET['id'] ?? '';
+
 
 if ($id) {
     // ตรวจสอบค่า $id
@@ -40,8 +41,9 @@ if ($id) {
         echo "Query Error: " . $connect->error; // แสดงข้อผิดพลาดถ้าการ query มีปัญหา
     }
 } else {
-    echo "<script>
-            alert('ไม่พบข้อมูลที่ต้องการลบ');
-            window.location.href = 'attendance.php';
-        </script>";
+
+    // echo "<script>
+    //         alert('ไม่พบข้อมูลที่ต้องการลบ');
+    //         window.location.href = 'attendance.php';
+    //     </script>";
 }
