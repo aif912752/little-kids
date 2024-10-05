@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2024 at 02:57 PM
+-- Generation Time: Oct 05, 2024 at 07:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -29,14 +29,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `director` (
   `director_id` int(10) NOT NULL COMMENT 'ไอดีผู้อำนวยการ',
+  `Img` varchar(255) NOT NULL COMMENT 'รูปภาพ',
   `first_name` varchar(100) NOT NULL COMMENT 'ชื่อผุ้อำนวยการ',
   `last_name` varchar(100) NOT NULL COMMENT 'นามสกุลผู้อำนวยการ',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดผู้อำนวยการ',
   `email` varchar(100) NOT NULL COMMENT 'อีเมล์ผู้อำนวยการ',
-  `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
+  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
   `position` varchar(100) NOT NULL COMMENT 'ตำเเหน่งผู้อำนวยการ',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `director`
+--
+
+INSERT INTO `director` (`director_id`, `Img`, `first_name`, `last_name`, `birthdate`, `email`, `phone_number`, `position`, `user_id`) VALUES
+(1, '', 'กาย', 'กาย', '2024-10-11', 'warunyoo084@gmail.com', '848091046', 'ครูใหญ่', 20),
+(2, '', 'กาย', 'กาย', '2024-10-18', 'warunyoo084@gmail.com', '848091046', 'ไอ่นนท์', 27);
 
 --
 -- Indexes for dumped tables
@@ -56,7 +65,7 @@ ALTER TABLE `director`
 -- AUTO_INCREMENT for table `director`
 --
 ALTER TABLE `director`
-  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ';
+  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

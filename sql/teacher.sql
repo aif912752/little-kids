@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 07:38 PM
+-- Generation Time: Oct 05, 2024 at 07:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,7 +39,7 @@ CREATE TABLE `teacher` (
   `religion` varchar(100) NOT NULL COMMENT 'ศาสนา',
   `citizen_id` int(15) NOT NULL COMMENT 'รหัสบัตรประชาชน',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดครู',
-  `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรครู',
+  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรครู',
   `teacher_address` varchar(255) NOT NULL COMMENT 'ที่อยู่ครู',
   `room_id` varchar(50) NOT NULL COMMENT 'ชั้นที่สอน',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser'
@@ -50,8 +50,8 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `img`, `first_name`, `last_name`, `position`, `email`, `ethnicity`, `nationality`, `religion`, `citizen_id`, `birthdate`, `phone_number`, `teacher_address`, `room_id`, `user_id`) VALUES
-(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', 0, '', '', 3),
-(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', 0, 'asdasdas', 'กกกกก', 28);
+(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', '0', '', '', 3),
+(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', '0', 'asdasdas', 'กกกกก', 28);
 
 --
 -- Indexes for dumped tables
