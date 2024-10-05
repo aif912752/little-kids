@@ -1,7 +1,8 @@
 <?php
 include '../../config/database.php';
-$sql = "SELECT * FROM attendance  ";
+$sql = "SELECT * FROM attendance ";
 $result = $connect->query($sql);
+
 
 ?>
 <!DOCTYPE html>
@@ -97,7 +98,7 @@ $result = $connect->query($sql);
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
                                                         <a href="student_edit.php?id=<?php echo $row['student_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                        <a href="attendance_delete.php?id=<?php echo $row['student_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                                        <a href="attendance_delete.php?id=<?php echo $row['attendance_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
                                                     </td>
                                                 </tr>
 

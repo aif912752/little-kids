@@ -1,42 +1,43 @@
 <?php
 include('../../config/database.php');
-$id = $_GET['id'] ?? '';
+$id = $_GET['attendance_id'] ?? '';
 
 if ($id) {
-    // Select ข้อมูลเพื่อเอา user_id ออกมา แล้วลบ user ก่อน
-    $sql = "SELECT user_id FROM students WHERE student_id = $id"; // เปลี่ยนชื่อ table และ id
-    $result = $connect->query($sql);
+    // ตรวจสอบค่า $id
+    var_dump($id); // เพิ่มบรรทัดนี้เพื่อตรวจสอบค่า
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $user_id = $row['user_id'];
+    // Select ข้อมูลจาก attendance
+    $stmt = $connect->prepare("SELECT * FROM attendance WHERE attendance_id = ? LIMIT 1");
+    $stmt->bind_param("i", $id); // "i" หมายถึง integer
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        // ลบข้อมูลจากตาราง user
-        $sql = "DELETE FROM user WHERE id = $user_id";
-        $result = $connect->query($sql);
-
-        if ($result) {
+    if ($result) {
+        if ($result->num_rows > 0) {
             // ลบข้อมูลจากตาราง attendance
-            $sql = "DELETE FROM attendance WHERE attendance_id  = $id"; // เปลี่ยนชื่อ table และ id
-            $result = $connect->query($sql);
+            $stmt = $connect->prepare("DELETE FROM attendance WHERE attendance_id = ?");
+            $stmt->bind_param("i", $id); // "i" หมายถึง integer
+            $stmt->execute();
 
-            if ($result) {
+            if ($stmt->affected_rows > 0) {
                 echo "<script>
                         alert('ลบข้อมูลเรียบร้อยแล้ว');
                         window.location.href = 'attendance.php';
                     </script>";
             } else {
-                echo $connect->error;
+                echo "<script>
+                        alert('ไม่สามารถลบข้อมูลได้');
+                        window.location.href = 'attendance.php';
+                    </script>";
             }
         } else {
-            echo $connect->error;
+            echo "<script>
+                    alert('ไม่พบข้อมูลที่ต้องการลบ');
+                    window.location.href = 'attendance.php';
+                </script>";
         }
     } else {
-        echo $connect->error;
-        echo "<script>
-                alert('ไม่พบข้อมูลที่ต้องการลบ');
-                window.location.href = 'attendance.php';
-            </script>";
+        echo "Query Error: " . $connect->error; // แสดงข้อผิดพลาดถ้าการ query มีปัญหา
     }
 } else {
     echo "<script>
