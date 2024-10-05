@@ -1,0 +1,139 @@
+<?php
+include('../../config/database.php');
+$id = $_GET['id'] ?? '';
+if ($id) {
+    $sql = "SELECT * FROM attendance WHERE attendance_id = $id";
+    $result = $connect->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "<script>
+                alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+                window.location.href = 'student.php';
+            </script>";
+    }
+} else {
+    echo "<script>
+            alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+            window.location.href = 'student.php';
+        </script>";
+}
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขข้อมูลผู้ดูแลระบบ</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .swal2-confirm {
+            background-color: #2563EB !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class=" bg-surface">
+    <main>
+        <div id="main-wrapper" class=" flex p-5 xl:pr-0">
+
+            <?php include '../../src/navbar_teacher.php'; ?>
+            <div class=" w-full page-wrapper xl:px-6 px-0">
+                <main class="h-full  max-w-full">
+                    <div class="container full-container p-0 flex flex-col gap-6">
+                        <div class="w-full">
+                            <div class="bg-gradient-to-b from-blue-500 to-blue-300 h-96"></div>
+                            <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
+                                <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
+                                    <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลนักเรียน</p>
+                                    <form action="update_student.php" method="post" enctype="multipart/form-data">
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">ชื่อ</label>
+                                                <input type="text" name="student_name" value="<?= $row['student_name'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
+                                                <label class="font-semibold leading-none">นามสกุล</label>
+                                                <input type="text" name="student_lastname" value="<?= $row['student_lastname'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+
+                                        </div>
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">เวลาเข้า</label>
+                                                <input type="text" name="check_in_time" value="<?= $row['check_in_time'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
+                                                <label class="font-semibold leading-none">เวลาออก</label>
+                                                <input type="text" name="check_out_time" value="<?= $row['check_out_time'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+
+                                        </div>
+                                        <div class="md:flex items-start mt-4">
+                                            <div class="w-full flex flex-col">
+                                                <label class="font-semibold leading-none">สถานะนักเรียน</label>
+                                                <select name="status" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
+                                                    <option value="normal" <?= $row['status'] == 'normal' ? 'selected' : '' ?>>ปกติ</option>
+                                                    <option value="absent" <?= $row['status'] == 'absent' ? 'selected' : '' ?>>ขาดเรียน</option>
+                                                    <option value="leave" <?= $row['status'] == 'leave' ? 'selected' : '' ?>>ลากิจ</option>
+                                                    <option value="late" <?= $row['status'] == 'late' ? 'selected' : '' ?>>มาสาย</option>
+                                                    <option value="unknown" <?= $row['status'] == 'unknown' ? 'selected' : '' ?>>ไม่ทราบสถานะ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center justify-center w-full gap-4">
+                                            <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
+                                                บันทึก
+                                            </button>
+                                            <a href="attendance.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+    </main>
+    </div>
+    </div>
+    <!--end of project-->
+    </main>
+</body>
+
+</html>
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('preview');
+        var previewImg = document.getElementById('preview-img');
+        var uploadBox = document.getElementById('upload-box');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.classList.remove('hidden');
+                uploadBox.classList.add('hidden');
+            }
+            // ปิด id current-img ถ้ามีการเลือกไฟล์ใหม่
+            var currentImg = document.getElementById('current-img');
+            if (currentImg) {
+                currentImg.remove();
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = "";
+            preview.classList.add('hidden');
+            uploadBox.classList.remove('hidden');
+        }
+    }
+</script>
