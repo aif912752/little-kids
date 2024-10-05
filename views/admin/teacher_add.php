@@ -97,7 +97,18 @@
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
                                                 <label class="font-semibold leading-none">ชั้นปีที่ </label>
-                                                <input type="text" name="class_taught"  class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <select name="room_id" class="leading-none text-gray-900 p-4 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
+                                                    <option value="" selected>กรุณาเลือกห้อง</option>    
+                                                    <?php
+                                                        include('../../config/database.php');
+                                                        $sqlroom= "SELECT * FROM room";
+                                                        $resultroom = $connect->query($sqlroom);
+                                                        while($rowroom = $resultroom->fetch_assoc()) {
+                                                            echo '<option value="'.$rowroom['room_id'].'">'.$rowroom['room_name'].'</option>';
+                                                        } 
+                                                    ?>
+                                                </select>
+
                                             </div>
                                         </div>
 

@@ -1,7 +1,7 @@
 <?php
 
 include '../../config/database.php';
-$sql = "SELECT * FROM teacher";
+$sql = "SELECT * FROM teacher Join room ON teacher.room_id = room.room_id";
 $result = $connect->query($sql);
 
 ?>
@@ -85,7 +85,14 @@ $result = $connect->query($sql);
                                                 <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['birthdate']; ?></td>
                                                 <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['phone_number']; ?></td>
                                                 <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['email']; ?></td>
-                                                <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['class_taught']; ?></td>
+                                                <td class="py-5 border-b border-gray-200 bg-white"><?php 
+                                                    if($row['room_name'] == null){
+                                                        echo "ยังไม่มีชั้นที่สอน";
+                                                    }else{
+                                                        echo $row['room_name'];
+                                                    }
+                                                     
+                                                ?></td>
                                                 <td class="py-5 border-b border-gray-200 bg-white">
                                                     <a href="teacher_edit.php?id=<?php echo $row['teacher_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
                                                     <a class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

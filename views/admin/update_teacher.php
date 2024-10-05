@@ -17,10 +17,10 @@ $citizen_id = $_POST['citizen_id'] ?? '';
 $birthdate = $_POST['birthdate'] ?? '';
 $phone_number = $_POST['phone_number'] ?? '';
 $teacher_address = $_POST['teacher_address'] ?? '';
-$class_taught = $_POST['class_taught'] ?? '';
+$room_id = $_POST['room_id'] ?? '';
 
 //เช็คว่ามีข้อมูลที่ส่งมาหรือไม่
-if ($username && $password && $first_name && $last_name && $position && $email && $ethnicity && $nationality && $religion && $citizen_id && $birthdate && $phone_number && $teacher_address && $class_taught) {    //ถ้ามี username ที่แก้ไข ไม่ซ้ำกับ username ในฐานข้อมูล ให้ทำการแก้ไขข้อมูล
+if ($username && $password && $first_name && $last_name && $position && $email && $ethnicity && $nationality && $religion && $citizen_id && $birthdate && $phone_number && $teacher_address && $room_id) {    //ถ้ามี username ที่แก้ไข ไม่ซ้ำกับ username ในฐานข้อมูล ให้ทำการแก้ไขข้อมูล
     if ($username != $old_username) {
         $checkUserQuery = "SELECT * FROM user WHERE username = '$username'";
         $checkUserResult = $connect->query($checkUserQuery);
@@ -70,17 +70,17 @@ if ($username && $password && $first_name && $last_name && $position && $email &
             if($img != '') {
                 // ถ้ามีการอัปโหลดรูปภาพ ให้ทำการอัปเดตรูปภาพด้วย
                 $sql3 = "UPDATE teacher 
-                         SET first_name = ?, last_name = ?, position =?, email = ?, ethnicity = ?, nationality =?, religion =?, citizen_id =?, birthdate =?, phone_number =?, teacher_address =?, class_taught =?, img = ? 
+                         SET first_name = ?, last_name = ?, position =?, email = ?, ethnicity = ?, nationality =?, religion =?, citizen_id =?, birthdate =?, phone_number =?, teacher_address =?, room_id =?, img = ? 
                          WHERE teacher_id = ?";
                 $stmt3 = $connect->prepare($sql3);
-                $stmt3->bind_param('sssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $class_taught, $img, $id);
+                $stmt3->bind_param('sssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $room_id, $img, $id);
             } else {
                 // ถ้าไม่มีการอัปโหลดรูปภาพ ให้ทำการอัปเดตโดยไม่รวมรูปภาพ
                 $sql3 = "UPDATE teacher 
-                         SET first_name = ?, last_name = ?, position = ?, email = ?, ethnicity = ?, nationality = ?, religion = ?, citizen_id = ?, birthdate = ?, phone_number = ?, teacher_address = ?, class_taught = ? 
+                         SET first_name = ?, last_name = ?, position = ?, email = ?, ethnicity = ?, nationality = ?, religion = ?, citizen_id = ?, birthdate = ?, phone_number = ?, teacher_address = ?, room_id = ? 
                          WHERE teacher_id = ?";
                 $stmt3 = $connect->prepare($sql3);
-                $stmt3->bind_param('ssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $class_taught, $id);
+                $stmt3->bind_param('ssssssssssssi', $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $room_id, $id);
             }
            
             $stmt3->execute();

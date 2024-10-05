@@ -16,10 +16,10 @@ $citizen_id = $_POST['citizen_id'] ?? '';
 $birthdate = $_POST['birthdate'] ?? '';
 $phone_number = $_POST['phone_number'] ?? '';
 $teacher_address = $_POST['teacher_address'] ?? '';
-$class_taught = $_POST['class_taught'] ?? '';
+$room_id = $_POST['room_id'] ?? '';
 
 // เช็คว่ามีข้อมูลที่ส่งมาหรือไม่
-if (!empty($username) && !empty($password) && !empty($first_name) && !empty($last_name) && !empty($position) && !empty($email) && !empty($ethnicity) && !empty($nationality) && !empty($religion) && !empty($citizen_id) && !empty($birthdate) && !empty($phone_number) && !empty($teacher_address) && !empty($class_taught)) {
+if (!empty($username) && !empty($password) && !empty($first_name) && !empty($last_name) && !empty($position) && !empty($email) && !empty($ethnicity) && !empty($nationality) && !empty($religion) && !empty($citizen_id) && !empty($birthdate) && !empty($phone_number) && !empty($teacher_address) && !empty($room_id)) {
 
     $upload_dir = '../teacher/uploads/teacher/'; // กำหนดเส้นทางในการเก็บไฟล์อัปโหลด
 
@@ -69,14 +69,14 @@ if (!empty($username) && !empty($password) && !empty($first_name) && !empty($las
         $user_id = $stmt->insert_id; // รับค่า user_id ที่เพิ่มลงในฐานข้อมูล
         // เตรียมคำสั่ง SQL สำหรับเพิ่มข้อมูลครู
 
-        $sql2 = "INSERT INTO teacher (first_name, last_name, position, email, ethnicity, nationality, religion, citizen_id, birthdate, phone_number, teacher_address, class_taught, img, user_id) 
+        $sql2 = "INSERT INTO teacher (first_name, last_name, position, email, ethnicity, nationality, religion, citizen_id, birthdate, phone_number, teacher_address, room_id, img, user_id) 
 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // เตรียม statement สำหรับป้องกัน SQL Injection
         $stmt2 = $connect->prepare($sql2);
 
         // กำหนดจำนวนพารามิเตอร์เป็น 14 ค่า และปรับปรุงชนิดข้อมูลใน bind_param
-        $stmt2->bind_param("sssssssssssssi", $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $class_taught, $img, $user_id);
+        $stmt2->bind_param("sssssssssssssi", $first_name, $last_name, $position, $email, $ethnicity, $nationality, $religion, $citizen_id, $birthdate, $phone_number, $teacher_address, $room_id, $img, $user_id);
 
         // ตรวจสอบผลลัพธ์การบันทึกข้อมูล
         if ($stmt2->execute()) {
