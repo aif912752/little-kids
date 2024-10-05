@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include '../../config/database.php';
     $sql = "SELECT * FROM administrators ";
     $result = $connect->query($sql);
@@ -88,3 +89,23 @@
         $('#example').DataTable(); // เรียกใช้งาน DataTables
     });
 </script>
+
+<!-- SweetAlert2 -->
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+<?php 
+    // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+    if(isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        echo "<script>
+            Swal.fire({
+                icon: '".$_SESSION['status']."',
+                title: 'สำเร็จ!',
+                text: '$alert',
+            })
+        </script>";
+        unset($_SESSION['status']);
+        unset($_SESSION['alert']);
+    }
+
+?>

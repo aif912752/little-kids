@@ -1,4 +1,6 @@
-
+<?php 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,64 +25,64 @@
                         <!-- Row 1 -->
                         <div class="col-span-1">
                             <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                            <input type="text" name="username" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="username" class="border border-gray-400 p-2 w-full" >
                         </div>
                         <div class="col-span-1">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" name="password" class="border border-gray-400 p-2 w-full" required>
+                            <input type="password" name="password" class="border border-gray-400 p-2 w-full" >
                         </div>
 
                         <!-- Row 2 -->
                         <div class="col-span-1">
                             <label for="first_name" class="block text-sm font-medium text-gray-700">ชื่อ</label>
-                            <input type="text" name="first_name" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="first_name" class="border border-gray-400 p-2 w-full">
                         </div>
                         <div class="col-span-1">
                             <label for="last_name" class="block text-sm font-medium text-gray-700">นามสกุล</label>
-                            <input type="text" name="last_name" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="last_name" class="border border-gray-400 p-2 w-full" >
                         </div>
 
 
                         <!-- Row 4 -->
                         <div class="col-span-2">
                             <label for="citizen_id" class="block text-sm font-medium text-gray-700">เลขประจำตัวประชาชน</label>
-                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="citizen_id" class="border border-gray-400 p-2 w-full" >
                         </div>
 
                         <!-- Row 5 -->
                         <div class="col-span-1">
                             <label for="birthdate" class="block text-sm font-medium text-gray-700">วัน/เดือน/ปี เกิด</label>
-                            <input type="date" name="birthdate" class="border border-gray-400 p-2 w-full" required>
+                            <input type="date" name="birthdate" class="border border-gray-400 p-2 w-full" >
                         </div>
                         <div class="col-span-1">
                             <label for="email" class="block text-sm font-medium text-gray-700">อีเมล์</label>
-                            <input type="email" name="email" class="border border-gray-400 p-2 w-full" required>
+                            <input type="email" name="email" class="border border-gray-400 p-2 w-full" >
                         </div>
 
                         <!-- Row 6 -->
                         <div class="col-span-1">
                             <label for="phone_number" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
-                            <input type="text" name="phone_number" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="phone_number" class="border border-gray-400 p-2 w-full">
                         </div>
                         <div class="col-span-1">
                             <label for="nationality" class="block text-sm font-medium text-gray-700">เชื้อชาติ</label>
-                            <input type="text" name="nationality" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="nationality" class="border border-gray-400 p-2 w-full" >
                         </div>
 
                         <!-- Row 7 -->
                         <div class="col-span-1">
                             <label for="ethnicity" class="block text-sm font-medium text-gray-700">สัญชาติ</label>
-                            <input type="text" name="ethnicity" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="ethnicity" class="border border-gray-400 p-2 w-full" >
                         </div>
                         <div class="col-span-1">
                             <label for="religion" class="block text-sm font-medium text-gray-700">ศาสนา</label>
-                            <input type="text" name="religion" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="religion" class="border border-gray-400 p-2 w-full" >
                         </div>
 
                         <!-- Row 8 -->
                         <div class="col-span-2">
                             <label for="address" class="block text-sm font-medium text-gray-700">ที่อยู่</label>
-                            <input type="text" name="address" class="border border-gray-400 p-2 w-full" required>
+                            <input type="text" name="address" class="border border-gray-400 p-2 w-full" >
                         </div>
 
                         <!-- Row 9 -->
@@ -98,3 +100,21 @@
 </body>
 
 </html>
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+<?php 
+    // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+    if(isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        echo "<script>
+            Swal.fire({
+                icon: '".$_SESSION['status']."',
+                title: 'เกิดข้อผิดพลาด',
+                text: '$alert',
+            })
+        </script>";
+        unset($_SESSION['status']);
+        unset($_SESSION['alert']);
+    }
+
+?>

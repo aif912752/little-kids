@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../config/database.php');
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
@@ -35,28 +36,36 @@ if ($username && $password && $first_name && $last_name && $citizen_id && $birth
     VALUES ('$first_name', '$last_name', 'ผู้ดูแลระบบ', '$ethnicity', '$birthdate', '$email', '$phone_number', '$nationality', '$religion', '$address', '$last_id','$citizen_id')";
             $result2 = $connect->query($sql2);
             if ($result2) {
+                $_SESSION['status'] = 'success';
+                $_SESSION['alert'] = 'บันทึกข้อมูลไม่สำเร็จ';
                 echo "<script>
-                alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+                
                 window.location.href = 'admin_manage.php';
             </script>";
             } else {
+                $_SESSION['status'] = 'error';
+                $_SESSION['alert'] = 'บันทึกข้อมูลไม่สำเร็จ';
                 echo "<script>
-                alert('บันทึกข้อมูลไม่สำเร็จ');
+               
                 window.history.back();
               </script>";
               echo $connect->error;
             }
         } else {
+            $_SESSION['status'] = 'error';
+            $_SESSION['alert'] = 'บันทึกข้อมูลไม่สำเร็จ';
             echo "<script>
-            alert('บันทึกข้อมูลไม่สำเร็จ');
+           
             window.history.back();
             </script>";
             echo $connect->error;
         }
     }
 }else{
+    // ถ้าไม่มีข้อมูลให้แจ้งเตือน
+    $_SESSION['status'] = 'error';
+    $_SESSION['alert'] = 'กรุณากรอกข้อมูลให้ครบถ้วน';
     echo "<script>
-    alert('กรุณากรอกข้อมูลให้ครบถ้วน');
     window.history.back();
     </script>";
 }
