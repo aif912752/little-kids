@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+   
     include '../../config/database.php';
     $sql = "SELECT * FROM administrators ";
     $result = $connect->query($sql);
