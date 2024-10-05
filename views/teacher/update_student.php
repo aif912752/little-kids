@@ -84,29 +84,6 @@ if ($result) {
     // อัปเดตข้อมูลในตาราง students
     $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' ".$imgstring."  WHERE student_id = $id";
     $result2 = $connect->query($sql2);
-
-
-    // ถ้ามีการอัปโหลดรูปภาพใหม่
-    if (!empty($image)) {
-        // กำหนดโฟลเดอร์ที่จะเก็บรูปภาพ
-        $upload_directory = 'uploads/';
-        $image_path = $upload_directory . basename($image);
-
-        // อัปโหลดไฟล์รูปภาพ
-        if (move_uploaded_file($image_tmp, $image_path)) {
-            // ถ้าอัปโหลดไฟล์สำเร็จ อัปเดตฟิลด์ img ในตาราง students
-            $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id', enrollment_date = '$enrollment_date', grade_level = '$grade_level', img = '$image' WHERE student_id = $id";
-        } else {
-            $_SESSION['status'] = 'error';
-            $_SESSION['alert'] = 'ไม่สามารถอัปโหลดรูปภาพได้';
-            echo "<script>window.history.back();</script>";
-            exit();
-        }
-    } else {
-        // ถ้าไม่มีการอัปโหลดรูปภาพ จะใช้ชื่อไฟล์เดิม
-        $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id', enrollment_date = '$enrollment_date', grade_level = '$grade_level', img = '$old_image' WHERE student_id = $id";
-    }
-
     // อัปเดตข้อมูลในตาราง students
     $result2 = $connect->query($sql2);
     if ($result2) {

@@ -42,7 +42,7 @@ CREATE TABLE `teacher` (
   `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรครู',
   `teacher_address` varchar(255) NOT NULL COMMENT 'ที่อยู่ครู',
   `class_taught` varchar(50) NOT NULL COMMENT 'ชั้นที่สอน',
-  `img` varchar(50) NOT NULL COMMENT 'รูปภาพครู',
+  
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

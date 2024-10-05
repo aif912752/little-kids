@@ -46,7 +46,7 @@
                         <div class="flex flex-col items-center -mt-20">
                             <?php 
                             if ($teacher['img'] != null) {
-                                // echo '<img src="data:image/jpeg;base64,' . base64_encode($teacher['profile_picture']) . '" class="w-40 border-4 border-white rounded-full">';
+                                echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
                             } else {
                                 echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
                             }
@@ -60,17 +60,16 @@
                                     </svg>
                                 </span>
                             </div>
-                            <p class="text-gray-700">Senior Software Engineer at Tailwind CSS</p>
-                            <p class="text-sm text-gray-500">New York, USA</p>
+                           
                         </div>
                         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
                             <div class="flex items-center space-x-4 mt-2">
-                                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                                <a href="edit_profile.php"  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                                     </svg>
                                     <span>แก้ไขข้อมูลส่วนตัว</span>
-                                </button>
+                                </a>
 
                             </div>
                         </div>
@@ -79,46 +78,33 @@
                     <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                         <div class="w-full flex flex-col 2xl:w-1/3">
                             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
-                                <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
+                                <h4 class="text-xl text-gray-900 font-bold">ข้อมูลส่วนตัว</h4>
                                 <ul class="mt-2 text-gray-700">
 
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">วันเกิด:</span>
-                                        <span class="text-gray-700">24 Jul, 1991</span>
+                                        <span class="font-bold w-24">ชื่อ-นามสกุล:</span>
+                                        <span class="text-gray-700"> <?= $teacher['first_name'] . ' ' . $teacher['last_name'] ?> </span>
                                     </li>
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">email:</span>
-                                        <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
+                                        <span class="font-bold w-24">ตำแหน่ง:</span>
+                                        <span class="text-gray-700"><?= $teacher['position']  ?></span>
                                     </li>
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">เชื้อชาติ :</span>
-                                        <span class="text-gray-700">(123) 123-1234</span>
+                                        <span class="font-bold w-24">email :</span>
+                                        <span class="text-gray-700"><?= $teacher['email'] ?></span>
                                     </li>
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">สัญชาติ:</span>
-                                        <span class="text-gray-700">amandaross@example.com</span>
-                                    </li>
-                                    <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">ศาสนา:</span>
-                                        <span class="text-gray-700">New York, US</span>
-                                    </li>
-                                    <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">รหัสบัตรประชาชน:</span>
-                                        <span class="text-gray-700">English, Spanish</span>
+                                        <span class="font-bold w-24">วันเกิด :</span>
+                                        <span class="text-gray-700"><?= $teacher['birthdate']?> </span>
                                     </li>
                                     <li class="flex border-b py-2">
                                         <span class="font-bold w-24">เบอร์โทร:</span>
-                                        <span class="text-gray-700">English, Spanish</span>
-                                    </li>
-                                    <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">ที่อยู่:</span>
-                                        <span class="text-gray-700">English, Spanish</span>
+                                        <span class="text-gray-700"><?= $teacher['phone_number'] ?></span>
                                     </li>
                                     <li class="flex border-b py-2">
                                         <span class="font-bold w-24">ชั้นที่สอน:</span>
-                                        <span class="text-gray-700">English, Spanish</span>
+                                        <span class="text-gray-700"><?= $teacher['class_taught']  ?></span>
                                     </li>
-
                                 </ul>
                             </div>
 
