@@ -8,16 +8,16 @@ if ($id) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        // echo "<script>
-        //         alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-        //         window.location.href = 'attendance_edit.php';
-        //     </script>";
+        echo "<script>
+                alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+                window.location.href = 'attendance_edit.php';
+            </script>";
     }
 } else {
-    // echo "<script>
-    //         alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-    //         window.location.href = 'attendance_edit.php';
-    //     </script>";
+    echo "<script>
+            alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+            window.location.href = 'attendance_edit.php';
+        </script>";
 }
 ?>
 
