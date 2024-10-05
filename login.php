@@ -1,68 +1,52 @@
 <?php
 session_start();
 include('config/database.php');
-//เมื่อทำการ post 
+
+$error_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //เช็คข้อมูล post username password
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     if (!empty($username) && !empty($password)) {
-        //ทำการเช็ค username และ password ทำการ query ข้อมูล
         $sql = "SELECT * FROM user WHERE username = ? AND password = ? ";
         $stmt = $connect->prepare($sql);
-        // ตรวจสอบว่าการเตรียมคำสั่ง SQL สำเร็จหรือไม่
         if ($stmt === false) {
             die("Error preparing SQL query: " . $connect->error);
         }
 
-        // ผูกพารามิเตอร์และรันคำสั่ง
-        $stmt->bind_param("ss", $username,$password);
+        $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
-            // เก็บข้อมูล session 
-            $_SESSION['user_id'] = $user['id'];          // ID ของผู้ใช้
-            $_SESSION['username'] = $user['username'];   // ชื่อผู้ใช้
-            // แล้วทำการแยกสิทธิ์
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
             switch ($user['role']) {
                 case 1:
-                    // เช็ค 1 = ผู้ดูแลระบบ
                     $_SESSION['role'] = '1';
-                    header('Location: views/admin/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของผู้ดูแลระบบ
+                    header('Location: views/admin/index.php');
                     break;
                 case 2:
-                     // เช็ค 2 = ผู้อำนวยการ
                     $_SESSION['role'] = '2';
-                    header('Location: views/director/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของ director
+                    header('Location: views/director/index.php');
                     break;
                 case 3:
-                    // เช็ค 3 = คุณครู
                     $_SESSION['role'] = '3';
-                    header('Location: views/teacher/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของ teacher
+                    header('Location: views/teacher/index.php');
                     break;
                 case 4:
-                    // เช็ค 4 = ผู้ปกครอง
-                    header('Location: views/guardian/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของ guardian
                     $_SESSION['role'] = '4';
+                    header('Location: views/guardian/index.php');
                     break;
                 default:
-                    // บทบาทไม่ถูกต้อง
                     $_SESSION['role'] = 'unknown';
                     break;
-                }
-                // echo  $_SESSION['role'];
-                
+            }
         } else {
-            echo 'รหัสผ่านไม่ถูกต้อง';
+            $error_message = 'รหัสผ่านไม่ถูกต้อง';
         }
     }
-
-    
-
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -140,8 +125,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </form>
             </div>
         </div>
-        
+
     </section>
+
+
+    
+    <script>
+        <?php if (!empty($error_message)): ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'เกิดข้อผิดพลาด',
+            text: '<?php echo $error_message; ?>',
+        });
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>
