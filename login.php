@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class=" w-full card-body">
                                 <p class="mb-4 text-gray-800 text-sm text-center">เข้าสู่ระบบ</p>
                             <!-- form -->
-                            <form action="index.php" method="POST">
+                            <form action="login.php" method="POST">
                                 <!-- username -->
                                 <div class="mb-4">
                                     <label 

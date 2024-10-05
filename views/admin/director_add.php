@@ -55,7 +55,7 @@
                                     <label class="font-semibold leading-none">วัน/เดือน/ปี</label>
                                     <input type="date" name="birthdate" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
-                                <div class="w-full md:w-1/2 flex flex-col">
+                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
                                     <label class="font-semibold leading-none">อีเมล์</label>
                                     <input type="email" name="email" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
