@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 08:06 PM
+-- Generation Time: Oct 05, 2024 at 08:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,10 +31,10 @@ CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL COMMENT 'รหัสการลงเวลา',
   `student_id` int(11) NOT NULL COMMENT 'รหัสนักเรียน',
   `student_name` varchar(255) NOT NULL COMMENT 'ชื่อนักเรียน',
-  `student_lastname` varchar(255) NOT NULL COMMENT 'ชื่อนักเรียน',
+  `student_lastname` varchar(255) NOT NULL COMMENT 'นามกสุลนักเรียน',
   `attendance_date` date NOT NULL COMMENT 'วันที่ลงเวลา',
   `note` varchar(100) NOT NULL COMMENT 'หมายเหตุ',
-  `status` enum('normal','absent','leave','late') DEFAULT 'normal' COMMENT 'สถานะการเข้าเรียน'
+  `status` varchar(50) NOT NULL COMMENT 'สถานะการเข้าเรียน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
