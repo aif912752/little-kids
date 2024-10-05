@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 12:00 PM
+-- Generation Time: Oct 05, 2024 at 01:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `evaluation_activity` (
-  `activity_id` int(11) NOT NULL,
+  `id` varchar(50) NOT NULL COMMENT 'ไอดีหลัก pk',
+  `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
   `evaluation_type` varchar(255) NOT NULL COMMENT 'ประเภทกิจกรรม'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -41,17 +42,7 @@ CREATE TABLE `evaluation_activity` (
 -- Indexes for table `evaluation_activity`
 --
 ALTER TABLE `evaluation_activity`
-  ADD PRIMARY KEY (`activity_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `evaluation_activity`
---
-ALTER TABLE `evaluation_activity`
-  MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT;
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
