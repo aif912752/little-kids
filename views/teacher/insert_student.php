@@ -12,6 +12,7 @@ $citizen_id = $_POST['citizen_id'] ?? '';
 $religion = $_POST['religion'] ?? '';
 $enrollment_date = $_POST['enrollment_date'] ?? '';
 $status = $_POST['status'] ?? '';
+$room_id = $_POST['room_id'] ?? '';
 
 $upload_dir = 'uploads/'; // เปลี่ยนเส้นทางตามที่ต้องการ
 
@@ -51,8 +52,8 @@ $result = $connect->query($sql);
 $last_id = $connect->insert_id;
 if ($result) {
     // insert ข้อมูลลงในตาราง students พร้อมกับฟิลด์ img
-    $sql2 = "INSERT INTO students (first_name, last_name, birthdate,  religion, enrollment_date,  status, user_id, citizen_id, img) 
-             VALUES ('$first_name', '$last_name', '$birthdate',  '$religion', '$enrollment_date',  '$status', '$last_id', '$citizen_id', '$img_name')";
+    $sql2 = "INSERT INTO students (first_name, last_name, birthdate,  religion, enrollment_date,  status, user_id, citizen_id, img,room_id) 
+             VALUES ('$first_name', '$last_name', '$birthdate',  '$religion', '$enrollment_date',  '$status', '$last_id', '$citizen_id', '$img_name','$room_id')";
     $result2 = $connect->query($sql2);
 
     if ($result2) {

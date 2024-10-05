@@ -119,7 +119,21 @@ if ($id) {
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full  flex flex-col">
                                                 <label class="font-semibold leading-none">ชั้นที่เรียน</label>
-                                                <input type="text" name="grade_level" value="<?= $row['grade_level'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <select name="room_id" class="leading-none text-gray-900 p-4 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
+                                                    <option value="" selected>กรุณาเลือกห้อง</option>    
+                                                    <?php
+                                                      
+                                                        $sqlroom= "SELECT * FROM room";
+                                                        $resultroom = $connect->query($sqlroom);
+                                                        while($rowroom = $resultroom->fetch_assoc()) {
+                                                            if($row['room_id'] == $rowroom['room_id']){
+                                                                echo '<option value="'.$rowroom['room_id'].'" selected>'.$rowroom['room_name'].'</option>';
+                                                            }else{
+                                                                echo '<option value="'.$rowroom['room_id'].'">'.$rowroom['room_name'].'</option>';
+                                                            }
+                                                        } 
+                                                    ?>
+                                                </select>
                                             </div>
 
                                         </div>

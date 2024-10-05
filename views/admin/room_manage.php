@@ -146,7 +146,7 @@ if (isset($_SESSION['alert'])) {
 
 
 <script>
-    function confirmDelete(event, adminId) {
+    function confirmDelete(event, roomId) {
         event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
 
         Swal.fire({
@@ -160,7 +160,7 @@ if (isset($_SESSION['alert'])) {
             cancelButtonText: 'ยกเลิก'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'admin_delete.php?id=' + adminId; // ดำเนินการลบเมื่อยืนยัน
+                window.location.href = 'room_delete.php?id=' + roomId; // ดำเนินการลบเมื่อยืนยัน
             }
         });
     }

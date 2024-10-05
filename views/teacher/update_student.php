@@ -14,7 +14,7 @@ $nationality = $_POST['nationality'] ?? '';
 $religion = $_POST['religion'] ?? '';
 $citizen_id = $_POST['citizen_id'] ?? '';
 $enrollment_date = $_POST['enrollment_date'] ?? '';
-$grade_level = $_POST['grade_level'] ?? '';
+$room_id = $_POST['room_id'] ?? '';
 $old_username = $_POST['old_username'] ?? '';
 $old_image = $_POST['old_image'] ?? ''; // เก็บชื่อไฟล์รูปภาพเดิม
 
@@ -79,7 +79,7 @@ if ($result) {
 
 
     // อัปเดตข้อมูลในตาราง students
-    $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' " . $imgstring . ", grade_level = '$grade_level', enrollment_date = '$enrollment_date' WHERE student_id = $id";
+    $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' " . $imgstring . ", room_id = '$room_id', enrollment_date = '$enrollment_date' WHERE student_id = $id";
     $result2 = $connect->query($sql2);
     // อัปเดตข้อมูลในตาราง students
     $result2 = $connect->query($sql2);

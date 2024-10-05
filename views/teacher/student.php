@@ -1,6 +1,6 @@
 <?php
 include '../../config/database.php';
-$sql = "SELECT * FROM students  ";
+$sql = "SELECT * FROM students join room ON students.room_id = room.room_id";
 $result = $connect->query($sql);
 
 ?>
@@ -83,7 +83,7 @@ $result = $connect->query($sql);
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['citizen_id']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['birthdate']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['enrollment_date']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['grade_level']; ?></td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['room_name']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['status']; ?></td>
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
