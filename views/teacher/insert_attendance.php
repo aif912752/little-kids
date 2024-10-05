@@ -1,19 +1,12 @@
 <?php
 include('../../config/database.php');
 
-// แสดงค่าที่ส่งมาทั้งหมด
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// ตั้งค่า Time Zone ให้เป็น Asia/Bangkok
+date_default_timezone_set('Asia/Bangkok');
 
 // รับค่าจากฟอร์ม
 $status_data = $_POST['status'] ?? [];
 $attendance_date = $_POST['attendance_date'] ?? date('Y-m-d');
-
-// แสดงค่า status_data
-echo "<pre>";
-print_r($status_data);
-echo "</pre>";
 
 // ตรวจสอบว่ามีข้อมูลการเข้าเรียนถูกส่งมาหรือไม่
 if (!empty($status_data)) {

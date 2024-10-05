@@ -66,25 +66,15 @@ if ($id) {
                                             </div>
 
                                         </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">เวลาเข้า</label>
-                                                <input type="text" name="check_in_time" value="<?= $row['check_in_time'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <label class="font-semibold leading-none">เวลาออก</label>
-                                                <input type="text" name="check_out_time" value="<?= $row['check_out_time'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-
-                                        </div>
+                               
                                         <div class="md:flex items-start mt-4">
                                             <div class="w-full flex flex-col">
                                                 <label class="font-semibold leading-none">สถานะนักเรียน</label>
                                                 <select name="status" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
-                                                    <option value="normal" <?= $row['status'] == 'normal' ? 'selected' : '' ?>>ปกติ</option>
-                                                    <option value="absent" <?= $row['status'] == 'absent' ? 'selected' : '' ?>>ขาดเรียน</option>
-                                                    <option value="leave" <?= $row['status'] == 'leave' ? 'selected' : '' ?>>ลากิจ</option>
-                                                    <option value="late" <?= $row['status'] == 'late' ? 'selected' : '' ?>>มาสาย</option>
+                                                    <option value="normal" <?= $row['status'] == 'มา' ? 'selected' : '' ?>>ปกติ</option>
+                                                    <option value="absent" <?= $row['status'] == 'ขาด' ? 'selected' : '' ?>>ขาดเรียน</option>
+                                                    <option value="leave" <?= $row['status'] == 'ลา' ? 'selected' : '' ?>>ลากิจ</option>
+                                                    <option value="late" <?= $row['status'] == 'สาย' ? 'selected' : '' ?>>มาสาย</option>
                                                     <option value="unknown" <?= $row['status'] == 'unknown' ? 'selected' : '' ?>>ไม่ทราบสถานะ</option>
                                                 </select>
                                             </div>
