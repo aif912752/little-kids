@@ -391,7 +391,7 @@
 
                 <div class="w-full h-full bg-blue-500 rounded-2xl md:rounded-3xl relative lg:flex items-center">
                     <div class="hidden lg:block">
-                        <img src="public/humans.png"  
+                        <img src="/little-kids/public/humans.png"  
                        
                         class="relative z-10">
 

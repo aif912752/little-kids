@@ -1,7 +1,7 @@
 <?php
 
 include '../../config/database.php';
-$sql = "SELECT * FROM administrators ";
+$sql = "SELECT * FROM director";
 $result = $connect->query($sql);
 
 ?>
@@ -11,7 +11,7 @@ $result = $connect->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>จัดการข้อมูลผู้ดูแลระบบ</title>
+    <title>จัดการข้อมูลผู้อำนวยการ</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
@@ -40,14 +40,14 @@ $result = $connect->query($sql);
                 <main class="h-full  max-w-full">
                     <div class="container full-container p-0 flex flex-col gap-6">
                         <div>
-                            <h3 class="text-3xl font-medium text-black">จัดการข้อมูลผู้ดูแลระบบ</h3>
+                            <h3 class="text-3xl font-medium text-black">จัดการข้อมูลผู้อำนวยการ</h3>
                         </div>
 
                         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
 
                             <!-- ชิดขวา -->
                             <div class="flex justify-end p-3">
-                                <a href="admin_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
+                                <a href="director_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
                             </div>
 
 
@@ -74,9 +74,9 @@ $result = $connect->query($sql);
                                                 <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['phone_number']; ?></td>
                                                 <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['email']; ?></td>
                                                 <td class="py-5 border-b border-gray-200 bg-white">
-                                                    <a href="admin_edit.php?id=<?php echo $row['admin_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                                    <a href="director_edit.php?id=<?php echo $row['director_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
                                                     <a class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                                        onclick="confirmDelete(event, '<?php echo $row['admin_id']; ?>')">
+                                                        onclick="confirmDelete(event, '<?php echo $row['director_id']; ?>')">
                                                         ลบ
                                                     </a>
                                                 </td>
@@ -154,7 +154,7 @@ if (isset($_SESSION['alert'])) {
 
 
 <script>
-    function confirmDelete(event, adminId) {
+    function confirmDelete(event, directorId) {
         event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
 
         Swal.fire({
@@ -168,7 +168,7 @@ if (isset($_SESSION['alert'])) {
             cancelButtonText: 'ยกเลิก'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'admin_delete.php?id=' + adminId; // ดำเนินการลบเมื่อยืนยัน
+                window.location.href = 'director_delete.php?id=' + directorId; // ดำเนินการลบเมื่อยืนยัน
             }
         });
     }
