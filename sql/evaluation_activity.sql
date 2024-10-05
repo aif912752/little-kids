@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 01:53 PM
+-- Generation Time: Oct 05, 2024 at 09:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,7 +31,7 @@ CREATE TABLE `evaluation_activity` (
   `id` varchar(50) NOT NULL COMMENT 'ไอดีหลัก pk',
   `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
-  `evaluation_type` varchar(255) NOT NULL COMMENT 'ประเภทกิจกรรม'
+  `evaluation_score` int(10) NOT NULL COMMENT 'คะเเนนประเมิน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
