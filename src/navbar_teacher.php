@@ -121,7 +121,12 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="eventcalendar.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ปฏิทินกิจกรรม</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="./components/cards.html">
@@ -155,7 +160,7 @@ session_start();
                             <i class="ti ti-dots nav-small-cap-icon text-lg hidden text-center"></i>
                             <span class="text-xs text-gray-400 font-semibold">นักเรียน</span>
                         </li>
-                
+
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="attendance.php">
@@ -168,7 +173,12 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="eventcalendar.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ปฏิทินกิจกรรม</span>
+                            </a>
+                        </li>
                     <?php
                     } else if ($_SESSION['role'] == '5') {
 
