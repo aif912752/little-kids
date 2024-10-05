@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL COMMENT 'รหัสการลงเวลา',
   `student_id` int(11) NOT NULL COMMENT 'รหัสนักเรียน',
-  `student_name` int(11) NOT NULL COMMENT '=ชื่อนักเรียน',
-  `student_lastname` int(11) NOT NULL COMMENT '=ชื่อนักเรียน',
+  `student_name` int(11) NOT NULL COMMENT 'ชื่อนักเรียน',
+  `student_lastname` int(11) NOT NULL COMMENT 'ชื่อนักเรียน',
   `attendance_date` date NOT NULL COMMENT 'วันที่ลงเวลา',
   `check_in_time` time NOT NULL COMMENT 'เวลาเข้า',
   `check_out_time` time DEFAULT NULL COMMENT 'เวลาออก',

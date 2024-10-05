@@ -42,8 +42,8 @@ if ($id) {
     }
 } else {
 
-    // echo "<script>
-    //         alert('ไม่พบข้อมูลที่ต้องการลบ');
-    //         window.location.href = 'attendance.php';
-    //     </script>";
+    echo "<script>
+            alert('ไม่พบข้อมูลที่ต้องการลบ');
+            window.location.href = 'attendance.php';
+        </script>";
 }
