@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 07:42 PM
+-- Generation Time: Oct 05, 2024 at 07:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -112,7 +112,7 @@ CREATE TABLE `director` (
   `last_name` varchar(100) NOT NULL COMMENT 'นามสกุลผู้อำนวยการ',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดผู้อำนวยการ',
   `email` varchar(100) NOT NULL COMMENT 'อีเมล์ผู้อำนวยการ',
-  `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
+  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
   `position` varchar(100) NOT NULL COMMENT 'ตำเเหน่งผู้อำนวยการ',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -122,8 +122,8 @@ CREATE TABLE `director` (
 --
 
 INSERT INTO `director` (`director_id`, `Img`, `first_name`, `last_name`, `birthdate`, `email`, `phone_number`, `position`, `user_id`) VALUES
-(1, '', 'กาย', 'กาย', '2024-10-11', 'warunyoo084@gmail.com', 848091046, 'ครูใหญ่', 20),
-(2, '', 'กาย', 'กาย', '2024-10-18', 'warunyoo084@gmail.com', 848091046, 'ไอ่นนท์', 27);
+(1, '', 'กาย', 'กาย', '2024-10-11', 'warunyoo084@gmail.com', '848091046', 'ครูใหญ่', 20),
+(2, '', 'กาย', 'กาย', '2024-10-18', 'warunyoo084@gmail.com', '848091046', 'ไอ่นนท์', 27);
 
 -- --------------------------------------------------------
 
@@ -240,7 +240,7 @@ CREATE TABLE `teacher` (
   `religion` varchar(100) NOT NULL COMMENT 'ศาสนา',
   `citizen_id` int(15) NOT NULL COMMENT 'รหัสบัตรประชาชน',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดครู',
-  `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรครู',
+  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรครู',
   `teacher_address` varchar(255) NOT NULL COMMENT 'ที่อยู่ครู',
   `room_id` varchar(50) NOT NULL COMMENT 'ชั้นที่สอน',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser'
@@ -251,8 +251,8 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `img`, `first_name`, `last_name`, `position`, `email`, `ethnicity`, `nationality`, `religion`, `citizen_id`, `birthdate`, `phone_number`, `teacher_address`, `room_id`, `user_id`) VALUES
-(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', 0, '', '', 3),
-(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', 0, 'asdasdas', 'กกกกก', 28);
+(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', '0', '', '', 3),
+(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', '0', 'asdasdas', 'กกกกก', 28);
 
 -- --------------------------------------------------------
 
