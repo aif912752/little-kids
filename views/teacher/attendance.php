@@ -55,15 +55,15 @@ $result = $connect->query($sql);
                                     <tbody>
 
                                         <?php
-                                      if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            $img_src = !empty($row['img']) ? 'uploads/' . $row['img'] : 'path/to/default-image.jpg';
-                                    ?>
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $img_src = !empty($row['img']) ? 'uploads/' . $row['img'] : 'path/to/default-image.jpg';
+                                        ?>
 
                                                 <tr>
                                                     <td class="py-5 border-b border-l border-gray-200 bg-white">
                                                         <div class="flex items-center text-sm py-4">
-                                                          
+
                                                             <div>
                                                                 <p class="font-semibold text-black"> <?php echo $row['student_name'] . ' ' . $row['student_lastname']; ?></p>
                                                             </div>
@@ -73,7 +73,27 @@ $result = $connect->query($sql);
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['attendance_date']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['check_in_time']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['check_out_time']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['status']; ?></td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white">
+                                                        <?php
+                                                        switch ($row['status']) {
+                                                            case 'normal':
+                                                                echo 'ปกติ';
+                                                                break;
+                                                            case 'absent':
+                                                                echo 'ขาดเรียน';
+                                                                break;
+                                                            case 'leave':
+                                                                echo 'ลากิจ';
+                                                                break;
+                                                            case 'late':
+                                                                echo 'มาสาย';
+                                                                break;
+                                                            default:
+                                                                echo 'ไม่ทราบสถานะ';
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    </td>
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
                                                         <a href="student_edit.php?id=<?php echo $row['student_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>

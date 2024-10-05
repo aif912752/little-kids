@@ -34,7 +34,7 @@ $result = $connect->query($query);
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                                     <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลการมาเรียน</p>
-                                    <form action="insert_attendance.php" method="post" enctype="multipart/form-data">
+                                    <form action="insert_attendance.php" method="post" >
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-2/2 flex flex-col ">
                                                 <label class="font-semibold leading-none">ชื่อนักเรียน</label>
@@ -57,11 +57,11 @@ $result = $connect->query($query);
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">เวลาเข้า</label>
-                                                <input type="text" name="first_name" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="time" name="check_in_time" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <label class="font-semibold leading-none">เวลาออก</label>
-                                                <input type="text" name="last_name" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="time" name="check_out_time" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                         </div>
 
