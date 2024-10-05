@@ -53,7 +53,8 @@ $result = $connect->query($query);
                                                 <textarea name="activity_description" rows="5"
                                                     class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
                                                     autoComplete="off" spellCheck="false"></textarea>
-                                            </div>
+                                            
+                                                </div>
 
                                         </div>
 
