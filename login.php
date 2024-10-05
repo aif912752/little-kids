@@ -70,12 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าล็อคอิน </title>
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
-
-    <link rel="stylesheet" href="./assets/css/theme.css" />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
@@ -84,82 +80,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         font-family: 'Kanit', sans-serif;
     }
 </style>
-<body class="DEFAULT_THEME ">
-	<main>
-				<!-- Main Content -->
-                <div class="flex flex-col w-full  overflow-hidden relative min-h-screen radial-gradient items-center justify-center g-0 px-4">
-                  
-                    <div class="justify-center items-center w-full card lg:flex max-w-md ">
-                        <div class=" w-full card-body">
-                                <p class="mb-4 text-gray-800 text-sm text-center">เข้าสู่ระบบ</p>
-                            <!-- form -->
-                            <form action="login.php" method="POST">
-                                <!-- username -->
-                                <div class="mb-4">
-                                    <label 
-                                    class="block text-sm mb-2 text-gray-400">Username</label>
-                                <input type="text" name="username"
-                                    class="py-3 px-4 block w-full border-gray-200 rounded-sm text-sm focus:border-blue-600 focus:ring-0 " aria-describedby="hs-input-helper-text">
-                                </div>
-                                <!-- password -->
-                                <div class="mb-6">
-                                    <label 
-                                    class="block text-sm  mb-2 text-gray-400">Password</label>
-                                <input type="password" name="password"
-                                    class="py-3 px-4 block w-full border-gray-200 rounded-sm text-sm focus:border-blue-600 focus:ring-0 " aria-describedby="hs-input-helper-text">
-                                </div>
-                                <!-- checkbox -->
-                                 
-                                    <!-- button -->
-                                      <div class="grid my-6">
-                                      <button type="submit" class="btn py-[10px] text-base text-white font-medium hover:bg-blue-700">เข้าสู่ระบบ</button>
-                                      </div>
-        
-                              
-                                </div>
-                            </form>
-                        </div>
+
+<body>
+    <section class="min-h-screen flex items-stretch text-white ">
+        <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
+            style="background-image: url(/little-kids/public/1.jpg);">
+            <div class="absolute  inset-0 z-0"></div>
+            <div class="w-full px-24 z-10">
+            </div>
+
+        </div>
+        <div class="lg:w-1/2 w-full flex items-center justify-center text-start md:px-16 px-0 z-0" style="background-color: #B7E0FF;">
+            <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
+                <div class="absolute bg-black  inset-0 z-0"></div>
+            </div>
+            <div class="w-full py-6 z-20">
+                <h1 class="my-6 text-center text-xl font-bold" style="color: #1E3E62">
+                    สถานรับเลี้ยงเด็กอนุบาลลิตเติ้ลคิดส์
+                </h1>
+
+
+                <form action="login.php" method="POST"
+                    class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto" >
+
+                    <div class="pb-2 pt-4" style="color: #1E3E62">
+                        <label class="  pb-2">username</label>
+
+                        <input type="text" name="username" placeholder="username"
+                         class="block w-full p-4 text-lg rounded-sm ">
                     </div>
-				
-			</div>
-		<!--end of project-->
-	</main>
+                    <div class="pb-2 pt-4" style="color: #1E3E62"> 
+                        <label class=" pb-2">Password</label>
+                        <input class="block w-full p-4 text-lg rounded-sm " type="password" name="password" placeholder="Password">
+                    </div>
 
+                    <div class="px-4 pb-2 pt-4">
+                        <button type="submit" class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">เข้าสู่ระบบ</button>
+                    </div>
 
-	
+                    <div class="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
+                        <a href="#">
+                            <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                    </div>
 
-
-
-</body>
-
-<!-- <body>
-    <section class="flex justify-center items-center h-screen bg-gray-100">
-        <form action="index.php" method="POST" class="max-w-md w-full bg-white rounded p-6 space-y-4">
-            <div class="mb-4">
-                <p class="text-gray-600">Sign In</p>
-                <h2 class="text-xl font-bold">Join our community</h2>
+                </form>
             </div>
-            <div>
-                <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" name="username" placeholder="Email">
-            </div>
-            <div>
-                <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="text" name="password" placeholder="Password">
-            </div>
-            <div>
-                <button class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">ล็อคอิน</button>
-            </div>
-            <div class="flex items-center justify-between">
-                <div class="flex flex-row items-center">
-                    <input type="checkbox" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
-                    <label for="comments" class="ml-2 text-sm font-normal text-gray-600">Remember me</label>
-                </div>
-                <div>
-                    <a class="text-sm text-blue-600 hover:underline" href="#">Forgot password?</a>
-                </div>
-            </div>
-        </form>
+        </div>
     </section>
-
-</body> -->
+</body>
 
 </html>
