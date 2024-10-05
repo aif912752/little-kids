@@ -20,8 +20,10 @@ if ($username && $password && $first_name && $last_name && $citizen_id && $birth
     $checkUserQuery = "SELECT * FROM user WHERE username = '$username'";
     $checkUserResult = $connect->query($checkUserQuery);
     if ($checkUserResult->num_rows > 0) {
-        echo "<script>
-                alert('Username นี้ถูกใช้ไปแล้ว กรุณาใช้ username อื่น');
+
+        $_SESSION['status'] = 'error';
+        $_SESSION['alert'] = 'Username นี้ถูกใช้ไปแล้ว กรุณาใช้ username อื่น';
+        echo "<script>       
                 window.history.back();
               </script>";
     } else {

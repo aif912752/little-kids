@@ -15,7 +15,7 @@ $ethnicity = $_POST['ethnicity'] ?? '';
 $religion = $_POST['religion'] ?? '';
 $address = $_POST['address'] ?? '';
 $old_username = $_POST['old_username'] ?? '';
-
+$user_id = $_POST['user_id'] ?? '';
 
 // เช็คว่ามีข้อมูลที่ส่งมาหรือไม่
 if ($username && $password && $first_name && $last_name && $citizen_id && $birthdate && $email && $phone_number && $nationality && $ethnicity && $religion && $address) {
@@ -35,8 +35,9 @@ if ($username && $password && $first_name && $last_name && $citizen_id && $birth
     }
 
     // ถ้ามีข้อมูลให้ทำการแก้ไขข้อมูลลงในฐานข้อมูล
+    
     // update ข้อมูลลงในตาราง  user
-    $sql = "UPDATE user SET username = '$username', password = '$password' WHERE id = $id";
+    $sql = "UPDATE user SET username = '$username', password = '$password' WHERE id = $user_id";
     $result = $connect->query($sql);
     if ($result) {
         // update ข้อมูลลงในตาราง administrators

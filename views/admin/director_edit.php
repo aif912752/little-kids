@@ -54,11 +54,14 @@ if ($id) {
                 <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                     <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                         <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลผู้อำนวยการ</p>
-                        <form action="insert_director.php" method="post">
+                        <form action="update_director.php" method="post">
                             <div class="md:flex items-center mt-4">
                                 <div class="w-full md:w-1/2 flex flex-col">
                                     <label class="font-semibold leading-none">Username</label>
                                     <input type="text" name="username" value="<?= $user['username']; ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                    <input type="hidden" name="old_username" value="<?= $user['username']; ?>" />
+                                    <input type="hidden" name="id" value="<?= $id; ?>" />
+                                    <input type="hidden" name="user_id" value="<?= $user['id']; ?>" />
                                 </div>
                                 <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
                                     <label class="font-semibold leading-none"> Password </label>
