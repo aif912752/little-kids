@@ -18,6 +18,10 @@ $room_id = $_POST['room_id'] ?? '';
 $old_username = $_POST['old_username'] ?? '';
 $old_image = $_POST['old_image'] ?? ''; // เก็บชื่อไฟล์รูปภาพเดิม
 
+$student_height = $_POST['student_height'] ?? '';
+$student_weight = $_POST['student_weight'] ?? '';
+
+
 // ตรวจสอบว่า username ซ้ำหรือไม่
 if ($username != $old_username) {
     $checkUserQuery = "SELECT * FROM user WHERE username = '$username'";
@@ -88,7 +92,7 @@ if ($result) {
     
 
     // อัปเดตข้อมูลในตาราง students
-    $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' " . $imgstring . ", room_id = '$room_id', enrollment_date = '$enrollment_date' WHERE student_id = $id";
+    $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' " . $imgstring . ", room_id = '$room_id', enrollment_date = '$enrollment_date' ,student_height ='$student_height',student_weight ='$student_weight'   WHERE student_id = $id";
     $result2 = $connect->query($sql2);
     // อัปเดตข้อมูลในตาราง students
     $result2 = $connect->query($sql2);
