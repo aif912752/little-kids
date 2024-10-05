@@ -1,5 +1,8 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
-<html  lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -7,9 +10,9 @@
     <title>Document</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
-	
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-		rel="stylesheet" />
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
     <link rel="stylesheet" href="../../assets/css/theme.css" />
 
@@ -28,14 +31,9 @@
         <!-- Start Vertical Layout Sidebar -->
         <!-- ---------------------------------- -->
         <div class="p-4 flex justify-center">
-
-         
             <span class="text-nowrap text-gray-800 text-xl  font-semibold">
-            ลิตเติ้ลคิดส์ 
-            </span>   
-
-        
-
+                ลิตเติ้ลคิดส์
+            </span>
         </div>
         <div class="scroll-sidebar" data-simplebar="">
             <nav class=" w-full flex flex-col sidebar-nav px-4 mt-5">
@@ -45,55 +43,78 @@
                         <span class="text-xs text-gray-400 font-semibold">HOME</span>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full"
-                            href="index.php">
-                            <i class="ti ti-layout-dashboard ps-2  text-2xl"></i> <span>หน้าหลัก</span>
-                        </a>
-                    </li>
+                    <?php
+                    if ($_SESSION['role'] == '1') {
+                    ?>
 
-                    <li class="text-xs font-bold mb-4 mt-6">
-                        <i class="ti ti-dots nav-small-cap-icon text-lg hidden text-center"></i>
-                        <span class="text-xs text-gray-400 font-semibold">นักเรียน</span>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                            href="student.php">
-                            <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลนักเรียน</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                            href="./components/cards.html">
-                            <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลการมาเรียน</span>
-                        </a>
-                    </li>
+                    <?php
+                    } else if ($_SESSION['role'] == '2') {
+                    ?>
+
+                    <?php
+                    } else if ($_SESSION['role'] == '3') {
+                    ?>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="index.php">
+                                <i class="ti ti-layout-dashboard ps-2  text-2xl"></i> <span>หน้าหลัก</span>
+                            </a>
+                        </li>
+
+                        <li class="text-xs font-bold mb-4 mt-6">
+                            <i class="ti ti-dots nav-small-cap-icon text-lg hidden text-center"></i>
+                            <span class="text-xs text-gray-400 font-semibold">นักเรียน</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="student.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลนักเรียน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="./components/cards.html">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลการมาเรียน</span>
+                            </a>
+                        </li>
 
 
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                            href="./components/cards.html">
-                            <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
-                        </a>
-                    </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="./components/cards.html">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
+                            </a>
+                        </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                            href="./components/cards.html">
-                            <i class="ti ti-article ps-2 text-2xl"></i> <span>พัฒนาการของนักเรียน</span>
-                        </a>
-                    </li>
-                  
-      
-                    <li class="sidebar-item">
-                        <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                            href="./components/cards.html">
-                            <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
-                        </a>
-                    </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="./components/cards.html">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>พัฒนาการของนักเรียน</span>
+                            </a>
+                        </li>
 
-              
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="./components/cards.html">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
+                            </a>
+                        </li>
+
+                    <?php
+                    } else if ($_SESSION['role'] == '4') {
+                    ?>
+                    <?php
+                    } else if ($_SESSION['role'] == '5') {
+                    ?>
+                    <?php
+                    } else {
+                    }
+                    ?>
+
+
+
 
                 </ul>
             </nav>
@@ -107,15 +128,15 @@
     </aside>
 
 
-	<script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
-	<script src="../../assets/libs/simplebar/dist/simplebar.min.js"></script>
-	<script src="../../assets/libs/iconify-icon/dist/iconify-icon.min.js"></script>
-	<script src="../../assets/libs/@preline/dropdown/index.js"></script>
-	<script src="../../assets/libs/@preline/overlay/index.js"></script>
-	<script src="../../assets/js/sidebarmenu.js"></script>
-	
+    <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../../assets/libs/simplebar/dist/simplebar.min.js"></script>
+    <script src="../../assets/libs/iconify-icon/dist/iconify-icon.min.js"></script>
+    <script src="../../assets/libs/@preline/dropdown/index.js"></script>
+    <script src="../../assets/libs/@preline/overlay/index.js"></script>
+    <script src="../../assets/js/sidebarmenu.js"></script>
+
     <script src="../../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
 
 </body>
 

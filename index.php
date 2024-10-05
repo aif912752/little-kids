@@ -28,23 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             switch ($user['role']) {
                 case 1:
                     // เช็ค 1 = ผู้ดูแลระบบ
-                    $_SESSION['role'] = 'admin';
+                    $_SESSION['role'] = '1';
                     header('Location: views/admin/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของผู้ดูแลระบบ
                     break;
                 case 2:
                      // เช็ค 2 = ผู้อำนวยการ
-                    $_SESSION['role'] = 'director';
+                    $_SESSION['role'] = '2';
                     header('Location: views/director/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของ director
                     break;
                 case 3:
                     // เช็ค 3 = คุณครู
-                    $_SESSION['role'] = 'teacher';
+                    $_SESSION['role'] = '3';
                     header('Location: views/teacher/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของ teacher
                     break;
                 case 4:
                     // เช็ค 4 = ผู้ปกครอง
                     header('Location: views/guardian/index.php'); // เปลี่ยนเส้นทางไปที่แดชบอร์ดของ guardian
-                    $_SESSION['role'] = 'guardian';
+                    $_SESSION['role'] = '4';
                     break;
                 default:
                     // บทบาทไม่ถูกต้อง
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  
                                     <!-- button -->
                                       <div class="grid my-6">
-                                      <button class="btn py-[10px] text-base text-white font-medium hover:bg-blue-700">เข้าสู่ระบบ</button>
+                                      <button type="submit" class="btn py-[10px] text-base text-white font-medium hover:bg-blue-700">เข้าสู่ระบบ</button>
                                       </div>
         
                               
