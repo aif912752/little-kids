@@ -84,7 +84,7 @@
 
         <!-- Bottom Upgrade Option -->
         <div class="m-4  relative grid">
-            <button class="text-base font-semibold hover:bg-blue-700 btn">ออกจากระบบ</button>
+            <a href="../../src/logout.php" class="text-base font-semibold hover:bg-blue-700 btn">ออกจากระบบ</a>
         </div>
         <!-- </aside> -->
     </aside>
