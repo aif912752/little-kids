@@ -42,14 +42,16 @@ if ($id) {
 
 </head>
 
-<body class=" font-inter">
-    <div class="flex h-screen bg-gray-50 " :class="{ 'overflow-hidden': isSideMenuOpen }">
+<body class=" bg-surface">
+<main>
+<div id="main-wrapper" class=" flex p-5 xl:pr-0">
 
         <?php include '../../src/navbar_teacher.php'; ?>
 
+        <div class=" w-full page-wrapper xl:px-6 px-0">
 
-        <div class="flex flex-col w-full overflow-y-auto">
-            <div class="w-full">
+        <main class="h-full  max-w-full">
+        <div class="w-full">
                 <div class="bg-gradient-to-b from-blue-500 to-blue-300 h-96"></div>
                 <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                     <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
@@ -60,7 +62,7 @@ if ($id) {
                                     <label class="font-semibold leading-none">ชื่อจริง</label>
                                     <input type="text" name="first_name" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
-                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                     <label class="font-semibold leading-none">นามสกุล</label>
                                     <input type="text" name="last_name" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
@@ -70,7 +72,7 @@ if ($id) {
                                     <label class="font-semibold leading-none">วันเดือนปีเกิด</label>
                                     <input type="date" name="birthdate" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
-                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                     <label class="font-semibold leading-none">เชื้อชาติ</label>
                                     <input type="text" name="ethnicity" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
@@ -80,7 +82,7 @@ if ($id) {
                                     <label class="font-semibold leading-none">สัญชาติ</label>
                                     <input type="text" name="nationality" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
-                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                     <label class="font-semibold leading-none">ศาสนา</label>
                                     <input type="text" name="religion" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
@@ -90,7 +92,7 @@ if ($id) {
                                     <label class="font-semibold leading-none">เพศนักเรียน</label>
                                     <input type="text" name="gender" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
-                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                     <label class="font-semibold leading-none">รหัสบัตรประชาชน</label>
                                     <input type="text" name="citizen_id" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
@@ -100,7 +102,7 @@ if ($id) {
                                     <label class="font-semibold leading-none">วันที่ลงทะเบียนเข้าเรียน</label>
                                     <input type="text" name="enrollment_date" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
-                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                                <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                     <label class="font-semibold leading-none">ชั้นที่เรียน</label>
                                     <input type="text" name="grade_level" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                 </div>
@@ -133,7 +135,9 @@ if ($id) {
 
 
         </div>
+        </div>
     </div>
+    </main>
 </body>
 
 </html>

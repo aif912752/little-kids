@@ -72,9 +72,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้าล็อคอิน </title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
 
-<body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+
+    <link rel="stylesheet" href="./assets/css/theme.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<style>
+    body {
+        font-family: 'Kanit', sans-serif;
+    }
+</style>
+<body class="DEFAULT_THEME ">
+	<main>
+				<!-- Main Content -->
+                <div class="flex flex-col w-full  overflow-hidden relative min-h-screen radial-gradient items-center justify-center g-0 px-4">
+                  
+                    <div class="justify-center items-center w-full card lg:flex max-w-md ">
+                        <div class=" w-full card-body">
+                                <p class="mb-4 text-gray-800 text-sm text-center">เข้าสู่ระบบ</p>
+                            <!-- form -->
+                            <form action="index.php" method="POST">
+                                <!-- username -->
+                                <div class="mb-4">
+                                    <label 
+                                    class="block text-sm mb-2 text-gray-400">Username</label>
+                                <input type="text" name="username"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-sm text-sm focus:border-blue-600 focus:ring-0 " aria-describedby="hs-input-helper-text">
+                                </div>
+                                <!-- password -->
+                                <div class="mb-6">
+                                    <label 
+                                    class="block text-sm  mb-2 text-gray-400">Password</label>
+                                <input type="password" name="password"
+                                    class="py-3 px-4 block w-full border-gray-200 rounded-sm text-sm focus:border-blue-600 focus:ring-0 " aria-describedby="hs-input-helper-text">
+                                </div>
+                                <!-- checkbox -->
+                                 
+                                    <!-- button -->
+                                      <div class="grid my-6">
+                                      <button class="btn py-[10px] text-base text-white font-medium hover:bg-blue-700">เข้าสู่ระบบ</button>
+                                      </div>
+        
+                              
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+				
+			</div>
+		<!--end of project-->
+	</main>
+
+
+	
+
+
+
+</body>
+
+<!-- <body>
     <section class="flex justify-center items-center h-screen bg-gray-100">
         <form action="index.php" method="POST" class="max-w-md w-full bg-white rounded p-6 space-y-4">
             <div class="mb-4">
@@ -102,6 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </section>
 
-</body>
+</body> -->
 
 </html>
