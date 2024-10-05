@@ -77,6 +77,15 @@ if ($result) {
         $imgstring = "";
     }
 
+    // select ข้อมูลเดิม
+    $sql = "SELECT * FROM students WHERE student_id = $id";
+    $result = $connect->query($sql);
+    $data = $result->fetch_assoc();
+    $user_id = $data['user_id'];
+    // อัปเดตข้อมูลในตาราง user
+    $sql = "UPDATE user SET username = '$username', password = '$password', name = '$first_name' WHERE id = $user_id";
+    $result = $connect->query($sql);
+    
 
     // อัปเดตข้อมูลในตาราง students
     $sql2 = "UPDATE students SET first_name = '$first_name', last_name = '$last_name', ethnicity = '$ethnicity', birthdate = '$birthdate', nationality = '$nationality', religion = '$religion', citizen_id = '$citizen_id' " . $imgstring . ", room_id = '$room_id', enrollment_date = '$enrollment_date' WHERE student_id = $id";

@@ -141,7 +141,25 @@ if ($id) {
                                         <div class="md:flex items-start mt-4">
                                             <div class="w-full  flex flex-col">
                                                 <label class="font-semibold leading-none">สถาณะนักเรียน</label>
-                                                <input type="text" name="status" value="<?= $row['status'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <select name="status" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
+                                                    <?php 
+                                                    
+                                                    if($row['status'] == 'Active'){
+                                                        echo '<option value="1" selected>กำลังศึกษา</option>';
+                                                        echo '<option value="2">ไม่ศึกษา</option>';
+                                                        echo '<option value="3">สำเร็จการศึกษา</option>';
+                                                    }else if($row['status'] == 'Inactive'){
+                                                        echo '<option value="1">กำลังศึกษา</option>';
+                                                        echo '<option value="2" selected>ไม่ศึกษา</option>';
+                                                        echo '<option value="3">สำเร็จการศึกษา</option>';
+                                                    }else if($row['status'] == 'Graduated'){
+                                                        echo '<option value="1">กำลังศึกษา</option>';
+                                                        echo '<option value="2">ไม่ศึกษา</option>';
+                                                        echo '<option value="3" selected>สำเร็จการศึกษา</option>';
+                                                    }
+                                                    ?>
+        
+                                                </select>
                                             </div>
 
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
