@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
+
 <style>
     body {
         font-family: 'Kanit', sans-serif;
@@ -139,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </form>
             </div>
         </div>
+        
     </section>
 </body>
 
