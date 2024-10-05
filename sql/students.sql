@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 07:08 PM
+-- Generation Time: Oct 05, 2024 at 08:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,7 +39,6 @@ CREATE TABLE `students` (
   `gender` enum('Male','Female','Other') NOT NULL COMMENT 'เพศนักเรียน',
   `citizen_id` varchar(11) NOT NULL COMMENT 'รหัสบัตรประชาชน',
   `enrollment_date` date NOT NULL COMMENT 'วันที่ลงทะเบียนเข้าเรียน',
-  `grade_level` varchar(50) NOT NULL COMMENT 'ชั้นที่เรียน',
   `status` enum('Active','Inactive','Graduated') DEFAULT 'Active' COMMENT 'สถาณะนักเรียน',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	',
   `guardians_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาผู้ครอง',
@@ -52,9 +51,10 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `grade_level`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
-(17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', '', 'Active', 24, '', '', '', ''),
-(18, '670168f02a3bd-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'อนุบาล 5', 'Active', 25, '', '', '', '');
+INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
+(17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', 'Active', 24, '', '', '', ''),
+(18, '67017e0985bc4-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'Active', 25, '', '', '', ''),
+(19, '', 'นวล', '123456789', '0000-00-00', '', '', 'ไทย', 'Male', '15000', '2024-10-22', 'Inactive', 30, '', '1', '', '');
 
 --
 -- Indexes for dumped tables
@@ -74,7 +74,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=19;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
