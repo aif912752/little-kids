@@ -1,3 +1,18 @@
+<?php
+// เชื่อมต่อกับฐานข้อมูล
+include('../../config/database.php');
+
+// Fetch teachers from the database
+$teacherQuery = "SELECT teacher_id, first_name, last_name FROM teacher";
+$teacherResult = $connect->query($teacherQuery);
+$teachers = [];
+
+if ($teacherResult) {
+    while ($row = $teacherResult->fetch_assoc()) {
+        $teachers[] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="th">
 
@@ -42,6 +57,33 @@
                     ?>
 
                         <form method="post" action="evaluation_insert.php" id="evaluationForm" class="p-6 space-y-6">
+                            <div>
+                            <label for="teacherSelect" class="block font-medium text-gray-700 mb-2">เลือกอาจารย์:</label>
+            <select name="teacher_id" id="teacherSelect" class="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                <option value="">เลือกอาจารย์</option>
+                <?php foreach ($teachers as $teacher): ?>
+                    <option value="<?= htmlspecialchars($teacher['teacher_id']) ?>">
+                        <?= htmlspecialchars($teacher['first_name'] . ' ' . $teacher['last_name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <input type="hidden" name="selected_teacher_id" id="selectedTeacherId">
+            <div id="selectedTeacherIdDisplay" class="text-gray-700 font-medium mt-2"></div>
+                            </div>
+                            <script>
+                                function showTeacherId() {
+                                    const teacherSelect = document.getElementById('teacherSelect');
+                                    const selectedTeacherId = teacherSelect.value; // รับค่า teacher_id ที่ถูกเลือก
+                                    const displayDiv = document.getElementById('selectedTeacherId');
+
+                                    if (selectedTeacherId) {
+                                        displayDiv.textContent = "Teacher ID: " + selectedTeacherId; // แสดง teacher_id
+                                    } else {
+                                        displayDiv.textContent = ""; // หากไม่มีการเลือกให้ลบข้อความ
+                                    }
+                                }
+                            </script>
+
                             <div id="topicsContainer" class="space-y-6">
                                 <!-- หัวข้อจะถูกเพิ่มที่นี่ -->
                             </div>
@@ -116,5 +158,17 @@
         </div>
     </main>
 </body>
+<script>
+        document.getElementById('teacherSelect').addEventListener('change', function() {
+            const selectedTeacherId = this.value;
+            if (selectedTeacherId) {
+                document.getElementById('selectedTeacherIdDisplay').innerText = `ID อาจารย์ที่เลือก: ${selectedTeacherId}`;
+                document.getElementById('selectedTeacherId').value = selectedTeacherId;
+            } else {
+                document.getElementById('selectedTeacherIdDisplay').innerText = '';
+                document.getElementById('selectedTeacherId').value = '';
+            }
+        });
+    </script>
 
 </html>
