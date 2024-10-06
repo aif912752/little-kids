@@ -36,7 +36,7 @@
                 <main class="h-full  max-w-full">
                     <div class="container full-container p-0 flex flex-col gap-6">
                         <div>
-                            <h3 class="text-3xl font-medium text-black">รายงานตารางกิจกรรมต่อเดือน</h3>
+                            <h3 class="text-3xl font-medium text-black">รายงานการมาเรียนกิจกรรมของนักเรียน</h3>
                         </div>
 
                         <!-- แผนภูมิแท่ง -->
@@ -82,12 +82,12 @@
         MONTH(attendance_date) AS month,
         SUM(CASE WHEN status = 'ขาด' THEN 1 ELSE 0 END) AS total_absent,
         SUM(CASE WHEN status = 'ลา' THEN 1 ELSE 0 END) AS total_leave,
-        SUM(CASE WHEN status = 'มาสาย' THEN 1 ELSE 0 END) AS total_late
+        SUM(CASE WHEN status = 'สาย' THEN 1 ELSE 0 END) AS total_late
     FROM attendance
     GROUP BY YEAR(attendance_date), MONTH(attendance_date)
     ORDER BY year, month
 ";
-
+                            $result = $connect->query($sql);
                             ?>
 
                             <table id="example" class="display pt-8" style="width:100%">
@@ -101,22 +101,27 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($result && $result->num_rows > 0) {
-                                        // วนลูปแสดงข้อมูลในตาราง
+                                    // ลูปแสดงข้อมูลในตาราง
+                                    if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
                                             $month = $row['month'];
                                             $year = $row['year'];
-                                            $total_activities = $row['total_attendance']; // อัปเดตชื่อฟิลด์ตาม query
+                                            $total_absent = $row['total_absent'];
+                                            $total_leave = $row['total_leave'];
+                                            $total_late = $row['total_late'];
 
-                                            // แสดงข้อมูล
+                                            // รวมจำนวน ขาด ลา มาสาย
+                                            $total_attendance = $total_absent + $total_leave + $total_late;
+
                                             echo "<tr>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . getThaiMonth($month) . " " . $year . "</td>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_activities . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_absent . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_leave . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_late . "</td>";
                                             echo "</tr>";
                                         }
                                     } else {
-                                        // ไม่มีข้อมูลให้แสดง
-                                        echo "<tr><td colspan='2' class='py-5 border-b border-gray-200 bg-white'>No data available</td></tr>";
+                                        echo "<tr><td colspan='4' class='py-5 border-b border-gray-200 bg-white'>No data available</td></tr>";
                                     }
                                     ?>
                                 </tbody>
@@ -212,20 +217,23 @@ if (isset($_SESSION['alert'])) {
 <!-- สคริปต์สำหรับ Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // ดึงข้อมูลจาก PHP
     const months = [];
-    const totalActivities = [];
+    const totalAbsents = [];
+    const totalLeaves = [];
+    const totalLates = [];
+
     <?php
     // เตรียมข้อมูลสำหรับ JavaScript
     $result->data_seek(0); // รีเซ็ตผลลัพธ์
     while ($row = $result->fetch_assoc()) {
         $month = $row['month'];
         $year = $row['year'];
-        $total_activities = $row['total_activities'];
         $monthName = getThaiMonth($month);
 
         echo "months.push('" . $monthName . " " . $year . "');"; // เพิ่มเดือนและปีในอาร์เรย์
-        echo "totalActivities.push(" . $total_activities . ");"; // เพิ่มจำนวนกิจกรรมในอาร์เรย์
+        echo "totalAbsents.push(" . $row['total_absent'] . ");"; // จำนวนขาด
+        echo "totalLeaves.push(" . $row['total_leave'] . ");"; // จำนวนลา
+        echo "totalLates.push(" . $row['total_late'] . ");"; // จำนวนมาสาย
     }
     ?>
 
@@ -235,12 +243,27 @@ if (isset($_SESSION['alert'])) {
         data: {
             labels: months, // แท็ก x-axis
             datasets: [{
-                label: 'จำนวนกิจกรรม',
-                data: totalActivities, // ข้อมูลจำนวนกิจกรรม
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีฟ้าอ่อน
-                borderColor: 'rgba(54, 162, 235, 1)', // สีฟ้าเข้ม
-                borderWidth: 1
-            }]
+                    label: 'ขาด',
+                    data: totalAbsents, // ข้อมูลจำนวนขาด
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // สีแดงอ่อน
+                    borderColor: 'rgba(255, 99, 132, 1)', // สีแดงเข้ม
+                    borderWidth: 1
+                },
+                {
+                    label: 'ลา',
+                    data: totalLeaves, // ข้อมูลจำนวนลา
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีน้ำเงินอ่อน
+                    borderColor: 'rgba(54, 162, 235, 1)', // สีน้ำเงินเข้ม
+                    borderWidth: 1
+                },
+                {
+                    label: 'มาสาย',
+                    data: totalLates, // ข้อมูลจำนวนมาสาย
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // สีเขียวอ่อน
+                    borderColor: 'rgba(75, 192, 192, 1)', // สีเขียวเข้ม
+                    borderWidth: 1
+                }
+            ]
         },
         options: {
             scales: {
