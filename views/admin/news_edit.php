@@ -59,7 +59,11 @@ $news = $result->fetch_assoc();
     </script>
 </head>
 
-<body class="bg-gray-100">
+<body class=" bg-surface">
+<main>
+<div id="main-wrapper" class=" flex p-5 xl:pr-0">
+<div class=" w-full page-wrapper xl:px-6 px-0">
+
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">แก้ไขข่าว</h1>
         <form action="news_update.php" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -86,7 +90,7 @@ $news = $result->fetch_assoc();
                 <div class="md:flex">
                     <div class="w-full p-3">
                         <?php if (!empty($news['img'])): ?>
-                            <div id="preview" class="mb-3">
+                            <div id="preview" class="mb-3 w-48">
                                 <img id="preview-img" src="uploads/<?php echo $news['img']; ?>" alt="รูปภาพปัจจุบัน" class="max-w-full h-auto rounded-lg shadow-lg">
                             </div>
                         <?php else: ?>
@@ -119,5 +123,9 @@ $news = $result->fetch_assoc();
             </div>
         </form>
     </div>
+
+    </div>
+    </div>
+    </main>
 </body>
 </html>
