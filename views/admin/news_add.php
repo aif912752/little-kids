@@ -27,13 +27,13 @@
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                                     <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลกิจกรรม</p>
-                                    <form action="insert_student.php" method="post" enctype="multipart/form-data">
+                                    <form action="news_insert.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">หัวข้อ</label>
                                                 <input type="text" name="title" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
-                                           
+
                                         </div>
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full flex flex-col">
@@ -42,7 +42,7 @@
                                             </div>
                                         </div>
                                         <div class="md:flex items-start mt-4">
-                                 
+
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <div class="md:flex">
                                                     <div class="w-full p-3">
@@ -63,11 +63,11 @@
                                             </div>
                                         </div>
 
-                                   
 
-                                        
-                                     
-                                        
+
+
+
+
                                         <div class="flex items-center justify-center w-full gap-4">
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
                                                 บันทึก
@@ -115,19 +115,19 @@
 
 
 <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-<?php 
-    // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
-    if(isset($_SESSION['alert'])) {
-        $alert = $_SESSION['alert'];
-        echo "<script>
+<?php
+// เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+if (isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    echo "<script>
             Swal.fire({
-                icon: '".$_SESSION['status']."',
+                icon: '" . $_SESSION['status'] . "',
                 title: 'เกิดข้อผิดพลาด',
                 text: '$alert',
             })
         </script>";
-        unset($_SESSION['status']);
-        unset($_SESSION['alert']);
-    }
+    unset($_SESSION['status']);
+    unset($_SESSION['alert']);
+}
 
 ?>

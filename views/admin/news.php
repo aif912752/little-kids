@@ -66,7 +66,7 @@ $result = $connect->query($sql);
 
                                                 <tr>
                                                     <td class="py-5 border-b border-l border-gray-200 bg-white">
-                                                        <div class="flex items-center text-sm">
+                                                        <div class="flex items-center text-sm  px-4" >
 
                                                             <div>
                                                                 <p class="font-semibold text-black"> <?php echo $row['title']; ?></p>
@@ -76,12 +76,14 @@ $result = $connect->query($sql);
                                                     </td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['details']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white">
-                                                        <img class="object-cover w-full h-full rounded-full" src="<?php echo $img_src; ?>" alt="" />
+                                                        <img class="object-cover w-32 h-full rounded-full" src="<?php echo $img_src; ?>" alt="" />
                                                     </td>
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
-                                                        <a href="activity_edit.php?id=<?php echo $row['id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                        <a href="activity_delete.php?id=<?php echo $row['id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                                      <div class="flex gap-2 px-4">
+                                                    <a href="news_edit.php?id=<?php echo $row['news_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                                        <a href="news_delete.php?id=<?php echo $row['news_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
