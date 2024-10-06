@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 09:36 PM
+-- Generation Time: Oct 06, 2024 at 07:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,8 +31,15 @@ CREATE TABLE `evaluation_activity` (
   `id` varchar(50) NOT NULL COMMENT 'ไอดีหลัก pk',
   `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
-  `evaluation_score` int(10) NOT NULL COMMENT 'คะเเนนประเมิน'
+  `evaluation_score` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'คะเเนนประเมินในรูปแบบ JSON' CHECK (json_valid(`evaluation_score`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `evaluation_activity`
+--
+
+INSERT INTO `evaluation_activity` (`id`, `activity_id`, `evaluation_name`, `evaluation_score`) VALUES
+('', '4', 'กาย', '0');
 
 --
 -- Indexes for dumped tables
