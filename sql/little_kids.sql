@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 07:47 PM
+-- Generation Time: Oct 06, 2024 at 11:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -43,7 +43,8 @@ CREATE TABLE `activity` (
 
 INSERT INTO `activity` (`id`, `user_id`, `activity_type`, `activity_name`, `activity_description`, `activity_date_start`, `activity_date_end`) VALUES
 (3, 0, 'ฟหกฟหกฟหก', 'กกกกก', 'ฟหกฟหก', '2024-10-23 20:46:00', '2024-10-25 20:46:00'),
-(4, 0, 'ตีไก่', 'นวล', 'ไปเที่ยวกัน', '2024-10-12 20:59:00', '2024-10-12 20:59:00');
+(4, 0, 'ตีไก่', 'นวล', 'ไปเที่ยวกัน', '2024-10-13', '2024-10-12'),
+(6, 0, 'ตีไก่', 'ไอ่นนท์', 'หกด', '2024-10-15', '2024-10-15');
 
 -- --------------------------------------------------------
 
@@ -84,20 +85,20 @@ CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL COMMENT 'รหัสการลงเวลา',
   `student_id` int(11) NOT NULL COMMENT 'รหัสนักเรียน',
   `student_name` varchar(255) NOT NULL COMMENT 'ชื่อนักเรียน',
-  `student_lastname` varchar(255) NOT NULL COMMENT 'ชื่อนักเรียน',
+  `student_lastname` varchar(255) NOT NULL COMMENT 'นามกสุลนักเรียน',
   `attendance_date` date NOT NULL COMMENT 'วันที่ลงเวลา',
-  `check_in_time` time NOT NULL COMMENT 'เวลาเข้า',
-  `check_out_time` time DEFAULT NULL COMMENT 'เวลาออก',
   `note` varchar(100) NOT NULL COMMENT 'หมายเหตุ',
-  `status` enum('normal','absent','leave','late') DEFAULT 'normal' COMMENT 'สถานะการเข้าเรียน'
+  `room_id` varchar(50) NOT NULL COMMENT 'เก็บวันที่ if ref มาจาก table room ',
+  `status` varchar(50) NOT NULL COMMENT 'สถานะการเข้าเรียน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `attendance`
 --
 
-INSERT INTO `attendance` (`attendance_id`, `student_id`, `student_name`, `student_lastname`, `attendance_date`, `check_in_time`, `check_out_time`, `note`, `status`) VALUES
-(12, 17, 'กาย', 'กาย', '2024-10-05', '10:47:00', '02:49:00', '', 'absent');
+INSERT INTO `attendance` (`attendance_id`, `student_id`, `student_name`, `student_lastname`, `attendance_date`, `note`, `room_id`, `status`) VALUES
+(28, 19, 'นวล', '123456789', '2024-10-06', '', '', 'มา'),
+(30, 20, 'กิจกรรมนัทนาการtest1', 'intarathaiwong', '2024-10-06', 'โดยต่อย', '', 'ขาด');
 
 -- --------------------------------------------------------
 
@@ -133,13 +134,20 @@ INSERT INTO `director` (`director_id`, `Img`, `first_name`, `last_name`, `birthd
 
 CREATE TABLE `evaluation` (
   `evaluation_id` int(11) NOT NULL COMMENT 'รหัสประจำแบบประเมิน',
-  `student_id` int(11) NOT NULL COMMENT ' รหัสนักเรียนที่ถูกประเมิน',
-  `teacher_id` int(11) NOT NULL COMMENT 'รหัสครูที่ทำการประเมิน',
+  `evaluation_name` varchar(255) NOT NULL COMMENT 'หัวแบบฟอร์ม',
   `score` varchar(3) NOT NULL COMMENT 'คะเเนนเก็บเป็น string',
   `evaluation_date` date NOT NULL COMMENT 'วันที่ทำการประเมิน',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `evaluation`
+--
+
+INSERT INTO `evaluation` (`evaluation_id`, `evaluation_name`, `score`, `evaluation_date`, `created_at`, `updated_at`) VALUES
+(4, 'กิจกรรมนัทนาการ', '', '0000-00-00', '2024-10-06 05:37:50', '2024-10-06 05:37:50'),
+(5, 'กิจกรรมนัทนาการtest1', '', '0000-00-00', '2024-10-06 05:46:22', '2024-10-06 05:46:22');
 
 -- --------------------------------------------------------
 
@@ -148,10 +156,32 @@ CREATE TABLE `evaluation` (
 --
 
 CREATE TABLE `evaluation_activity` (
-  `id` varchar(50) NOT NULL COMMENT 'ไอดีหลัก pk',
+  `id` int(50) NOT NULL,
   `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
-  `evaluation_type` varchar(255) NOT NULL COMMENT 'ประเภทกิจกรรม'
+  `evaluation_score` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'คะเเนนประเมินในรูปแบบ JSON' CHECK (json_valid(`evaluation_score`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `evaluation_activity`
+--
+
+INSERT INTO `evaluation_activity` (`id`, `activity_id`, `evaluation_name`, `evaluation_score`) VALUES
+(1, '4', 'กาย', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `evaluation_to_activity`
+--
+
+CREATE TABLE `evaluation_to_activity` (
+  `id` int(11) NOT NULL,
+  `evaluation_id` int(11) NOT NULL COMMENT 'อ้างอิงจากรหัสประเมิน อ้างอิงมาจาก table evaluation ',
+  `evaluation_activity_id` varchar(50) NOT NULL COMMENT 'อ้างอิงจากรหัสกิจกรรมประเมินจาก table evaluation_activity ',
+  `total_score` varchar(50) NOT NULL COMMENT 'คะเเนนรวม ',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -174,6 +204,13 @@ CREATE TABLE `guardians` (
   `room_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาห้องเรียน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `guardians`
+--
+
+INSERT INTO `guardians` (`guardian_id`, `img`, `first_name`, `last_name`, `phone_number`, `gender`, `address`, `relation_to_student`, `student_id`, `user_id`, `room_id`) VALUES
+(1, '', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการ', 'Male', 'กดหกดหกดหกด', 'กิจกรรมนัทนาการtest1', 20, 32, '');
+
 -- --------------------------------------------------------
 
 --
@@ -186,6 +223,14 @@ CREATE TABLE `room` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `room`
+--
+
+INSERT INTO `room` (`room_id`, `room_name`, `created_at`, `updated_at`) VALUES
+(1, 'อนุบาล 2', '2024-10-05 18:12:33', '2024-10-05 18:12:33'),
+(2, 'อนุบาล 3', '2024-10-06 07:03:31', '2024-10-06 07:03:31');
 
 -- --------------------------------------------------------
 
@@ -205,7 +250,6 @@ CREATE TABLE `students` (
   `gender` enum('Male','Female','Other') NOT NULL COMMENT 'เพศนักเรียน',
   `citizen_id` varchar(11) NOT NULL COMMENT 'รหัสบัตรประชาชน',
   `enrollment_date` date NOT NULL COMMENT 'วันที่ลงทะเบียนเข้าเรียน',
-  `grade_level` varchar(50) NOT NULL COMMENT 'ชั้นที่เรียน',
   `status` enum('Active','Inactive','Graduated') DEFAULT 'Active' COMMENT 'สถาณะนักเรียน',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	',
   `guardians_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาผู้ครอง',
@@ -218,9 +262,36 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `grade_level`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
-(17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', '', 'Active', 24, '', '', '', ''),
-(18, '670168f02a3bd-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'อนุบาล 5', 'Active', 25, '', '', '', '');
+INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
+(17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', 'Active', 24, '', '', '', ''),
+(18, '67017e0985bc4-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'Active', 25, '', '', '', ''),
+(19, '6701979a22c77-1.jpg', 'นวล', '123456789', '0000-00-00', '', '', 'ไทย', 'Male', '15000', '2024-10-22', 'Inactive', 30, '', '1', '', ''),
+(20, '', 'กิจกรรมนัทนาการtest1', 'intarathaiwong', '2024-10-14', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 'Male', 'กิจกรรมนัทน', '2024-10-18', 'Inactive', 31, '', '2', '150', '20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_measurements`
+--
+
+CREATE TABLE `student_measurements` (
+  `id` int(11) NOT NULL COMMENT 'ไอดีหลัก pk',
+  `student_id` varchar(50) NOT NULL COMMENT 'ไอดีนักเรียน',
+  `weight` decimal(5,2) NOT NULL COMMENT 'น้ำหนัก (กิโลกรัม)',
+  `height` decimal(5,2) NOT NULL COMMENT 'ส่วนสูง (เซนติเมตร)',
+  `recorded_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'เวลาที่บันทึกข้อมูล'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `student_measurements`
+--
+
+INSERT INTO `student_measurements` (`id`, `student_id`, `weight`, `height`, `recorded_at`) VALUES
+(1, '18', 50.50, 175.60, '2024-10-06 09:10:54'),
+(2, '17', 150.20, 18.30, '2024-10-06 09:12:41'),
+(3, '19', 42.00, 456.00, '2024-10-06 09:13:57'),
+(4, '19', 150.00, 33.00, '2024-10-06 09:16:09'),
+(5, '17', 50.00, 175.00, '2024-10-06 09:17:29');
 
 -- --------------------------------------------------------
 
@@ -251,8 +322,9 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `img`, `first_name`, `last_name`, `position`, `email`, `ethnicity`, `nationality`, `religion`, `citizen_id`, `birthdate`, `phone_number`, `teacher_address`, `room_id`, `user_id`) VALUES
-(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', '0', '', '', 3),
-(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', '0', 'asdasdas', 'กกกกก', 28);
+(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', '0', '', '1', 3),
+(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', '0', 'asdasdas', '1', 28),
+(3, '67019789ee59c-1.jpg', 'supapit', 'intarathaiwong', 'ครูใหญ่', 'warunyoo084@gmail.com', 'asd', 'กาย', 'กาย', 1515151515, '2024-10-16', '0848091046', 'asdasd', '1', 29);
 
 -- --------------------------------------------------------
 
@@ -278,13 +350,17 @@ INSERT INTO `user` (`id`, `username`, `password`, `name`, `role`) VALUES
 (3, 'teacher', '123456789', 'teacher1', 3),
 (4, 'ruler', '123456789', 'ruler1', 4),
 (5, '', '', 'student1', 5),
-(19, '123456', '123456', 'กาย', 2),
+(19, '15000', '', 'กาย', 2),
 (20, '0848091046', '123456789', 'กาย', 2),
 (24, '', '', 'กาย', 5),
 (25, '', '', 'กหกฟหกฟหก', 5),
 (26, 'dddd', '123456789', 'ไอ่นนท์', 1),
 (27, 'test1', '123456789', 'กาย', 2),
-(28, 'teacher2', '123456789', 'กกกกก', 3);
+(28, 'teacher2', '123456789', 'กกกกก', 3),
+(29, 'teacher23', '123456789', 'supapit', 3),
+(30, '15000', '', 'นวล', 5),
+(31, 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 5),
+(32, '123465789', '123456789', 'กิจกรรมนัทนาการtest1', 4);
 
 --
 -- Indexes for dumped tables
@@ -327,6 +403,12 @@ ALTER TABLE `evaluation_activity`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `evaluation_to_activity`
+--
+ALTER TABLE `evaluation_to_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `guardians`
 --
 ALTER TABLE `guardians`
@@ -343,6 +425,12 @@ ALTER TABLE `room`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`student_id`);
+
+--
+-- Indexes for table `student_measurements`
+--
+ALTER TABLE `student_measurements`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `teacher`
@@ -364,7 +452,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสกิจกรรม', AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสกิจกรรม', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `administrators`
@@ -376,7 +464,7 @@ ALTER TABLE `administrators`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการลงเวลา', AUTO_INCREMENT=13;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการลงเวลา', AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `director`
@@ -388,37 +476,55 @@ ALTER TABLE `director`
 -- AUTO_INCREMENT for table `evaluation`
 --
 ALTER TABLE `evaluation`
-  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน';
+  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `evaluation_activity`
+--
+ALTER TABLE `evaluation_activity`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `evaluation_to_activity`
+--
+ALTER TABLE `evaluation_to_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `guardians`
 --
 ALTER TABLE `guardians`
-  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง';
+  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=19;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `student_measurements`
+--
+ALTER TABLE `student_measurements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีหลัก pk', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=3;
+  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
