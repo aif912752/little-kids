@@ -80,7 +80,7 @@ $result = $connect->query($sql);
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['enrollment_date']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['room_name']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white">
-                                                        <a href="edit_student.php?student_id=<?php echo $row['student_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">แก้ไข</a>
+                                                        <a href="child_evelopment_edit.php?id=<?php echo $row['id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">แก้ไข</a>
                                                         <a href="child_evelopment_delete.php?id=<?php echo $row['id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">ลบ</a>
                                                     </td>
                                                 </tr>
