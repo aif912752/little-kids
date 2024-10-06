@@ -1,10 +1,3 @@
-<?php
-include '../../config/database.php';
-$sql = "SELECT * FROM attendance";
-$result = $connect->query($sql);
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +19,20 @@ $result = $connect->query($sql);
     <main>
         <div id="main-wrapper" class=" flex p-5 xl:pr-0">
             <?php include '../../src/navbar_teacher.php'; ?>
+            <?php
+            include '../../config/database.php';
 
+
+            // เอา user_id ไปเอาหา student_id 
+            $sql_student_id = "SELECT student_id FROM students WHERE user_id = " . $_SESSION['user_id'];
+            $result_student_id = $connect->query($sql_student_id);
+            $student_id = $result_student_id->fetch_assoc()['student_id'] ?? 0;
+
+            $sql = "SELECT * FROM attendance  WHERE student_id = $student_id";
+            $result = $connect->query($sql);
+
+
+            ?>
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <div class="container px-6 py-8 mx-auto ">
@@ -113,10 +119,11 @@ $result = $connect->query($sql);
 </body>
 
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#example').DataTable(); // เรียกใช้งาน DataTables
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>

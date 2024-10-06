@@ -1,24 +1,3 @@
-<?php
-include '../../config/database.php';
-$sql = "SELECT * FROM attendance  ";
-$result = $connect->query($sql);
-
-// ดึงจำนวนครูจากตาราง teacher
-$sql_teacher_count = "SELECT COUNT(*) as teacher_count FROM teacher";
-$result_teacher_count = $connect->query($sql_teacher_count);
-$teacher_count = $result_teacher_count->fetch_assoc()['teacher_count'] ?? 0;
-
-// ดึงจำนวนนักเรียนจากตาราง students
-$sql_student_count = "SELECT COUNT(*) as student_count FROM students";
-$result_student_count = $connect->query($sql_student_count);
-$student_count = $result_student_count->fetch_assoc()['student_count'] ?? 0;
-
-// ดึงจำนวนข่าวสารและกิจกรรมจากตาราง activity
-$sql_activity_count = "SELECT COUNT(*) as activity_count FROM activity";
-$result_activity_count = $connect->query($sql_activity_count);
-$activity_count = $result_activity_count->fetch_assoc()['activity_count'] ?? 0;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +19,33 @@ $activity_count = $result_activity_count->fetch_assoc()['activity_count'] ?? 0;
     <main>
         <div id="main-wrapper" class=" flex p-5 xl:pr-0">
             <?php include '../../src/navbar_teacher.php'; ?>
+            <?php
+            include '../../config/database.php';
 
+
+            // เอา user_id ไปเอาหา student_id 
+            $sql_student_id = "SELECT student_id FROM students WHERE user_id = " . $_SESSION['user_id'];
+            $result_student_id = $connect->query($sql_student_id);
+            $student_id = $result_student_id->fetch_assoc()['student_id'] ?? 0;
+        
+            $sql = "SELECT * FROM attendance  WHERE student_id = $student_id";
+            $result = $connect->query($sql);
+
+            // ดึงจำนวนครูจากตาราง teacher
+            $sql_teacher_count = "SELECT COUNT(*) as teacher_count FROM teacher";
+            $result_teacher_count = $connect->query($sql_teacher_count);
+            $teacher_count = $result_teacher_count->fetch_assoc()['teacher_count'] ?? 0;
+
+            // ดึงจำนวนนักเรียนจากตาราง students
+            $sql_student_count = "SELECT COUNT(*) as student_count FROM students";
+            $result_student_count = $connect->query($sql_student_count);
+            $student_count = $result_student_count->fetch_assoc()['student_count'] ?? 0;
+
+            // ดึงจำนวนข่าวสารและกิจกรรมจากตาราง activity
+            $sql_activity_count = "SELECT COUNT(*) as activity_count FROM activity";
+            $result_activity_count = $connect->query($sql_activity_count);
+            $activity_count = $result_activity_count->fetch_assoc()['activity_count'] ?? 0;
+            ?>
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <!-- Main Content -->

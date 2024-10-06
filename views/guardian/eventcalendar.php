@@ -1,5 +1,8 @@
 <?php
 include '../../config/database.php';
+
+
+
 $sql = "SELECT * FROM activity";
 $result = $connect->query($sql);
 
