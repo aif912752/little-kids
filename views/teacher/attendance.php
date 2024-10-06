@@ -49,6 +49,7 @@ $result = $connect->query($sql);
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อ-นามสกุล</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่ลงเวลา</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">สถานะ</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">หมายเหตุ</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
                                     </thead>
                                     <tbody>
@@ -73,6 +74,7 @@ $result = $connect->query($sql);
                                                     <td class="py-5 border-b border-gray-200 bg-white">
                                                     <?php echo $row['status']; ?>
                                                     </td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['note']; ?></td>
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
                                                         <a href="attendance_edit.php?id=<?php echo $row['attendance_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
@@ -90,6 +92,7 @@ $result = $connect->query($sql);
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
             </div>

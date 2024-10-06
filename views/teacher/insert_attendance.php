@@ -7,6 +7,7 @@ date_default_timezone_set('Asia/Bangkok');
 // รับค่าจากฟอร์ม
 $status_data = $_POST['status'] ?? [];
 $attendance_date = $_POST['attendance_date'] ?? date('Y-m-d');
+$note_data = $_POST['note'] ?? []; // เก็บข้อมูลหมายเหตุ
 
 // ตรวจสอบว่ามีข้อมูลการเข้าเรียนถูกส่งมาหรือไม่
 if (!empty($status_data)) {
@@ -28,11 +29,15 @@ if (!empty($status_data)) {
             $student_name = $row['first_name'];
             $student_lastname = $row['last_name'];
             
+            // รับหมายเหตุสำหรับนักเรียน
+        $note = $note_data[$student_id] ?? ''; // ถ้าไม่มีหมายเหตุให้ใช้ค่าว่าง
+        
+
             // เพิ่มข้อมูลลงในตาราง attendance
-            $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, status) 
-                    VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, status, note) 
+                VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $connect->prepare($sql);
-            $stmt->bind_param("sssss", $student_id, $student_name, $student_lastname, $attendance_date, $status);
+            $stmt->bind_param("ssssss", $student_id, $student_name, $student_lastname, $attendance_date, $status, $note);
             
             if ($stmt->execute()) {
                 $success_count++;

@@ -20,6 +20,7 @@ $studentResult = $connect->query($studentQuery);
     <title>เพิ่มข้อมูลการมาเรียน</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
@@ -46,49 +47,56 @@ $studentResult = $connect->query($studentQuery);
 
                                         <input type="hidden" name="attendance_date" id="attendanceDate">
                                         <div class="mb-6">
-                <label for="roomSelect" class="block text-sm font-medium text-gray-700">เลือกชั้นเรียน</label>
-                <select id="roomSelect" name="room_id" onchange="fetchStudents()" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    <option value="">-- กรุณาเลือกชั้นเรียน --</option>
-                    <?php
-                    while ($room = $roomResult->fetch_assoc()) {
-                        echo "<option value='{$room['room_id']}'>{$room['room_name']}</option>";
-                    }
-                    ?>
-                </select>
-            </div>
+                                            <label for="roomSelect" class="block text-sm font-medium text-gray-700">เลือกชั้นเรียน</label>
+                                            <select id="roomSelect" name="room_id" onchange="fetchStudents()" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                                <option value="">-- กรุณาเลือกชั้นเรียน --</option>
+                                                <?php
+                                                while ($room = $roomResult->fetch_assoc()) {
+                                                    echo "<option value='{$room['room_id']}'>{$room['room_name']}</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
 
-            <table id="studentsTable" class="w-full hidden">
+                                        <table id="studentsTable" class="w-full hidden">
                                             <thead>
                                                 <tr class="bg-gray-200">
                                                     <th class="py-2 px-4 text-left">ลำดับ</th>
                                                     <th class="py-2 px-4 text-left">ชื่อนักเรียน</th>
                                                     <th class="py-2 px-4 text-center" colspan="3">ตัวเลือก</th>
+                                                    <th class="py-2 px-4 text-left" >หมายเหตุ</th> <!-- New header for notes -->
+
                                                 </tr>
                                             </thead>
                                             <tbody>
-                    <?php
-                    $count = 1;
-                    while ($row = $studentResult->fetch_assoc()) {
-                        echo "<tr class='border-b'>";
-                        echo "<td class='py-2 px-4'>{$count}</td>";
-                        echo "<td class='py-2 px-4'>{$row['first_name']} {$row['last_name']}</td>";
-                        echo "<td class='py-2 px-4 text-center'>
+                                                <?php
+                                                $count = 1;
+                                                while ($row = $studentResult->fetch_assoc()) {
+                                                    echo "<tr class='border-b'>";
+                                                    echo "<td class='py-2 px-4'>{$count}</td>";
+                                                    echo "<td class='py-2 px-4'>{$row['first_name']} {$row['last_name']}</td>";
+                                                    echo "<td class='py-2 px-4 text-center'>
                             <input type='radio' name='status[{$row['student_id']}]' value='มา' id='present_{$row['student_id']}' class='mr-2' required>
                             <label for='present_{$row['student_id']}'>มา</label>
                           </td>";
-                        echo "<td class='py-2 px-4 text-center'>
+                                                    echo "<td class='py-2 px-4 text-center'>
                             <input type='radio' name='status[{$row['student_id']}]' value='ขาด' id='absent_{$row['student_id']}' class='mr-2'>
                             <label for='absent_{$row['student_id']}'>ขาด</label>
                           </td>";
-                        echo "<td class='py-2 px-4 text-center'>
+                                                    echo "<td class='py-2 px-4 text-center'>
                             <input type='radio' name='status[{$row['student_id']}]' value='สาย' id='late_{$row['student_id']}' class='mr-2'>
                             <label for='late_{$row['student_id']}'>สาย</label>
                           </td>";
-                        echo "</tr>";
-                        $count++;
-                    }
-                    ?>
-                </tbody>
+
+                          echo "<td class='py-2 px-4'>
+                          <input type='text' name='note[{$row['student_id']}]' class='border border-gray-300 rounded-md w-full  
+                          ' placeholder='กรอกหมายเหตุ (ถ้ามี)'>
+                        </td>";
+                                                    echo "</tr>";
+                                                    $count++;
+                                                }
+                                                ?>
+                                            </tbody>
                                         </table>
                                         <div class="mt-6">
                                             <button type="submit" class="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded" style="background-color:#03346E ;">
@@ -111,29 +119,7 @@ $studentResult = $connect->query($studentQuery);
         <!--end of project-->
     </main>
 </body>
-<script>
-    function previewImage(input) {
-        var preview = document.getElementById('preview');
-        var previewImg = document.getElementById('preview-img');
-        var uploadBox = document.getElementById('upload-box');
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                previewImg.src = e.target.result;
-                preview.classList.remove('hidden');
-                uploadBox.classList.add('hidden');
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            previewImg.src = "";
-            preview.classList.add('hidden');
-            uploadBox.classList.remove('hidden');
-        }
-    }
-</script>
 <script>
     // ฟังก์ชันในการแสดงวันที่ปัจจุบันในรูปแบบ DD/MM/YYYY
     function displayCurrentDate() {
@@ -181,6 +167,11 @@ $studentResult = $connect->query($studentQuery);
                             <td class='py-2 px-4 text-center'>
                                 <input type='radio' name='status[${student.student_id}]' value='สาย' id='late_${student.student_id}' class='mr-2'>
                                 <label for='late_${student.student_id}'>สาย</label>
+                            </td>
+
+                              <td class='py-2 px-4 text-center'>
+                                <input type='text' name='note[${student.student_id}]' class='border border-gray-300 rounded-md w-full  
+                          ' placeholder='กรอกหมายเหตุ (ถ้ามี)'>
                             </td>
                         </tr>`;
                         count++;

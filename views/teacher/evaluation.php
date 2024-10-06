@@ -45,7 +45,7 @@ $result = $connect->query($sql);
 
                                 <!-- ชิดขวา -->
                                 <div class="flex justify-end p-3">
-                                    <a href="activity_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
+                                    <a href="evaluation_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
                                 </div>
 
 
