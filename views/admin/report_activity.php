@@ -38,12 +38,22 @@
                         <div>
                             <h3 class="text-3xl font-medium text-black">รายงานตารางกิจกรรมต่อเดือน</h3>
                         </div>
-                       
+
+                        <!-- แผนภูมิแท่ง -->
+
+
+
+
                         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
                             <!-- <div class="flex p-3 justify-end">
                                 <button class="px-4 py-2 bg-blue-700 text-white border border-blue-500 rounded-l hover:bg-blue-600 focus:outline-none">เดือน</button>
                                 <button class="px-4 py-2 bg-blue-700 text-white border border-blue-500 rounded-r hover:bg-blue-600 focus:outline-none">ปี</button>
                             </div> -->
+                            <div class="p-5">
+                                <canvas id="activityChart" width="400" height="200"></canvas>
+                            </div>
+                            
+                            
                             <?php
                             // เชื่อมต่อกับฐานข้อมูล
                             include('../../config/database.php');
@@ -67,11 +77,14 @@
                                 return $thaiMonths[$month];
                             }
                             // Query เพื่อดึงข้อมูลจำนวนกิจกรรมต่อเดือน
-                            $sql = "SELECT YEAR(activity_date_start) AS year, MONTH(activity_date_start) AS month, COUNT(*) AS total_activities FROM  activity GROUP BY  YEAR(activity_date_start), MONTH(activity_date_start) ORDER BY year, month";
-                            // เตรียมคำสั่ง SQL
+                            $sql = "SELECT YEAR(activity_date_start) AS year, MONTH(activity_date_start) AS month, COUNT(*) AS total_activities  FROM activity  GROUP BY YEAR(activity_date_start), MONTH(activity_date_start) ORDER BY year, month";
                             $result = $connect->query($sql);
+
                             ?>
 
+                            <div class="flex justify-end p-3">
+                                <a href="javascript:void(0)" onclick="openPrintWindow()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ปริ้นรายงาน</a>
+                            </div>
                             <!-- ตาราง -->
                             <table id="example" class="display pt-8" style="width:100%">
                                 <thead class="bg-slate-200 border border-rounded">
@@ -87,13 +100,14 @@
                                         // วนลูปแสดงผลข้อมูลในตาราง
                                         while ($row = $result->fetch_assoc()) {
                                             $month = $row['month'];
+                                            $year = $row['year']; // เพิ่มปี
                                             $total_activities = $row['total_activities'];
 
                                             // แปลงตัวเลขเดือนเป็นชื่อเดือนภาษาไทย
                                             $monthName = getThaiMonth($month);
 
                                             echo "<tr>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $monthName . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $monthName . " " . $year . "</td>"; // แสดงชื่อเดือนและปี
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_activities . "</td>";
                                             echo "</tr>";
                                         }
@@ -188,4 +202,72 @@ if (isset($_SESSION['alert'])) {
             }
         });
     }
+</script>
+
+
+<!-- สคริปต์สำหรับ Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // ดึงข้อมูลจาก PHP
+    const months = [];
+    const totalActivities = [];
+    <?php
+    // เตรียมข้อมูลสำหรับ JavaScript
+    $result->data_seek(0); // รีเซ็ตผลลัพธ์
+    while ($row = $result->fetch_assoc()) {
+        $month = $row['month'];
+        $year = $row['year'];
+        $total_activities = $row['total_activities'];
+        $monthName = getThaiMonth($month);
+        
+        echo "months.push('".$monthName." ".$year."');"; // เพิ่มเดือนและปีในอาร์เรย์
+        echo "totalActivities.push(".$total_activities.");"; // เพิ่มจำนวนกิจกรรมในอาร์เรย์
+    }
+    ?>
+    
+    const ctx = document.getElementById('activityChart').getContext('2d');
+    const activityChart = new Chart(ctx, {
+        type: 'bar', // ประเภทของกราฟ
+        data: {
+            labels: months, // แท็ก x-axis
+            datasets: [{
+                label: 'จำนวนกิจกรรม',
+                data: totalActivities, // ข้อมูลจำนวนกิจกรรม
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // สีฟ้าอ่อน
+                borderColor: 'rgba(54, 162, 235, 1)', // สีฟ้าเข้ม
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // เริ่มที่ 0
+                }
+            }
+        }
+    });
+</script>
+
+<!-- JavaScript สำหรับเปิดหน้าใหม่และปริ้น -->
+<script>
+function openPrintWindow() {
+    // ดึงข้อมูลตารางออกมาเป็น HTML
+    var printContents = document.getElementById('example').outerHTML;
+    
+    // สร้างหน้าต่างใหม่
+    var newWindow = window.open('', '_blank', 'width=800, height=600');
+    
+    // เขียนข้อมูล HTML ลงในหน้าต่างใหม่ พร้อมหัวข้อ
+    newWindow.document.write('<html><head><title>Print Report</title>');
+    newWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; text-align: left; border: 1px solid #ddd; } th { background-color: #f2f2f2; } h1 { text-align: center; margin-bottom: 20px; }</style>');
+    newWindow.document.write('</head><body>');
+    newWindow.document.write('<h1>รายงานกิจกรรมประจำเดือน</h1>'); // หัวข้อรายงาน
+    newWindow.document.write(printContents);
+    newWindow.document.write('</body></html>');
+    
+    // รอให้โหลดข้อมูลเสร็จแล้วสั่งปริ้น
+    newWindow.document.close();
+    newWindow.focus();
+    newWindow.print();
+}
 </script>
