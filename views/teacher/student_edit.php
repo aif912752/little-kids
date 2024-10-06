@@ -86,11 +86,11 @@ if ($id) {
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none"> ส่วนสูง </label>
-                                                <input type="number" name="student_height" value="<?= $row['student_height'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="number" name="student_height" value="<?= $row['student_height'] ?>" step="0.01" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <label class="font-semibold leading-none">น้ำหนัก</label>
-                                                <input type="number" name="student_weight" value="<?= $row['student_weight'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="number" name="student_weight" value="<?= $row['student_weight'] ?>" step="0.01" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                         </div>
 
@@ -217,7 +217,7 @@ if ($id) {
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full flex flex-col">
                                                 <label class="font-semibold leading-none">
-                                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลผู้ปกครอง</p>
+                                                    <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลผู้ปกครอง</p>
                                                 </label>
                                             </div>
                                         </div>

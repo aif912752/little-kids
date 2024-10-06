@@ -10,21 +10,19 @@ $result = $connect->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>จัดการข้อมูลผู้ดูแลระบบ</title>
+    <title>จัดการข้อมูลนักเรียน</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-        <style>
+    
+       
+    <style>
             .dataTables_length select {
                 width: 50px;
                 /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
 
             }
-        </style>
+    </style>
 </head>
 
 <body class=" bg-surface">
@@ -126,14 +124,17 @@ $result = $connect->query($sql);
 </body>
 
 </html>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JS CDN -->
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#example').DataTable(); // เรียกใช้งาน DataTables
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
 <!-- SweetAlert2 -->
 <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 
@@ -170,28 +171,6 @@ if (isset($_SESSION['alert'])) {
 }
 
 ?>
-
-
-<script>
-    function confirmDelete(event, studentId) {
-        event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
-
-        Swal.fire({
-            title: 'คุณแน่ใจหรือไม่?',
-            text: "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'ใช่, ลบเลย!',
-            cancelButtonText: 'ยกเลิก'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = 'student_delete.php?id=' + studentId; // ดำเนินการลบเมื่อยืนยัน
-            }
-        });
-    }
-</script>
 
 
 <script>
