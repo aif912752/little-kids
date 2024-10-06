@@ -1,22 +1,22 @@
 <?php
 include '../../config/database.php'; // เชื่อมต่อฐานข้อมูล
 
-// ดึงข้อมูลครูจากตาราง teacher
-$sql_teachers = "SELECT student_id, first_name, last_name FROM students";
-$result_teachers = $connect->query($sql_teachers);
+// ดึงข้อมูลนักเรียนจากตาราง students
+$sql_students = "SELECT student_id, first_name, last_name FROM students";
+$result_students = $connect->query($sql_students);
 
-$selected_teacher_id = null;
+$selected_student_id = null;
 $show_evaluation_form = false;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['select_teacher'])) {
-    $selected_teacher_id = $_POST['teacher_id'];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['select_student'])) {
+    $selected_student_id = $_POST['student_id'];
     $show_evaluation_form = true;
 }
 
-// ดึงข้อมูลหัวข้อจากตาราง evaluation เฉพาะของนักเรียนที่เลือก
+// ดึงข้อมูลการประเมินจากตาราง evaluation_students เฉพาะของนักเรียนที่เลือก
 $sql_evaluation = "SELECT * FROM evaluation_students WHERE students_id = ?";
 $stmt_evaluation = $connect->prepare($sql_evaluation);
-$stmt_evaluation->bind_param("i", $selected_teacher_id);
+$stmt_evaluation->bind_param("i", $selected_student_id);
 $stmt_evaluation->execute();
 $result_evaluation = $stmt_evaluation->get_result();
 ?>
@@ -40,7 +40,7 @@ $result_evaluation = $stmt_evaluation->get_result();
             <?php include '../../src/navbar_teacher.php'; ?>
             <div class="w-full page-wrapper xl:px-6 px-0">
                 <div class="relative">
-                    <h2 class="w-full mb-4 text-3xl font-bold text-center sm:text-4xl md:text-5xl">แบบประเมินครู</h2>
+                    <h2 class="w-full mb-4 text-3xl font-bold text-center sm:text-4xl md:text-5xl">แบบประเมินนักเรียน</h2>
                 </div>
                 <div class="relative block p-8 overflow-hidden border bg-white border-slate-100 rounded-lg ml-6 mr-6">
                     <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
@@ -48,18 +48,18 @@ $result_evaluation = $stmt_evaluation->get_result();
                     <!-- ฟอร์มเลือกนักเรียน -->
                     <form action="" method="post" class="mb-6">
                         <div class="mb-4">
-                            <label for="teacher_id" class="block text-sm font-medium text-gray-700">เลือกนักเรียนที่ต้องการประเมิน:</label>
-                            <select name="teacher_id" id="teacher_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                            <label for="student_id" class="block text-sm font-medium text-gray-700">เลือกนักเรียนที่ต้องการประเมิน:</label>
+                            <select name="student_id" id="student_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
                                 <option value="">-- เลือกนักเรียน --</option>
-                                <?php while ($teacher = $result_teachers->fetch_assoc()): ?>
-                                    <option value="<?php echo $teacher['student_id']; ?>" <?php echo ($selected_teacher_id == $teacher['student_id']) ? 'selected' : ''; ?>>
-                                        <?= htmlspecialchars($teacher['first_name'] . ' ' . $teacher['last_name']) ?>
+                                <?php while ($student = $result_students->fetch_assoc()): ?>
+                                    <option value="<?php echo $student['student_id']; ?>" <?php echo ($selected_student_id == $student['student_id']) ? 'selected' : ''; ?>>
+                                        <?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>
                                     </option>
                                 <?php endwhile; ?>
                             </select>
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit" name="select_teacher" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
+                            <button type="submit" name="select_student" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
                                 เลือกนักเรียน
                             </button>
                         </div>
@@ -67,15 +67,15 @@ $result_evaluation = $stmt_evaluation->get_result();
 
                     <?php if ($show_evaluation_form && $result_evaluation->num_rows > 0): ?>
                         <form action="" method="post" class="">
-                            <input type="hidden" name="teacher_id" value="<?php echo $selected_teacher_id; ?>">
+                            <input type="hidden" name="student_id" value="<?php echo $selected_student_id; ?>">
                             <?php while ($evaluation = $result_evaluation->fetch_assoc()): ?>
                                 <h2 class="text-xl font-semibold mb-4 text-gray-800">
                                     <?php echo htmlspecialchars($evaluation['evaluation_name']); ?>
                                 </h2>
 
                                 <?php
-                                // ดึงคำถามย่อยจากตาราง evaluation_activity
-                                $sql_questions = "SELECT * FROM evaluation_activity WHERE activity_id = ?";
+                                // ดึงคำถามย่อยจากตาราง evaluation_activity_student
+                                $sql_questions = "SELECT * FROM evaluation_activity_student WHERE activity_id = ?";
                                 $stmt_questions = $connect->prepare($sql_questions);
                                 $stmt_questions->bind_param("s", $evaluation['evaluation_id']);
                                 $stmt_questions->execute();
@@ -127,7 +127,7 @@ $result_evaluation = $stmt_evaluation->get_result();
 
                     <?php
                     if (isset($_POST['submit_evaluation'])) {
-                        $teacher_id = $_POST['teacher_id'];
+                        $student_id = $_POST['student_id'];
                         $evaluation_ids = $_POST['evaluation_id'];
                         $evaluation_activity_ids = $_POST['evaluation_activity_id'];
                         $answers = $_POST['answers'];
@@ -139,7 +139,7 @@ $result_evaluation = $stmt_evaluation->get_result();
 
                             $sql_insert = "INSERT INTO evaluation_to_activity_student (evaluation_id, evaluation_activity_id, total_score, students_id) VALUES (?, ?, ?, ?)";
                             $stmt_insert = $connect->prepare($sql_insert);
-                            $stmt_insert->bind_param("issi", $evaluation_id, $activity_id, $total_score, $teacher_id);
+                            $stmt_insert->bind_param("sssi", $evaluation_id, $activity_id, $total_score, $student_id);
 
                             if (!$stmt_insert->execute()) {
                                 echo "<script>showAlert('เกิดข้อผิดพลาด', '" . $stmt_insert->error . "', 'error');</script>";
