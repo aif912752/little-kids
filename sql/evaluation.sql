@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 07:07 AM
+-- Generation Time: Oct 06, 2024 at 12:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -29,12 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `evaluation` (
   `evaluation_id` int(11) NOT NULL COMMENT 'รหัสประจำแบบประเมิน',
+  `techer_id` int(50) NOT NULL COMMENT 'ไอดีคุณครู',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'หัวแบบฟอร์ม',
   `score` varchar(3) NOT NULL COMMENT 'คะเเนนเก็บเป็น string',
   `evaluation_date` date NOT NULL COMMENT 'วันที่ทำการประเมิน',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `evaluation`
+--
+
+INSERT INTO `evaluation` (`evaluation_id`, `techer_id`, `evaluation_name`, `score`, `evaluation_date`, `created_at`, `updated_at`) VALUES
+(6, 0, 'กิจกรรมนัทนาการ', '14', '2024-10-06', '2024-10-06 10:45:42', '2024-10-06 10:45:42');
 
 --
 -- Indexes for dumped tables
@@ -54,7 +62,7 @@ ALTER TABLE `evaluation`
 -- AUTO_INCREMENT for table `evaluation`
 --
 ALTER TABLE `evaluation`
-  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน';
+  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
