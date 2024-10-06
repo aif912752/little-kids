@@ -30,90 +30,19 @@
                                     <form action="insert_student.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">ชื่อจริง</label>
-                                                <input type="text" name="first_name" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <label class="font-semibold leading-none">หัวข้อ</label>
+                                                <input type="text" name="title" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">นามสกุล</label>
-                                                <input type="text" name="last_name" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none"> ส่วนสูง </label>
-                                                <input type="number" name="student_height" step="0.01" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div> 
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">น้ำหนัก</label>
-                                                <input type="number" name="student_weight" step="0.01" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-
-                                
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">วันเดือนปีเกิด</label>
-                                                <input type="date" name="birthdate" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">เชื้อชาติ</label>
-                                                <input type="text" name="ethnicity" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div> 
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">สัญชาติ</label>
-                                                <input type="text" name="nationality" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">ศาสนา</label>
-                                                <input type="text" name="religion" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
+                                           
                                         </div>
                                         <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">เพศนักเรียน</label>
-                                                <div class="flex item-center gap-2 mt-3 mb-5 ">
-                                                    <input type="radio" name="gender" value="1" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> ชาย
-                                                    <input type="radio" name="gender" value="2" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> หญิง
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">รหัสบัตรประชาชน</label>
-                                                <input type="text" name="citizen_id" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            <div class="w-full flex flex-col">
+                                                <label class="font-semibold leading-none">รายละเอียด</label>
+                                                <textarea name="details" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>
                                             </div>
                                         </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">วันที่ลงทะเบียนเข้าเรียน</label>
-                                                <input type="date" name="enrollment_date" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">ชั้นที่เรียน</label>
-                                                <select name="room_id" class="leading-none text-gray-900 p-4 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
-                                                    <option value="" selected>กรุณาเลือกห้อง</option>    
-                                                    <?php
-                                                        include('../../config/database.php');
-                                                        $sqlroom= "SELECT * FROM room";
-                                                        $resultroom = $connect->query($sqlroom);
-                                                        while($rowroom = $resultroom->fetch_assoc()) {
-                                                            echo '<option value="'.$rowroom['room_id'].'">'.$rowroom['room_name'].'</option>';
-                                                        } 
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div> 
                                         <div class="md:flex items-start mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">สถานะนักเรียน</label>
-                                                <select name="status" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
-                                                    <option value="1">กำลังศึกษา </option>
-                                                    <option value="2">ไม่ศึกษา</option>
-                                                    <option value="3">สำเร็จการศึกษา</option>
-                                                </select>
-                                            </div>
+                                 
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <div class="md:flex">
                                                     <div class="w-full p-3">
@@ -121,7 +50,7 @@
                                                             <div class="absolute">
                                                                 <div class="flex flex-col items-center">
                                                                     <i class="fa fa-folder-open fa-4x text-blue-700"></i>
-                                                                    <span class="block text-gray-400 font-normal">อัพโหลดรูปนักเรียน</span>
+                                                                    <span class="block text-gray-400 font-normal">อัพโหลดรูปกิจกรรม</span>
                                                                 </div>
                                                             </div>
                                                             <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
@@ -134,66 +63,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full flex flex-col">
-                                                <label class="font-semibold leading-none"> 
-                                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลผู้ปกครอง</p>
-                                                </label>
-                                            </div>
-                                        </div>
+                                   
 
                                         
-                                        <!-- <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">username</label>
-                                                <input type="text" name="username_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">password</label>
-                                                <input type="password" name="password_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div> -->
-
-
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">ชื่อจริงผู้ปกครอง</label>
-                                                <input type="text" name="first_name_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">นามสกุลผู้ปกครอง</label>
-                                                <input type="text" name="last_name_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">เบอร์โทรศัพท์ผู้ปกครอง</label>
-                                                <input type="text" name="phone_number_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">เพศผู้ปกครอง</label>
-                                                <div class="flex item-center gap-2 mt-3 mb-5 ">
-                                                <input type="radio" name="gender_guardian" value="1" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> ชาย
-                                                <input type="radio" name="gender_guardian" value="2" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> หญิง
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full  flex flex-col  ">
-                                                <label class="font-semibold leading-none">เกี่ยวข้องเป็น</label>
-                                                <input type="text" name="relation_to_student" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full flex flex-col">
-                                                <label class="font-semibold leading-none">ที่อยู่</label>
-                                                <textarea name="address_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>
-                                            </div>
-                                        </div>
+                                     
                                         
                                         <div class="flex items-center justify-center w-full gap-4">
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
