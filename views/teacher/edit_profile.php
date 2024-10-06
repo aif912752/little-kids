@@ -124,7 +124,22 @@
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
                                                 <label class="font-semibold leading-none">ชั้นปีที่ </label>
-                                                <input type="text" name="class_taught" value="<?= $row['class_taught'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                
+                                                <select name="room_id" class="leading-none text-gray-900 p-4 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
+                                                    <option value="" selected>กรุณาเลือกห้อง</option>
+                                                    <?php
+
+                                                    $sqlroom = "SELECT * FROM room";
+                                                    $resultroom = $connect->query($sqlroom);
+                                                    while ($rowroom = $resultroom->fetch_assoc()) {
+                                                        if ($row['room_id'] == $rowroom['room_id']) {
+                                                            echo '<option value="' . $rowroom['room_id'] . '" selected>' . $rowroom['room_name'] . '</option>';
+                                                        } else {
+                                                            echo '<option value="' . $rowroom['room_id'] . '">' . $rowroom['room_name'] . '</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -133,7 +148,7 @@
                                                 <label class="font-semibold leading-none">ที่อยู่</label>
                                                 <textarea name="teacher_address" rows="4" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"><?= $row['teacher_address'] ?></textarea>                      
                                             </div>
-                                        </div>
+                                        </div> 
                                     
 
                                         <div class="md:flex items-start mt-4">
@@ -169,7 +184,7 @@
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
                                                 บันทึก
                                             </button>
-                                            <a href="student.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
+                                            <a href="profile.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
                                         </div>
                                     </form>
                                 </div>

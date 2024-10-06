@@ -18,7 +18,7 @@
             include('../../config/database.php');
 
             // ดึงข้อมูลครูจากตาราง teacher โดยใช้ user_id
-            $sql = "SELECT * FROM teacher JOIN room ON teacher.room_id = room.room_id WHERE teacher.user_id = ?";
+            $sql = "SELECT * FROM guardians WHERE user_id = ?";
             $stmt = $connect->prepare($sql);
 
 
@@ -31,7 +31,11 @@
             $result = $stmt->get_result();
 
             if ($result->num_rows == 1) {
-                $teacher = $result->fetch_assoc();
+                $guardian = $result->fetch_assoc();
+                // ดึงข้อมูล student จากตาราง student โดยใช้ student_id
+                $sql = "SELECT * FROM students WHERE student_id = ".$guardian['student_id'];
+                $result = $connect->query($sql);
+                $student = $result->fetch_assoc();
             } else {
                 die("ไม่พบข้อมูลครู");
             }
@@ -46,16 +50,18 @@
                         </div>
                         <div class="flex flex-col items-center -mt-20">
                             <?php
-                            if ($teacher['img'] != null) {
-                                echo '<img src="uploads/teacher/'.$teacher['img'].'" class="w-40 h-40 border-4 border-white rounded-full">';
-                                // echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
+                            if ($guardian['img'] != null) {
+                                echo '<img src="uploads/' . $guardian['img'] . '" class="w-40 h-40 border-4 border-white rounded-full">';
                             } else {
                                 echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
                             }
                             ?>
-                            <!-- <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full"> -->
+
                             <div class="flex items-center space-x-2 mt-2">
-                                <p class="text-2xl"><?php echo $teacher['first_name'] . ' ' . $teacher['last_name']; ?></p>
+                                <p class="text-2xl text-center">
+                                    <?php echo $student['first_name'] . ' ' . $student['last_name']; ?>
+                                </p>
+                            
                                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
@@ -80,33 +86,78 @@
                     <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                         <div class="w-full flex flex-col 2xl:w-1/3">
                             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
-                                <h4 class="text-xl text-gray-900 font-bold">ข้อมูลส่วนตัว</h4>
+                                <h4 class="text-xl text-gray-900 font-bold">ข้อมูลส่วนตัวของเด็ก</h4>
                                 <ul class="mt-2 text-gray-700">
 
                                     <li class="flex border-b py-2">
                                         <span class="font-bold w-24">ชื่อ-นามสกุล:</span>
-                                        <span class="text-gray-700"> <?= $teacher['first_name'] . ' ' . $teacher['last_name'] ?> </span>
+                                        <span class="text-gray-700"> <?= $student['first_name'] . ' ' . $guardian['last_name'] ?> </span>
                                     </li>
-                                    <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">ตำแหน่ง:</span>
-                                        <span class="text-gray-700"><?= $teacher['position']  ?></span>
-                                    </li>
-                                    <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">email :</span>
-                                        <span class="text-gray-700"><?= $teacher['email'] ?></span>
-                                    </li>
+
                                     <li class="flex border-b py-2">
                                         <span class="font-bold w-24">วันเกิด :</span>
-                                        <span class="text-gray-700"><?= $teacher['birthdate'] ?> </span>
+                                        <span class="text-gray-700"><?= $student['birthdate'] ?> </span>
                                     </li>
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">เบอร์โทร:</span>
-                                        <span class="text-gray-700"><?= $teacher['phone_number'] ?></span>
+                                        <span class="font-bold w-24">เพศ:</span>
+                                        <span class="text-gray-700"><?= $student['gender'] == 'Male' ? 'ชาย' : 'หญิง'?> </span>
                                     </li>
                                     <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">ชั้นที่สอน:</span>
-                                        <span class="text-gray-700"><?= $teacher['room_name']  ?></span>
+                                        <span class="font-bold w-24">ชั้นที่เรียน:</span>
+                                        <?php
+                                        if ($student['room_id'] == null) {
+                                            echo '<span class="text-gray-700">ยังไม่ได้ระบุ</span>';
+                                        } else {
+                                            $sql2 = "SELECT * FROM room WHERE room_id = ".$student['room_id'];
+                                            $result2 = $connect->query($sql2);
+                                            $room = $result2->fetch_assoc();
+                                            echo '<span class="text-gray-700">'.$room['room_name'].'</span>';
+
+                                        }
+                                        ?>
+
+                                        
                                     </li>
+                                    
+                                    
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+                        <div class="w-full flex flex-col 2xl:w-1/3">
+                            <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                                <h4 class="text-xl text-gray-900 font-bold">ข้อมูลส่วนตัวของผู้ปกครอง</h4>
+                                <ul class="mt-2 text-gray-700">
+
+                                    <li class="flex border-b py-2">
+                                        <span class="font-bold w-24">ชื่อผู้ปกครอง:</span>
+                                        <span class="text-gray-700"> <?= $guardian['first_name'] . ' ' . $guardian['last_name'] ?> </span>
+                                    </li>
+
+                                    <li class="flex border-b py-2">
+                                        <span class="font-bold w-24">เบอร์โทรศัพท์ :</span>
+                                        <span class="text-gray-700"><?= $guardian['phone_number'] ?> </span>
+                                    </li>
+                                    <li class="flex border-b py-2">
+                                        <span class="font-bold w-24">เพศ:</span>
+                                        <span class="text-gray-700"><?= $guardian['gender'] == 'Male' ? 'ชาย' : 'หญิง'?> </span>
+                                    </li>
+                                    
+                                    <li class="flex border-b py-2">
+                                        <span class="font-bold w-24">เกี่ยวข้องเป็น:</span>
+                                        <span class="text-gray-700"><?= $guardian['relation_to_student'] ?> </span>
+                                    </li>
+                                    <li class="flex border-b py-2">
+                                        <span class="font-bold w-24">ที่อยู่:</span>
+                                        <span class="text-gray-700"><?= $guardian['address'] ?> </span>
+                                    </li>
+
                                 </ul>
                             </div>
 

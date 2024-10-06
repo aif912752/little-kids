@@ -19,7 +19,7 @@
     <main>
         <div id="main-wrapper" class=" flex p-5 xl:pr-0">
             <?php include '../../src/navbar_teacher.php'; ?>
-
+            
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <!-- Main Content -->
