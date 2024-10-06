@@ -137,7 +137,7 @@ $result_evaluation = $stmt_evaluation->get_result();
                             $evaluation_id = $evaluation_ids[$activity_id];
                             $total_score = $answers[$activity_id];
 
-                            $sql_insert = "INSERT INTO evaluation_to_activity (evaluation_id, evaluation_activity_id, total_score, teacher_id) VALUES (?, ?, ?, ?)";
+                            $sql_insert = "INSERT INTO evaluation_to_activity (evaluation_id, evaluation_activity_id, total_score, techer_id) VALUES (?, ?, ?, ?)";
                             $stmt_insert = $connect->prepare($sql_insert);
                             $stmt_insert->bind_param("issi", $evaluation_id, $activity_id, $total_score, $teacher_id);
 
