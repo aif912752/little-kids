@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 10:57 AM
+-- Generation Time: Oct 06, 2024 at 11:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `evaluation_to_activity` (
-  `id` int(11) NOT NULL,
+  `id` int(150) NOT NULL,
   `evaluation_id` int(11) NOT NULL COMMENT 'อ้างอิงจากรหัสประเมิน อ้างอิงมาจาก table evaluation ',
   `evaluation_activity_id` varchar(50) NOT NULL COMMENT 'อ้างอิงจากรหัสกิจกรรมประเมินจาก table evaluation_activity ',
   `total_score` varchar(50) NOT NULL COMMENT 'คะเเนนรวม ',
@@ -54,7 +54,7 @@ ALTER TABLE `evaluation_to_activity`
 -- AUTO_INCREMENT for table `evaluation_to_activity`
 --
 ALTER TABLE `evaluation_to_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(150) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

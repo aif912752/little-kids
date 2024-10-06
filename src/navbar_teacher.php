@@ -187,6 +187,12 @@ session_start();
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="child_evelopment.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ประวัติน้ำหนักส่วนสูงนักเรียน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="profile.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>โปรไฟล์</span>
                             </a>
