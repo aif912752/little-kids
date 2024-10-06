@@ -308,9 +308,6 @@ $activity_count = $result_activity_count->fetch_assoc()['activity_count'] ?? 0;
                                                 <tr class="text-sm">
                                                     <th scope="col" class="p-4 font-semibold">ชื่อ-นามสกุล</th>
                                                     <th scope="col" class="p-4 font-semibold">วันที่</th>
-
-                                                    <th scope="col" class="p-4 font-semibold">เวลาเข้า</th>
-                                                    <th scope="col" class="p-4 font-semibold">เวลาออก</th>
                                                     <th scope="col" class="p-4 font-semibold">Status</th>
                                                 </tr>
                                             </thead>
@@ -335,12 +332,7 @@ $activity_count = $result_activity_count->fetch_assoc()['activity_count'] ?? 0;
                                                             <td class="p-4">
                                                                 <h3 class="font-medium"><?php echo $row['attendance_date']; ?></h3>
                                                             </td>
-                                                            <td class="p-4">
-                                                                <h3 class="font-medium"><?php echo $row['check_in_time']; ?></h3>
-                                                            </td>
-                                                            <td class="p-4">
-                                                                <h3 class="font-medium"><?php echo $row['check_out_time']; ?></h3>
-                                                            </td>
+
                                                             <td class="p-4">
                                                                 <span
                                                                     class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-teal-400 text-teal-500"><?php echo $row['status']; ?></span>
