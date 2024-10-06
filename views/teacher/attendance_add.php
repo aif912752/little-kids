@@ -8,7 +8,7 @@ $roomResult = $connect->query($roomQuery);
 // Initial student query (no filtering yet)
 $studentQuery = "SELECT student_id, first_name, last_name FROM students WHERE room_id IS NULL"; // Default query, will update after room selection
 $studentResult = $connect->query($studentQuery);
-?>
+?> 
 
 
 <!DOCTYPE html>
