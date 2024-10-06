@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Show success message and redirect
             echo "<script>
                 alert('บันทึกข้อมูลน้ำหนักและส่วนสูงเรียบร้อยแล้ว!');
-                window.location.href = 'child_evelopment_add.php';
+                window.location.href = 'child_evelopment.php';
             </script>";
         } else {
             echo "เกิดข้อผิดพลาดในการบันทึกข้อมูล: " . $stmt->error;
