@@ -164,8 +164,9 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ดูข้อมูลพัฒนาการของนักเรียน</span>
                             </a>
                         </li>
-                       
 
+                        
+                       
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/director/profile.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>โปรไฟล์</span>
@@ -229,6 +230,28 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ประเมินนักเรียน</span>
                             </a>
                         </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/report_attendance_teacher.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>รายงานการมาเรียนของนักเรียน</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/report_activity.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>รายงานตารางกิจกรรมภายในชั้นเรียน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/report_child_evelopment.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>รายงานพัฒนาการของนักเรียนภายในชั้นเรียน</span>
+                            </a>
+                        </li>
+
+                        
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="profile.php">
