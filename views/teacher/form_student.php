@@ -40,7 +40,7 @@ $result_evaluation = $stmt_evaluation->get_result();
             <?php include '../../src/navbar_teacher.php'; ?>
             <div class="w-full page-wrapper xl:px-6 px-0">
                 <div class="relative">
-                    <h2 class="w-full mb-4 text-3xl font-bold text-center sm:text-4xl md:text-5xl">แบบประเมินครู</h2>
+                    <h2 class="w-full mb-4 text-3xl font-bold text-center sm:text-4xl md:text-5xl">แบบประเมินนักเรียน</h2>
                 </div>
                 <div class="relative block p-8 overflow-hidden border bg-white border-slate-100 rounded-lg ml-6 mr-6">
                     <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>

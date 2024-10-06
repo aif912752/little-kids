@@ -26,7 +26,7 @@
                             <div class="bg-gradient-to-b from-blue-500 to-blue-300 h-96"></div>
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
-                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลนักเรียน</p>
+                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลกิจกรรม</p>
                                     <form action="insert_student.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
