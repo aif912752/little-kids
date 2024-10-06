@@ -4,47 +4,94 @@ include('../../config/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // เตรียมคำสั่ง SQL สำหรับบันทึกหัวข้อและคำถาม
-    $sqlTopic = "INSERT INTO evaluation (evaluation_name, created_at) VALUES (?, NOW())"; 
-    $sqlQuestion = "INSERT INTO evaluation_activity (activity_id, evaluation_name, evaluation_score) VALUES (?, ?, ?)";
+    $sqlEvaluation = "INSERT INTO evaluation (evaluation_name, score, evaluation_date, created_at, updated_at) VALUES (?, ?, NOW(), NOW(), NOW())";
+    $sqlActivity = "INSERT INTO evaluation_activity (id, activity_id, evaluation_name, evaluation_score) VALUES (?, ?, ?, ?)";
 
-    // เตรียม statement
-    if ($stmtTopic = $connect->prepare($sqlTopic)) {
-        if ($stmtQuestion = $connect->prepare($sqlQuestion)) {
+    // เริ่ม transaction
+    $connect->begin_transaction();
 
-            // เริ่มการวนลูปผ่าน array ของหัวข้อ
-            foreach ($_POST['topics'] as $topicIndex => $topic) {
-                // บันทึกหัวข้อลงในตาราง evaluation
-                $evaluationName = $topic['name']; // หัวข้อประเมิน
+    try {
+        // เตรียม statement
+        $stmtEvaluation = $connect->prepare($sqlEvaluation);
+        $stmtActivity = $connect->prepare($sqlActivity);
 
-                // bind และ execute สำหรับการเพิ่มข้อมูลหัวข้อ
-                $stmtTopic->bind_param("s", $evaluationName); // ปรับให้ไม่ใช้ teacher_id
-                $stmtTopic->execute();
+        // วนลูปผ่าน array ของหัวข้อ
+        foreach ($_POST['topics'] as $topic) {
+            $topicName = $topic['name']; // หัวข้อหลัก
+            $totalScore = 0; // คะแนนรวมของหัวข้อนี้
 
-                // ดึง id ของหัวข้อที่เพิ่งบันทึกลงไป
-                $evaluationId = $connect->insert_id;
-
-                // วนลูปคำถามภายในหัวข้อ
-                foreach ($topic['questions'] as $questionIndex => $question) {
-                    $questionText = $question['text']; // คำถาม
-                    $answer = $question['answer']; // คำตอบที่เลือก
-
-                    // บันทึกคำถามและคำตอบลงใน evaluation_activity
-                    $stmtQuestion->bind_param("iss", $evaluationId, $questionText, $answer);
-                    $stmtQuestion->execute();
+            // คำนวณคะแนนรวมของหัวข้อ
+            if (isset($topic['questions']) && is_array($topic['questions'])) {
+                foreach ($topic['questions'] as $question) {
+                    if (isset($question['answers']) && is_array($question['answers'])) {
+                        foreach ($question['answers'] as $answer) {
+                            if (isset($answer['score'])) {
+                                $totalScore += intval($answer['score']);
+                            }
+                        }
+                    }
                 }
             }
 
-            // ปิดการ prepare statement
-            $stmtTopic->close();
-            $stmtQuestion->close();
+            // แปลง $totalScore เป็น string
+            $scoreStr = strval($totalScore);
 
-            echo "บันทึกข้อมูลเรียบร้อยแล้ว!";
-        } else {
-            echo "Error preparing SQL for questions: " . $connect->error;
+            // บันทึกหัวข้อลงในตาราง evaluation
+            $stmtEvaluation->bind_param("ss", $topicName, $scoreStr);
+            $stmtEvaluation->execute();
+
+            // ดึง id ของหัวข้อที่เพิ่งบันทึกลงไป (จะใช้เป็น activity_id)
+            $activityId = $connect->insert_id;
+
+            // วนลูปคำถามภายในหัวข้อ
+            if (isset($topic['questions']) && is_array($topic['questions'])) {
+                foreach ($topic['questions'] as $question) {
+                    $questionText = $question['text'];
+                    $answersWithScores = [];
+
+                    if (isset($question['answers']) && is_array($question['answers'])) {
+                        foreach ($question['answers'] as $answer) {
+                            if (isset($answer['text']) && isset($answer['score'])) {
+                                $answersWithScores[] = [
+                                    'text' => $answer['text'],
+                                    'score' => intval($answer['score'])
+                                ];
+                            }
+                        }
+                    }
+
+                    // แปลงคำตอบและคะแนนเป็น JSON สำหรับ evaluation_score
+                    $evaluationScoreJson = json_encode($answersWithScores);
+
+                    // สร้าง unique ID สำหรับ evaluation_activity
+                    $uniqueId = uniqid('eval_', true);
+
+                    // แปลง $activityId เป็น string
+                    $activityIdStr = strval($activityId);
+
+                    // บันทึกคำถามและคำตอบลงใน evaluation_activity
+                    $stmtActivity->bind_param("ssss", $uniqueId, $activityIdStr, $questionText, $evaluationScoreJson);
+                    $stmtActivity->execute();
+                }
+            }
         }
-    } else {
-        echo "Error preparing SQL for topics: " . $connect->error;
+
+        // Commit transaction
+        $connect->commit();
+
+        // แสดงป๊อปอัพเมื่อบันทึกสำเร็จและเปลี่ยนเส้นทางกลับไปยัง evaluation.php
+        echo "<script>
+       alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+       window.location.href = 'evaluation.php';
+     </script>";
+    } catch (Exception $e) {
+        // Rollback ในกรณีที่เกิดข้อผิดพลาด
+        $connect->rollback();
+        echo "<script>alert('เกิดข้อผิดพลาด: " . $e->getMessage() . "');</script>";
     }
+    // ปิดการ prepare statement
+    $stmtEvaluation->close();
+    $stmtActivity->close();
 }
 
 $connect->close();

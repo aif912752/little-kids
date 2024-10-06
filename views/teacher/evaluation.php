@@ -1,6 +1,6 @@
 <?php
 include '../../config/database.php';
-$sql = "SELECT * FROM activity  ";
+$sql = "SELECT * FROM evaluation  ";
 $result = $connect->query($sql);
 
 ?>
@@ -35,7 +35,7 @@ $result = $connect->query($sql);
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <div class="container px-6 py-8 mx-auto ">
-                    <h3 class="text-3xl font-medium text-black">จัดการข้อมูลกิจกรรม</h3>
+                    <h3 class="text-3xl font-medium text-black">จัดการข้อมูลประเมิน</h3>
 
 
 
@@ -49,13 +49,12 @@ $result = $connect->query($sql);
                                 </div>
 
 
-                                <table id="example" class="display pt-8" style="width:100%">
+                                <table id="example" class="display pt-8 " style="width:100%">
                                     <thead class="bg-slate-200 border border-rounded">
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อกิจกรรม</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ประเภทกิจกรรม</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">รายละเอียดกิจกรรม</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่เริ่มกิจกรรม</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">เวลาสิ้นสุดกิจกรรม</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อหัวข้อ</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่สร้าง</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">รายละเอียด</th>
+
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
                                     </thead>
                                     <tbody>
@@ -68,22 +67,23 @@ $result = $connect->query($sql);
 
                                                 <tr>
                                                     <td class="py-5 border-b border-l border-gray-200 bg-white">
-                                                        <div class="flex items-center text-sm">
+                                                        <div class="flex items-center text-sm px-4">
 
                                                             <div>
-                                                                <p class="font-semibold text-black"> <?php echo $row['activity_name']; ?></p>
+                                                                <p class="font-semibold text-black"> <?php echo $row['evaluation_name']; ?></p>
                                                             </div>
                                                         </div>
 
                                                     </td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['activity_type']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['activity_description']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['activity_date_start']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['activity_date_end']; ?></td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['evaluation_date']; ?></td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white">
+                                                    <button class="appearance-none block w-full bg-green-700 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-green-600 focus:outline-none focus:bg-white focus:border-gray-500"
+                                                    >รายละเอียด</button>
+                                                    </td>
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
-                                                        <a href="activity_edit.php?id=<?php echo $row['id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                        <a href="activity_delete.php?id=<?php echo $row['id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                                        <a href="evaluation_edit.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                                        <a href="evaluation_delete.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
                                                     </td>
                                                 </tr>
 
