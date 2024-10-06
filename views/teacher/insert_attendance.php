@@ -8,12 +8,13 @@ date_default_timezone_set('Asia/Bangkok');
 $status_data = $_POST['status'] ?? [];
 $attendance_date = $_POST['attendance_date'] ?? date('Y-m-d');
 $note_data = $_POST['note'] ?? []; // เก็บข้อมูลหมายเหตุ
+$room_id = $_POST['room_id'] ?? '';
 
 // ตรวจสอบว่ามีข้อมูลการเข้าเรียนถูกส่งมาหรือไม่
 if (!empty($status_data)) {
     $success_count = 0;
     $error_count = 0;
-
+ 
     foreach ($status_data as $student_id => $status) {
         echo "Processing student_id: $student_id, status: $status<br>";
 
@@ -34,10 +35,10 @@ if (!empty($status_data)) {
         
 
             // เพิ่มข้อมูลลงในตาราง attendance
-            $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, status, note) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO attendance (student_id, student_name, student_lastname, attendance_date, status, note,room_id) 
+                VALUES (?, ?, ?, ?, ?, ?,?)";
             $stmt = $connect->prepare($sql);
-            $stmt->bind_param("ssssss", $student_id, $student_name, $student_lastname, $attendance_date, $status, $note);
+            $stmt->bind_param("sssssss", $student_id, $student_name, $student_lastname, $attendance_date, $status, $note,$room_id);
             
             if ($stmt->execute()) {
                 $success_count++;
@@ -64,6 +65,7 @@ if (!empty($status_data)) {
                 alert('บันทึกข้อมูลสำเร็จ {$success_count} รายการ และไม่สำเร็จ {$error_count} รายการ');
                 window.location.href = 'attendance.php';
               </script>";
+        echo "Error: " . $connect->error;
     }
 } else {
     echo "ไม่ได้รับข้อมูลการเข้าเรียน (status_data is empty)<br>";

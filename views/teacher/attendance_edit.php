@@ -101,6 +101,27 @@ if ($id) {
 </body>
 
 </html>
+
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'>
+
+</script>
+<?php
+// เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+if (isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    echo "<script>
+            Swal.fire({
+                icon: '" . $_SESSION['status'] . "',
+                title: 'เกิดข้อผิดพลาด',
+                text: '$alert',
+            })
+        </script>";
+    unset($_SESSION['status']);
+    unset($_SESSION['alert']);
+}
+
+?>
+
 <script>
     function previewImage(input) {
         var preview = document.getElementById('preview');

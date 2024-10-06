@@ -4,23 +4,25 @@ include('../../config/database.php');
 
 // รับข้อมูลจากฟอร์ม
 $id = $_POST['id'] ?? '';
-$check_in_time = $_POST['check_in_time'] ?? '';
+
 $student_name = $_POST['student_name'] ?? '';
 $student_lastname =  $_POST['student_lastname'] ?? '';
-$check_out_time = $_POST['check_out_time'] ?? '';
+
 $status = $_POST['status'] ?? '';
 
 
+
 // ตรวจสอบว่ามีข้อมูลครบถ้วนหรือไม่
-if (empty($id) || empty($check_in_time) || empty($check_out_time) || empty($status)) {
+if (empty($id) ||  empty($status)) {
     echo "ข้อมูลไม่ครบถ้วน";
     exit();
 }
 
+
 $id = intval($id); // แปลงค่า id ให้เป็นตัวเลข
 
 // อัปเดตข้อมูลในตาราง attendance
-$sql = "UPDATE attendance SET check_in_time = '$check_in_time', check_out_time = '$check_out_time', status = '$status', student_name = '$student_name' WHERE attendance_id = $id";
+$sql = "UPDATE attendance SET  status = '$status', student_name = '$student_name' WHERE attendance_id = $id";
 echo $sql; // ดู query ที่จะรัน
 $result = $connect->query($sql);
 

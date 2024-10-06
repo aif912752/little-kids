@@ -227,15 +227,7 @@ if ($id) {
                                             if($result2)
                                             {
                                                 if ($result2->num_rows > 0) {
-                                                    $guardian = $result2->fetch_assoc();
-                                                    // หาข้อมูล user ของ guardian
-                                                    $sql3 = "SELECT * FROM user WHERE id = " . $guardian['user_id'];
-                                                    $result3 = $connect->query($sql3);
-                                                    if($result3)
-                                                    {
-                                                        $user_guardian = $result3->fetch_assoc();
-                                                    }
-                                                    
+                                                    $guardian = $result2->fetch_assoc(); 
                                                 }else{
                                                     
                                                     $guardian = [];
@@ -249,24 +241,9 @@ if ($id) {
 
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">username</label>
-                                                <input type="text" name="username_guardian" value="<?php echo isset($user_guardian['username']) ? $user_guardian['username'] : ''; ?>"  class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                                <input type="hidden" name="old_username_guardian" value="<?php echo isset($user_guardian['username']) ? $user_guardian['username'] : ''; ?>" />
-                                                <input type="hidden" name="guardian_id" value="<?php echo isset($guardian['guardian_id']) ? $guardian['guardian_id'] : ''; ?>" />
-                                                <input type="hidden" name="guardian_user_id" value="<?php echo isset($guardian['user_id']) ? $guardian['user_id'] : ''; ?>" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
-                                                <label class="font-semibold leading-none">password</label>
-                                                <input type="password" name="password_guardian" value="<?php echo isset($user_guardian['password']) ? $user_guardian['password'] : ''; ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                        </div>
-
-
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">ชื่อจริงผู้ปกครอง</label>
-                                               
-                                                <input type="text" name="first_name_guardian" value="<?php echo isset($guardian['first_name']) ? $guardian['first_name'] : ''; ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="text" name="first_name_guardian" value="<?php echo isset($guardian['first_name']) ? $guardian['first_name'] : ''; ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />                                               
+                                                <input type="hidden" name="guardian_id" value="<?php echo isset($guardian['guardian_id']) ? $guardian['guardian_id'] : ''; ?>" />
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <label class="font-semibold leading-none">นามสกุลผู้ปกครอง</label>

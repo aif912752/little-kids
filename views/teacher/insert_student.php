@@ -18,8 +18,8 @@ $student_height = $_POST['student_height'] ?? '';
 $student_weight = $_POST['student_weight'] ?? '';
 
 // ผู้ปกครอง
-$username_guardian = $_POST['username_guardian'] ?? '';
-$password_guardian = $_POST['password_guardian'] ?? '';
+// $username_guardian = $_POST['username_guardian'] ?? '';
+// $password_guardian = $_POST['password_guardian'] ?? '';
 $first_name_guardian = $_POST['first_name_guardian'] ?? '';
 $last_name_guardian = $_POST['last_name_guardian'] ?? '';
 $phone_number_guardian = $_POST['phone_number_guardian'] ?? '';
@@ -27,8 +27,25 @@ $gender_guardian = $_POST['gender_guardian'] ?? '';
 $relation_to_student = $_POST['relation_to_student'] ?? '';
 $address_guardian = $_POST['address_guardian'] ?? '';
 
+
+// ใช้ citizen_id เป็น username
+$username = $citizen_id;
+$password = $citizen_id;
+// ตรวจสอบว่ามี username ซ้ำกันหรือไม่
+$sql_check = "SELECT * FROM user WHERE username = '$username'";
+$result_check = $connect->query($sql_check);
+if ($result_check->num_rows > 0) {
+    $_SESSION['status'] = 'error';
+    $_SESSION['alert'] = 'มีข้อมูลนักเรียนนี้อยู่ในระบบแล้ว';
+    echo "<script>
+    window.history.back();
+    </script>";
+    exit;
+}
+
+
 // ตรวจสอบว่ากรอกข้อมูลครบหรือไม่
-if (empty($first_name) || empty($last_name) || empty($birthdate)  || empty($citizen_id) || empty($religion) || empty($enrollment_date) || empty($status) || empty($room_id) || empty($ethnicity) || empty($nationality) || empty($student_height) || empty($student_weight) || empty($username_guardian) || empty($password_guardian) || empty($first_name_guardian) || empty($last_name_guardian) || empty($phone_number_guardian) || empty($gender_guardian) || empty($relation_to_student) || empty($address_guardian)) {
+if (empty($first_name) || empty($last_name) || empty($birthdate)  || empty($citizen_id) || empty($religion) || empty($enrollment_date) || empty($status) || empty($room_id) || empty($ethnicity) || empty($nationality) || empty($student_height) || empty($student_weight) ||  empty($first_name_guardian) || empty($last_name_guardian) || empty($phone_number_guardian) || empty($gender_guardian) || empty($relation_to_student) || empty($address_guardian)) {
     $_SESSION['status'] = 'error';
     $_SESSION['alert'] = 'กรอกข้อมูลไม่ครบ';
     echo "<script>
@@ -37,17 +54,6 @@ if (empty($first_name) || empty($last_name) || empty($birthdate)  || empty($citi
     exit;
 }
 
-// ตรวจสอบว่าusername ของผู้ปกครองซ้ำกับของนักเรียนหรือไม่
-$sql = "SELECT * FROM user WHERE username = '$username_guardian'";
-$result = $connect->query($sql);
-if ($result->num_rows > 0) {
-    $_SESSION['status'] = 'error';
-    $_SESSION['alert'] = 'Username ของผู้ปกครองซ้ำกับของนักเรียน';
-    echo "<script>
-    window.history.back();
-    </script>";
-    exit;
-}
 
 
 $upload_dir = 'uploads/'; // เปลี่ยนเส้นทางตามที่ต้องการ
@@ -76,12 +82,10 @@ if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
     echo "No file uploaded or file error!";
 }
 
-// ใช้ citizen_id เป็น username
-$username = $citizen_id;
-$password = $citizen_id;
+
 
 // insert ข้อมูลลงในตาราง user
-$sql = "INSERT INTO user (username, password, name, role) VALUES ('$username', '$password', '$first_name', '5')";
+$sql = "INSERT INTO user (username, password, name, role) VALUES ('$username', '$password', '$first_name', '4')";
 $result = $connect->query($sql);
 
 // select ข้อมูล user_id ที่เพิ่งเพิ่มเข้าไป
@@ -94,24 +98,30 @@ if ($result) {
 
     if ($result2) {
         $last_student_id = $connect->insert_id;
-        // insert ข้อมูลลงในตาราง user ของผู้ปกครอง
-        $sql3 = "INSERT INTO user (username, password, name, role) VALUES ('$username_guardian', '$password_guardian', '$first_name_guardian', '4')";
-        $result3 = $connect->query($sql3);
-        if ($result3) {
-            // select ข้อมูล user_id ที่เพิ่งเพิ่มเข้าไป
-            $last_id_guardian = $connect->insert_id;
-
             // insert ข้อมูลลงในตาราง guardians
-            $sql4 = "INSERT INTO guardians (first_name, last_name, phone_number,gender,relation_to_student,address, user_id,student_id) 
-                     VALUES ('$first_name_guardian', '$last_name_guardian', '$phone_number_guardian','$gender_guardian','$relation_to_student','$address_guardian', '$last_id_guardian','$last_student_id')";
+            $sql4 = "INSERT INTO guardians (first_name, last_name, phone_number,gender,relation_to_student,address,student_id) 
+                     VALUES ('$first_name_guardian', '$last_name_guardian', '$phone_number_guardian','$gender_guardian','$relation_to_student','$address_guardian','$last_student_id')";
             $result4 = $connect->query($sql4);
             if ($result4) {
-
-                $_SESSION['status'] = 'success';
-                $_SESSION['alert'] = 'บันทึกข้อมูลนักเรียนสำเร็จ';
-                echo "<script>      
+                // เอา id ของ guardians ที่เพิ่งเพิ่มเข้าไป
+                $last_id_guardian = $connect->insert_id;
+                // ข้อมูล guardians ถูกเพิ่มเข้าไปแล้ว ทำการ update student_id ในตาราง students
+                $sql5 = "UPDATE guardians SET student_id = '$last_student_id' WHERE guardian_id = '$last_id_guardian'";
+                $result5 = $connect->query($sql5);
+                if($result5){
+                    $_SESSION['status'] = 'success';
+                    $_SESSION['alert'] = 'บันทึกข้อมูลนักเรียนสำเร็จ';
+                    echo "<script>      
                         window.location.href = 'student.php';
                       </script>";
+                }else{
+                    $_SESSION['status'] = 'error';
+                    $_SESSION['alert'] = 'ไม่สามารถบันทึกข้อมูลได้ ส่วนเพิ่ม guardians ผู้ปกครอง';
+                    echo "<script>
+                    window.history.back();
+                    </script>";
+                }
+               
             } else {
                 $_SESSION['status'] = 'error';
                 $_SESSION['alert'] = 'ไม่สามารถบันทึกข้อมูลได้ ส่วนเพิ่ม guardians ผู้ปกครอง';
@@ -120,20 +130,13 @@ if ($result) {
             </script>";
                 echo $connect->error;
             }
-        } else {
-            $_SESSION['status'] = 'error';
-            $_SESSION['alert'] = 'ไม่สามารถบันทึกข้อมูลได้ ส่วนเพิ่ม user ผู้ปกครอง';
-            echo "<script>
-        window.history.back();
-        </script>";
-            echo $connect->error;
-        }
+        
     } else {
         $_SESSION['status'] = 'error';
         $_SESSION['alert'] = 'ไม่สามารถบันทึกข้อมูลได้';
         echo "<script>
     window.history.back();
-    </script>";
+    </scrip>";
         echo $connect->error;
     }
 } else {

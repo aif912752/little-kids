@@ -143,7 +143,7 @@
                                         </div>
 
                                         
-                                        <div class="md:flex items-center mt-4">
+                                        <!-- <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">username</label>
                                                 <input type="text" name="username_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
@@ -152,7 +152,7 @@
                                                 <label class="font-semibold leading-none">password</label>
                                                 <input type="password" name="password_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
-                                        </div>
+                                        </div> -->
 
 
                                         <div class="md:flex items-center mt-4">

@@ -22,9 +22,8 @@ $gender = $_POST['gender']??'';
 $student_height = $_POST['student_height'] ?? '';
 $student_weight = $_POST['student_weight'] ?? '';
 
-// ผู้ปกครอง
-$username_guardian = $_POST['username_guardian'] ?? '';
-$password_guardian = $_POST['password_guardian'] ?? '';
+
+
 $first_name_guardian = $_POST['first_name_guardian'] ?? '';
 $last_name_guardian = $_POST['last_name_guardian'] ?? '';
 $phone_number_guardian = $_POST['phone_number_guardian'] ?? '';
@@ -32,25 +31,11 @@ $gender_guardian = $_POST['gender_guardian'] ?? '';
 $relation_to_student = $_POST['relation_to_student'] ?? '';
 $address_guardian = $_POST['address_guardian'] ?? '';
 
-$old_username_guardian = $_POST['old_username_guardian'] ?? '';
 $guardian_id = $_POST['guardian_id'] ?? '';
-$guardian_user_id = $_POST['guardian_user_id'] ?? '';
-
-// ตววจสอบว่ามี username_guardian ซ้ำกับ username ใน ตาราง user หรือไม่
-if ($username_guardian != $old_username_guardian) {
-    $checkUserQuery = "SELECT * FROM user WHERE username = '$username_guardian'";
-    $checkUserResult = $connect->query($checkUserQuery);
-    if ($checkUserResult->num_rows > 0) {
-        $_SESSION['status'] = 'error';
-        $_SESSION['alert'] = 'Username ของผู้ปกครองซ้ำกับของนักเรียน';
-        echo "<script>window.history.back();</script>";
-        exit();
-    }
-}
 
 
 // ตรวจสอบว่ากรอกข้อมูลครบหรือไม่
-if (empty($username) || empty($password) || empty($first_name) || empty($last_name) || empty($birthdate) || empty($ethnicity) || empty($nationality) || empty($religion) || empty($citizen_id) || empty($enrollment_date) || empty($room_id) || empty($student_height) || empty($student_weight) || empty($username_guardian) || empty($password_guardian) || empty($first_name_guardian) || empty($last_name_guardian) || empty($phone_number_guardian) || empty($gender_guardian) || empty($relation_to_student) || empty($address_guardian)) {
+if (empty($username) || empty($password) || empty($first_name) || empty($last_name) || empty($birthdate) || empty($ethnicity) || empty($nationality) || empty($religion) || empty($citizen_id) || empty($enrollment_date) || empty($room_id) || empty($student_height) || empty($student_weight) ||  empty($first_name_guardian) || empty($last_name_guardian) || empty($phone_number_guardian) || empty($gender_guardian) || empty($relation_to_student) || empty($address_guardian)) {
     $_SESSION['status'] = 'error';
     $_SESSION['alert'] = 'กรอกข้อมูลไม่ครบ';
     echo "<script>window.history.back();</script>";
@@ -71,6 +56,7 @@ if ($username != $old_username) {
         exit();
     }
 }
+
 
 // อัปเดตข้อมูลในตาราง user
 $sql = "UPDATE user SET username = '$username', password = '$password' WHERE id = $id";
@@ -135,10 +121,6 @@ if ($result) {
     // อัปเดตข้อมูลในตาราง students
     $result2 = $connect->query($sql2);
     if ($result2) {
-         // อัปเดตข้อมูลในตาราง user ของ guardian
-        $sql3 = "UPDATE user SET username = '$username_guardian', password = '$password_guardian', name = '$first_name_guardian' WHERE id = $guardian_user_id";
-        $result3 = $connect->query($sql3);
-        if ($result3) {
             // อัปเดตข้อมูลในตาราง guardian
             $sql4 = "UPDATE guardians SET first_name = '$first_name_guardian', last_name = '$last_name_guardian', phone_number = '$phone_number_guardian' , gender = '$gender_guardian', relation_to_student = '$relation_to_student', address = '$address_guardian' WHERE guardian_id = $guardian_id";
             $result4 = $connect->query($sql4);
@@ -152,13 +134,7 @@ if ($result) {
                 $_SESSION['alert'] = 'แก้ไขข้อมูลในตาราง guardian ไม่สำเร็จ';
                 echo "<script>window.history.back();</script>";
             }
-        }else{
-            echo $connect->error;
-            $_SESSION['status'] = 'error';
-            $_SESSION['alert'] = 'แก้ไขข้อมูลในตาราง user ของ guardian ไม่สำเร็จ';
-            echo "<script>window.history.back();</script>";
-        }
-       
+        
     } else {
         echo $connect->error;
         $_SESSION['status'] = 'error';

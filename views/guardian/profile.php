@@ -18,7 +18,7 @@
             include('../../config/database.php');
 
             // ดึงข้อมูลครูจากตาราง teacher โดยใช้ user_id
-            $sql = "SELECT * FROM guardians WHERE user_id = ?";
+            $sql = "SELECT * FROM students WHERE user_id = ?";
             $stmt = $connect->prepare($sql);
 
 
@@ -31,11 +31,11 @@
             $result = $stmt->get_result();
 
             if ($result->num_rows == 1) {
-                $guardian = $result->fetch_assoc();
-                // ดึงข้อมูล student จากตาราง student โดยใช้ student_id
-                $sql = "SELECT * FROM students WHERE student_id = ".$guardian['student_id'];
-                $result = $connect->query($sql);
                 $student = $result->fetch_assoc();
+                // ดึงข้อมูล student จากตาราง student โดยใช้ student_id
+                $sql = "SELECT * FROM guardians WHERE student_id = ".$student['student_id'];
+                $result = $connect->query($sql);
+                $guardian = $result->fetch_assoc();
             } else {
                 die("ไม่พบข้อมูลครู");
             }
