@@ -18,7 +18,6 @@
 <body class=" bg-surface">
     <main>
         <div id="main-wrapper" class=" flex p-5 xl:pr-0">
-
             <?php include '../../src/navbar_teacher.php'; ?>
             <?php
             include('../../config/database.php');
@@ -40,13 +39,13 @@
                         $user = $result->fetch_assoc();
                     } else {
                         echo "<script>
-                    alert('ไม่พบข้อมูลที่ต้องการแก้ไข3');
+                    alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
                     
                 </script>";
                     }
                 } else {
                     echo "<script>
-                    alert('ไม่พบข้อมูลที่ต้องการแก้ไข2');
+                    alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
                     </script>";
                 }
 
@@ -55,7 +54,7 @@
                 
             } else {
                 echo "<script>
-            alert('ไม่พบข้อมูลที่ต้องการแก้ไข1');
+            alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
         
         </script>";
             }

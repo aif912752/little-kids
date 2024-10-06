@@ -20,34 +20,40 @@
         <div id="main-wrapper" class=" flex p-5 xl:pr-0">
 
             <?php include '../../src/navbar_teacher.php'; ?>
+            
+            <div class=" w-full page-wrapper xl:px-6 px-0">
             <?php
             include('../../config/database.php');
+            
             $id = $_SESSION['user_id'] ?? '';
             if ($id) {
-
-                $sql = "SELECT * FROM administrators WHERE admin_id = $id";
+                $sql = "SELECT * FROM administrators WHERE user_id = $id";
                 $result = $connect->query($sql);
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
                     // select users table
-                    $sql = "SELECT * FROM user WHERE id = " . $row['user_id'];
-                    $result = $connect->query($sql);
-                    $user = $result->fetch_assoc();
+                    $sql2 = "SELECT * FROM user WHERE id = " . $id;
+                    $result2 = $connect->query($sql2);
+                    if($result2->num_rows > 0) {
+                        $user = $result2->fetch_assoc();
+                    } else {
+                        echo $connect->error;
+                    }
+                    
                 } else {
                     echo "<script>
                         alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-                        window.location.href = 'profile.php';
+                        
                     </script>";
                 }
             } else {
                 echo "<script>
-                        alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
-                        window.location.href = 'profile.php';
+                        alert('ไม่พบข้อมูลที่ต้องการแก้ไข2');
+                        
                 </script>";
             }
 
             ?>
-            <div class=" w-full page-wrapper xl:px-6 px-0">
                 <main class="h-full  max-w-full">
                     <div class="container full-container p-0 flex flex-col gap-6">
                         <div class="w-full">
