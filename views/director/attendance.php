@@ -19,6 +19,17 @@ $result = $connect->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <style>
+        .dataTables_length select {
+            width: 50px;
+            /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
+        }
+
+        /* .swal2-confirm {
+            background-color: #2563EB !important;
+            color: white !important;
+        } */
+    </style>
 
 </head>
 
@@ -37,6 +48,7 @@ $result = $connect->query($sql);
                     <div class="flex flex-col mt-8">
                         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                             <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+
 
                                 <table id="example" class="display pt-8" style="width:100%">
                                     <thead class="bg-slate-200 border border-rounded">
@@ -90,10 +102,13 @@ $result = $connect->query($sql);
 </body>
 
 </html>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JS CDN -->
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#example').DataTable(); // เรียกใช้งาน DataTables
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
