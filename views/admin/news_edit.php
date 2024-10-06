@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../../config/database.php');
 
 // ตรวจสอบว่ามีการส่ง ID มาหรือไม่
@@ -62,7 +61,10 @@ $news = $result->fetch_assoc();
 <body class=" bg-surface">
 <main>
 <div id="main-wrapper" class=" flex p-5 xl:pr-0">
+<?php include '../../src/navbar_teacher.php'; ?>
+
 <div class=" w-full page-wrapper xl:px-6 px-0">
+
 
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">แก้ไขข่าว</h1>
@@ -114,7 +116,7 @@ $news = $result->fetch_assoc();
             
             
             <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     บันทึกการแก้ไข
                 </button>
                 <a href="news.php" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
