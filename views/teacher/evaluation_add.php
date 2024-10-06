@@ -39,13 +39,14 @@
                     } else {
                     ?>
 
-                        <form method="post" id="evaluationForm" class="p-6 space-y-6">
+                        <form method="post" action="evaluation_insert.php" id="evaluationForm" class="p-6 space-y-6">
                             <div id="topicsContainer" class="space-y-6">
                                 <!-- หัวข้อจะถูกเพิ่มที่นี่ -->
                             </div>
                             <div class="flex space-x-4">
                                 <button type="button" onclick="addTopic()" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 ease-in-out">เพิ่มหัวข้อ</button>
-                                <button  class="flex-1 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">ส่งแบบประเมิน</button>
+                                <button type="submit" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">ส่งแบบประเมิน</button>
+
                             </div>
                         </form>
 
@@ -100,7 +101,7 @@
                     ?>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
         <!--end of project-->
     </main>
