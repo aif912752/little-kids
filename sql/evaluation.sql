@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 06:37 AM
+-- Generation Time: Oct 06, 2024 at 07:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `evaluation` (
   `evaluation_id` int(11) NOT NULL COMMENT 'รหัสประจำแบบประเมิน',
+  `evaluation_name` varchar(255) NOT NULL COMMENT 'หัวแบบฟอร์ม',
   `score` varchar(3) NOT NULL COMMENT 'คะเเนนเก็บเป็น string',
   `evaluation_date` date NOT NULL COMMENT 'วันที่ทำการประเมิน',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
