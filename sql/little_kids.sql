@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 02:51 PM
+-- Generation Time: Oct 06, 2024 at 04:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -119,6 +119,13 @@ CREATE TABLE `director` (
   `position` varchar(100) NOT NULL COMMENT 'ตำเเหน่งผู้อำนวยการ',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `director`
+--
+
+INSERT INTO `director` (`director_id`, `Img`, `first_name`, `last_name`, `birthdate`, `email`, `phone_number`, `position`, `user_id`) VALUES
+(5, '', 'ผู้อำนวยการ', 'intarathaiwong', '2024-10-23', 'warunyoo084@gmail.com', '0848091046', 'ผู้อำนวยการ', 42);
 
 -- --------------------------------------------------------
 
@@ -259,7 +266,8 @@ CREATE TABLE `guardians` (
 --
 
 INSERT INTO `guardians` (`guardian_id`, `img`, `first_name`, `last_name`, `phone_number`, `gender`, `address`, `relation_to_student`, `student_id`, `user_id`, `room_id`) VALUES
-(2, '', 'asdasd', 'asdasd', '08444545', 'Male', 'หกดหกด', 'เเม่เล่า', 21, 35, '');
+(2, '', 'asdasd', 'asdasd', '08444545', 'Male', 'หกดหกด', 'เเม่เล่า', 21, 35, ''),
+(4, '', 'ผู้ปกครอง', 'ผู้ปกครอง', '084091046', 'Male', 'ผู้ปกครอง', 'ผู้ปกครอง', 23, 45, '');
 
 -- --------------------------------------------------------
 
@@ -316,7 +324,8 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
 (17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', 'Active', 24, '', '', '', ''),
 (18, '67017e0985bc4-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'Active', 25, '', '', '', ''),
-(21, '670284da00c3e-1.png', 'supapit', 'intarathaiwong', '2024-10-14', 'asd', 'ไอ่นนท์', 'asd', 'Male', '1515151515', '2024-10-23', 'Active', 34, '', '3', '150', '55');
+(21, '670284da00c3e-1.png', 'supapit', 'intarathaiwong', '2024-10-14', 'asd', 'ไอ่นนท์', 'asd', 'Male', '1515151515', '2024-10-23', 'Active', 34, '', '3', '150', '55'),
+(23, '', 'นักเรียน', 'นักเรียน', '2024-10-24', 'ไทย', 'ไทย', 'ไทย', 'Male', '150984454', '2024-10-17', 'Inactive', 44, '', '2', '150', '55');
 
 -- --------------------------------------------------------
 
@@ -368,8 +377,7 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `img`, `first_name`, `last_name`, `position`, `email`, `ethnicity`, `nationality`, `religion`, `citizen_id`, `birthdate`, `phone_number`, `teacher_address`, `room_id`, `user_id`) VALUES
-(3, '67019789ee59c-1.jpg', 'supapit', 'intarathaiwong', 'ครูใหญ่', 'warunyoo084@gmail.com', 'asd', 'กาย', 'กาย', 1515151515, '2024-10-16', '0848091046', 'asdasd', '1', 29),
-(4, '', 'sadfsdfsdf', 'sfsdfsdf', 'กิจกรรมนัทนาการtest1', 'warunyoo084@gmail.com', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 'กิจกรรมนัทนาการtest1', 0, '2024-10-17', 'กิจกรรมนัทนาการtest1', 'asdasd', '3', 39);
+(5, '', 'ครู', 'ครู', 'ครู', 'warunyoo084@gmail.com', 'ไทย', 'ไทย', 'ไทย', 2147483647, '2024-10-10', '08480910416', 'ฟหกดห', '1', 43);
 
 -- --------------------------------------------------------
 
@@ -390,19 +398,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `role`) VALUES
-(1, 'admin', '123456789', 'adminnon', 1),
-(2, 'teacher2', '123456789', 'director1', 2),
-(4, 'ruler', '123456789', 'ruler1', 4),
-(5, '', '', 'student1', 5),
-(19, '15000', '', 'กาย', 2),
-(24, '', '', 'กาย', 5),
-(25, '', '', 'กหกฟหกฟหก', 5),
-(26, 'dddd', '123456789', 'ไอ่นนท์', 1),
-(29, 'teacher23', '123456789', 'supapit', 3),
 (33, 'gaizaza1412', '123456789', 'supapit', 1),
-(34, '1515151515', '1515151515', 'supapit', 5),
-(35, '123123', '123456789', 'asdasd', 4),
-(39, 'ruler123456', '123456789', 'sadfsdfsdf', 3);
+(42, 'director1', '123456789', 'ผู้อำนวยการ', 2),
+(43, 'teacher', '123456789', 'ครู', 3),
+(44, '150984454', '150984454', 'นักเรียน', 5),
+(45, 'test1', '123456789', 'ผู้ปกครอง', 4);
 
 --
 -- Indexes for dumped tables
@@ -530,7 +530,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `director`
 --
 ALTER TABLE `director`
-  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=5;
+  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `evaluation`
@@ -572,7 +572,7 @@ ALTER TABLE `evaluation_to_activity_student`
 -- AUTO_INCREMENT for table `guardians`
 --
 ALTER TABLE `guardians`
-  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=4;
+  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `room`
@@ -584,7 +584,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=23;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `student_measurements`
@@ -596,13 +596,13 @@ ALTER TABLE `student_measurements`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=5;
+  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
