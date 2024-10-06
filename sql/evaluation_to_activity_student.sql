@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 01:18 PM
+-- Generation Time: Oct 06, 2024 at 05:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `evaluation_to_activity_student` (
   `id` int(11) NOT NULL COMMENT 'id หลัก',
+  `students_id` int(50) NOT NULL COMMENT 'ไอดีที่ ref มาจาก table',
   `evaluation_id` int(11) NOT NULL COMMENT 'อ้างอิงจากรหัสประเมิน อ้างอิงมาจาก table evaluation ',
   `evaluation_activity_id` varchar(50) NOT NULL COMMENT 'อ้างอิงจากรหัสกิจกรรมประเมินจาก table evaluation_activity ',
   `total_score` varchar(50) NOT NULL COMMENT 'คะเเนนรวม ',
