@@ -84,11 +84,26 @@ $result = $connect->query($sql);
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['birthdate']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['enrollment_date']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['room_name']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['status']; ?></td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white">
+                                                        <?php
+                                                            if($row['status'] == 'Active'){
+                                                                echo 'กำลังศึกษา';
+                                                            }else if($row['status'] == 'Inactive'){
+                                                                echo 'ไม่ศึกษา';
+                                                            }else if($row['status'] == 'Graduated'){
+                                                                echo 'สำเร็จการศึกษา';
+                                                            }
+                                                            
+                                                        ?>
+                                                     </td>
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
                                                         <a href="student_edit.php?id=<?php echo $row['student_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                        <a href="student_delete.php?id=<?php echo $row['student_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                                        <a class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                                        onclick="confirmDelete(event, '<?php echo $row['student_id']; ?>')">
+                                                        ลบ
+                                                        </a>
+                                                        
                                                     </td>
                                                 </tr>
 
@@ -158,7 +173,7 @@ if (isset($_SESSION['alert'])) {
 
 
 <script>
-    function confirmDelete(event, adminId) {
+    function confirmDelete(event, studentId) {
         event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
 
         Swal.fire({
@@ -172,7 +187,29 @@ if (isset($_SESSION['alert'])) {
             cancelButtonText: 'ยกเลิก'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'admin_delete.php?id=' + adminId; // ดำเนินการลบเมื่อยืนยัน
+                window.location.href = 'student_delete.php?id=' + studentId; // ดำเนินการลบเมื่อยืนยัน
+            }
+        });
+    }
+</script>
+
+
+<script>
+    function confirmDelete(event, studentId) {
+        event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
+
+        Swal.fire({
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'ใช่, ลบเลย!',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'student_delete.php?id=' + studentId; // ดำเนินการลบเมื่อยืนยัน
             }
         });
     }

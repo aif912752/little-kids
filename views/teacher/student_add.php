@@ -74,7 +74,11 @@
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">เพศนักเรียน</label>
-                                                <input type="text" name="gender" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <div class="flex item-center gap-2 mt-3 mb-5 ">
+                                                    <input type="radio" name="gender" value="1" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> ชาย
+                                                    <input type="radio" name="gender" value="2" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> หญิง
+                                                </div>
+                                                
                                             </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <label class="font-semibold leading-none">รหัสบัตรประชาชน</label>
@@ -130,9 +134,67 @@
                                             </div>
                                         </div>
 
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full flex flex-col">
+                                                <label class="font-semibold leading-none"> 
+                                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลผู้ปกครอง</p>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">username</label>
+                                                <input type="text" name="username_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
+                                                <label class="font-semibold leading-none">password</label>
+                                                <input type="password" name="password_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
 
 
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">ชื่อจริงผู้ปกครอง</label>
+                                                <input type="text" name="first_name_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
+                                                <label class="font-semibold leading-none">นามสกุลผู้ปกครอง</label>
+                                                <input type="text" name="last_name_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
 
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">เบอร์โทรศัพท์ผู้ปกครอง</label>
+                                                <input type="text" name="phone_number_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
+                                                <label class="font-semibold leading-none">เพศผู้ปกครอง</label>
+                                                <div class="flex item-center gap-2 mt-3 mb-5 ">
+                                                <input type="radio" name="gender_guardian" value="1" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> ชาย
+                                                <input type="radio" name="gender_guardian" value="2" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700  bg-gray-100 border rounded border-gray-200 " /> หญิง
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full  flex flex-col  ">
+                                                <label class="font-semibold leading-none">เกี่ยวข้องเป็น</label>
+                                                <input type="text" name="relation_to_student" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full flex flex-col">
+                                                <label class="font-semibold leading-none">ที่อยู่</label>
+                                                <textarea name="address_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="flex items-center justify-center w-full gap-4">
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
                                                 บันทึก
@@ -177,7 +239,9 @@
 </script>
 
 </html>
-<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'>
+
+
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <?php 
     // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
     if(isset($_SESSION['alert'])) {

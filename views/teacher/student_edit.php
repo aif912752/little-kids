@@ -59,7 +59,7 @@ if ($id) {
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
                                     <p class="text-3xl font-bold leading-7 text-center">แก้ไขข้อมูลนักเรียน</p>
-                                    <form action="update_student.php" method="post"  enctype="multipart/form-data">
+                                    <form action="update_student.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">Username</label>
@@ -87,7 +87,7 @@ if ($id) {
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none"> ส่วนสูง </label>
                                                 <input type="number" name="student_height" value="<?= $row['student_height'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div> 
+                                            </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
                                                 <label class="font-semibold leading-none">น้ำหนัก</label>
                                                 <input type="number" name="student_weight" value="<?= $row['student_weight'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
@@ -117,9 +117,16 @@ if ($id) {
                                             </div>
                                         </div>
                                         <div class="md:flex items-center mt-4">
-                                            <div class="w-full  flex flex-col">
+                                            <div class="w-full md:w-1/2  flex flex-col">
                                                 <label class="font-semibold leading-none">ศาสนา</label>
                                                 <input type="text" name="religion" value="<?= $row['religion'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
+                                                <label class="font-semibold leading-none">เพศนักเรียน</label>
+                                                <div class="flex item-center gap-2 mt-4 mb-4 ">
+                                                    <input type="radio" name="gender" value="1" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 bg-gray-100 border rounded border-gray-200"  <?php echo ($row['gender'] == "Male") ? 'checked' : ''; ?> /> ชาย
+                                                    <input type="radio" name="gender" value="2" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 bg-gray-100 border rounded border-gray-200" <?php echo ($row['gender'] == "Female") ? 'checked' : ''; ?> /> หญิง
+                                                </div>
                                             </div>
 
                                         </div>
@@ -134,18 +141,18 @@ if ($id) {
                                             <div class="w-full  flex flex-col">
                                                 <label class="font-semibold leading-none">ชั้นที่เรียน</label>
                                                 <select name="room_id" class="leading-none text-gray-900 p-4 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
-                                                    <option value="" selected>กรุณาเลือกห้อง</option>    
+                                                    <option value="" selected>กรุณาเลือกห้อง</option>
                                                     <?php
-                                                      
-                                                        $sqlroom= "SELECT * FROM room";
-                                                        $resultroom = $connect->query($sqlroom);
-                                                        while($rowroom = $resultroom->fetch_assoc()) {
-                                                            if($row['room_id'] == $rowroom['room_id']){
-                                                                echo '<option value="'.$rowroom['room_id'].'" selected>'.$rowroom['room_name'].'</option>';
-                                                            }else{
-                                                                echo '<option value="'.$rowroom['room_id'].'">'.$rowroom['room_name'].'</option>';
-                                                            }
-                                                        } 
+
+                                                    $sqlroom = "SELECT * FROM room";
+                                                    $resultroom = $connect->query($sqlroom);
+                                                    while ($rowroom = $resultroom->fetch_assoc()) {
+                                                        if ($row['room_id'] == $rowroom['room_id']) {
+                                                            echo '<option value="' . $rowroom['room_id'] . '" selected>' . $rowroom['room_name'] . '</option>';
+                                                        } else {
+                                                            echo '<option value="' . $rowroom['room_id'] . '">' . $rowroom['room_name'] . '</option>';
+                                                        }
+                                                    }
                                                     ?>
                                                 </select>
                                             </div>
@@ -156,50 +163,143 @@ if ($id) {
                                             <div class="w-full  flex flex-col">
                                                 <label class="font-semibold leading-none">สถาณะนักเรียน</label>
                                                 <select name="status" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200">
-                                                    <?php 
-                                                    
-                                                    if($row['status'] == 'Active'){
+                                                    <?php
+
+                                                    if ($row['status'] == 'Active') {
                                                         echo '<option value="1" selected>กำลังศึกษา</option>';
                                                         echo '<option value="2">ไม่ศึกษา</option>';
                                                         echo '<option value="3">สำเร็จการศึกษา</option>';
-                                                    }else if($row['status'] == 'Inactive'){
+                                                    } else if ($row['status'] == 'Inactive') {
                                                         echo '<option value="1">กำลังศึกษา</option>';
                                                         echo '<option value="2" selected>ไม่ศึกษา</option>';
                                                         echo '<option value="3">สำเร็จการศึกษา</option>';
-                                                    }else if($row['status'] == 'Graduated'){
+                                                    } else if ($row['status'] == 'Graduated') {
+
                                                         echo '<option value="1">กำลังศึกษา</option>';
                                                         echo '<option value="2">ไม่ศึกษา</option>';
                                                         echo '<option value="3" selected>สำเร็จการศึกษา</option>';
                                                     }
                                                     ?>
-        
+
                                                 </select>
                                             </div>
 
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <div class="md:flex">
-                                                    <div class="w-full p-3">
-                                                        <div id="upload-box" class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-                                                            <div class="absolute">
-                                                                <div class="flex flex-col items-center">
-                                                                    <i class="fa fa-folder-open fa-4x text-blue-700"></i>
-                                                                    <span class="block text-gray-400 font-normal">อัพโหลดรูปนักเรียน</span>
-                                                                </div>
-                                                            </div>
-                                                            <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
-                                                        </div>
-                                                        <?php if (!empty($row['img'])): ?>
-                                                            <div id="current-img" class="mt-3">
-                                                                <label class="block text-gray-700">รูปภาพปัจจุบัน:</label>
-                                                                <img src="uploads/<?= $row['img'] ?>" alt="รูปภาพปัจจุบัน" class="max-w-full h-auto rounded-lg shadow-lg">
-                                                            </div>
-                                                        <?php endif; ?>
 
-                                                        <div id="preview" class="mt-3 hidden">
-                                                            <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
+
+                                        </div>
+
+                                        <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
+                                            <div class="md:flex">
+                                                <div class="w-full p-3">
+                                                    <div id="upload-box" class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                                                        <div class="absolute">
+                                                            <div class="flex flex-col items-center">
+                                                                <i class="fa fa-folder-open fa-4x text-blue-700"></i>
+                                                                <span class="block text-gray-400 font-normal">อัพโหลดรูปนักเรียน</span>
+                                                            </div>
                                                         </div>
+                                                        <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
+                                                    </div>
+                                                    <?php if (!empty($row['img'])): ?>
+                                                        <div id="current-img" class="mt-3">
+                                                            <label class="block text-gray-700">รูปภาพปัจจุบัน:</label>
+                                                            <img src="uploads/<?= $row['img'] ?>" alt="รูปภาพปัจจุบัน" class="max-w-full h-auto rounded-lg shadow-lg">
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                    <div id="preview" class="mt-3 hidden">
+                                                        <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full flex flex-col">
+                                                <label class="font-semibold leading-none">
+                                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลผู้ปกครอง</p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <?php 
+                                            $sql2 = "SELECT * FROM guardians WHERE student_id = $id";
+                                            $result2 = $connect->query($sql2);
+                                            if($result2)
+                                            {
+                                                if ($result2->num_rows > 0) {
+                                                    $guardian = $result2->fetch_assoc();
+                                                    // หาข้อมูล user ของ guardian
+                                                    $sql3 = "SELECT * FROM user WHERE id = " . $guardian['user_id'];
+                                                    $result3 = $connect->query($sql3);
+                                                    if($result3)
+                                                    {
+                                                        $user_guardian = $result3->fetch_assoc();
+                                                    }
+                                                    
+                                                }else{
+                                                    
+                                                    $guardian = [];
+                                                }
+                                            }else{
+                                                $guardian = [];
+                                            }
+                                            
+                                        ?>
+                                        
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">username</label>
+                                                <input type="text" name="username_guardian" value="<?php echo isset($user_guardian['username']) ? $user_guardian['username'] : ''; ?>"  class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <input type="hidden" name="old_username_guardian" value="<?php echo isset($user_guardian['username']) ? $user_guardian['username'] : ''; ?>" />
+                                                <input type="hidden" name="guardian_id" value="<?php echo isset($guardian['guardian_id']) ? $guardian['guardian_id'] : ''; ?>" />
+                                                <input type="hidden" name="guardian_user_id" value="<?php echo isset($guardian['user_id']) ? $guardian['user_id'] : ''; ?>" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
+                                                <label class="font-semibold leading-none">password</label>
+                                                <input type="password" name="password_guardian" value="<?php echo isset($user_guardian['password']) ? $user_guardian['password'] : ''; ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">ชื่อจริงผู้ปกครอง</label>
+                                               
+                                                <input type="text" name="first_name_guardian" value="<?php echo isset($guardian['first_name']) ? $guardian['first_name'] : ''; ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
+                                                <label class="font-semibold leading-none">นามสกุลผู้ปกครอง</label>
+                                                <input type="text" name="last_name_guardian" value="<?php echo (isset($guardian['last_name']) )? $guardian['last_name']:"" ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full md:w-1/2 flex flex-col">
+                                                <label class="font-semibold leading-none">เบอร์โทรศัพท์ผู้ปกครอง</label>
+                                                <input type="text" name="phone_number_guardian" value="<?php echo (isset($guardian['phone_number']) )? $guardian['phone_number']:"" ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 ">
+                                                <label class="font-semibold leading-none">เพศผู้ปกครอง</label>
+                                                <div class="flex item-center gap-2 mt-3 mb-5 ">
+                                                    <input type="radio" name="gender_guardian" value="1" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 bg-gray-100 border rounded border-gray-200" <?php echo (isset($guardian['gender']) && $guardian['gender'] == 'Male') ? 'checked' : ''; ?> /> ชาย
+                                                    <input type="radio" name="gender_guardian" value="2" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 bg-gray-100 border rounded border-gray-200" <?php echo (isset($guardian['gender']) && $guardian['gender'] == 'Female') ? 'checked' : ''; ?> /> หญิง
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full  flex flex-col  ">
+                                                <label class="font-semibold leading-none">เกี่ยวข้องเป็น</label>
+                                                <input type="text" name="relation_to_student"  value="<?php echo (isset($guardian['relation_to_student']) )? $guardian['relation_to_student']:"" ?>"   class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex items-center mt-4">
+                                            <div class="w-full flex flex-col">
+                                                <label class="font-semibold leading-none">ที่อยู่</label>
+                                                <textarea name="address_guardian" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"><?php echo (isset($guardian['address']) )? $guardian['address']:"" ?></textarea>
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-center w-full gap-4">
@@ -250,3 +350,22 @@ if ($id) {
         }
     }
 </script>
+
+
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<?php 
+    // เช็ค session alert ถ้ามีข้อความมีไหม ถ้ามีให้แสดงผล
+    if(isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        echo "<script>
+            Swal.fire({
+                icon: '".$_SESSION['status']."',
+                title: 'เกิดข้อผิดพลาด',
+                text: '$alert',
+            })
+        </script>";
+        unset($_SESSION['status']);
+        unset($_SESSION['alert']);
+    }
+
+?>
