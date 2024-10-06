@@ -48,8 +48,6 @@ $result = $connect->query($sql);
                                     <thead class="bg-slate-200 border border-rounded">
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อ-นามสกุล</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่ลงเวลา</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">เวลาเข้า</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">เวลาออก</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">สถานะ</th>
                                     </thead>
                                     <tbody>
@@ -71,8 +69,6 @@ $result = $connect->query($sql);
 
                                                     </td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['attendance_date']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['check_in_time']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['check_out_time']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white">
                                                         <?php
                                                         switch ($row['status']) {
@@ -95,7 +91,7 @@ $result = $connect->query($sql);
                                                         ?>
                                                     </td>
 
-                                               
+
                                                 </tr>
 
                                         <?php
