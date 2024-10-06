@@ -46,7 +46,7 @@
                         </div>
                         <div class="flex flex-col items-center -mt-20">
                             <?php
-                                echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
+                                echo '<img src="../../public/user.png" class="w-40 border-4 border-white rounded-full">';
                             ?>
                             <div class="flex items-center space-x-2 mt-2">
                                 <p class="text-2xl"><?php echo $teacher['first_name'] . ' ' . $teacher['last_name']; ?></p>

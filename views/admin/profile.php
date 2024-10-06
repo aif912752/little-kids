@@ -46,10 +46,11 @@
                         </div>
                         <div class="flex flex-col items-center -mt-20">
                             <?php
-                                echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
+                                echo '<img src="../../public/user.png" class="w-40 border-4 border-white rounded-full">';
                             ?>
                             <div class="flex items-center space-x-2 mt-2">
-                                <p class="text-2xl"><?php echo $teacher['first_name'] . ' ' . $teacher['last_name']; ?></p>
+                                <p class="text-2xl">
+                                    <?php echo $teacher['first_name'] . ' ' . $teacher['last_name']; ?></p>
                                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
