@@ -89,7 +89,9 @@
 ";
                             $result = $connect->query($sql);
                             ?>
-
+                            <div class="flex justify-end p-3">
+                                <a href="javascript:void(0)" onclick="openPrintWindow()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ปริ้นรายงาน</a>
+                            </div>
                             <table id="example" class="display pt-8" style="width:100%">
                                 <thead class="bg-slate-200 border border-rounded">
                                     <tr>
