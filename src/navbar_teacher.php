@@ -88,6 +88,26 @@ session_start();
                                 <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลผู้ปกครอง</span>
                             </a>
                         </li>
+
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/report_activity.php">
+                                <i class="ti ti-user ps-2 text-2xl"></i> <span>รายงานตารางกิจกรรม</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/report_evaluate_students.php">
+                                <i class="ti ti-user ps-2 text-2xl"></i> <span>รายงานการประเมินนักเรียน</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/report_study.php">
+                                <i class="ti ti-user ps-2 text-2xl"></i> <span>รายงานการมาเรียนของนักเรียน</span>
+                            </a>
+                        </li>
+
+
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/profile.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>โปรไฟล์</span>
@@ -160,13 +180,6 @@ session_start();
                         </li>
 
 
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="activity.php">
-                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
-                            </a>
-                        </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="eventcalendar.php">
@@ -185,6 +198,13 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>แบบประเมิน</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="evaluation_student.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>แบบประเมินนักเรียน</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="profile.php">
@@ -213,13 +233,8 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลการมาเรียน</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="activity.php">
-                                <i class="ti ti-article ps-2 text-2xl"></i>
-                                <span>ตารางกิจกรรม</span>
-                            </a>
-                        </li>
+
+
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="eventcalendar.php">
@@ -239,13 +254,9 @@ session_start();
                             </a>
                         </li>
                     <?php
-                    } else if ($_SESSION['role'] == '5') {
-
+                    } 
                     ?>
-                    <?php
-                    } else {
-                    }
-                    ?>
+                    
 
 
 
