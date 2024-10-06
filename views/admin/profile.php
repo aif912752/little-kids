@@ -18,7 +18,7 @@
             include('../../config/database.php');
 
             // ดึงข้อมูลครูจากตาราง teacher โดยใช้ user_id
-            $sql = "SELECT * FROM teacher JOIN room ON teacher.room_id = room.room_id WHERE teacher.user_id = ?";
+            $sql = "SELECT * FROM administrators WHERE user_id = ? ";
             $stmt = $connect->prepare($sql);
 
 
@@ -33,7 +33,7 @@
             if ($result->num_rows == 1) {
                 $teacher = $result->fetch_assoc();
             } else {
-                die("ไม่พบข้อมูลครู");
+                die("ไม่พบข้อมูล");
             }
             ?>
             <div class=" w-full page-wrapper xl:px-6 px-0">
@@ -46,13 +46,8 @@
                         </div>
                         <div class="flex flex-col items-center -mt-20">
                             <?php
-                            if ($teacher['img'] != null) {
                                 echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
-                            } else {
-                                echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
-                            }
                             ?>
-                            <!-- <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full"> -->
                             <div class="flex items-center space-x-2 mt-2">
                                 <p class="text-2xl"><?php echo $teacher['first_name'] . ' ' . $teacher['last_name']; ?></p>
                                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
@@ -102,10 +97,7 @@
                                         <span class="font-bold w-24">เบอร์โทร:</span>
                                         <span class="text-gray-700"><?= $teacher['phone_number'] ?></span>
                                     </li>
-                                    <li class="flex border-b py-2">
-                                        <span class="font-bold w-24">ชั้นที่สอน:</span>
-                                        <span class="text-gray-700"><?= $teacher['room_name']  ?></span>
-                                    </li>
+                                    
                                 </ul>
                             </div>
 
