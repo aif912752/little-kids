@@ -65,7 +65,7 @@ session_start();
                                 <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลผู้อำนวยการ</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/room_manage.php">
                                 <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลห้อง</span>
@@ -92,7 +92,36 @@ session_start();
                     <?php
                     } else if ($_SESSION['role'] == '2') {
                     ?>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/index.php">
+                                <i class="ti ti-layout-dashboard ps-2  text-2xl"></i> <span>หน้าหลัก</span>
+                            </a>
+                        </li>
 
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/teacher_manage.php">
+                                <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลครู</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/student.php">
+                                <i class="ti ti-user ps-2 text-2xl"></i> <span>จัดการข้อมูลนักเรียน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="attendance.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลการมาเรียน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/eventcalendar.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ปฏิทินกิจกรรม</span>
+                            </a>
+                        </li>
                     <?php
                     } else if ($_SESSION['role'] == '3') {
                     ?>
@@ -177,7 +206,7 @@ session_start();
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
                                 href="activity.php">
-                                <i class="ti ti-article ps-2 text-2xl"></i> 
+                                <i class="ti ti-article ps-2 text-2xl"></i>
                                 <span>ตารางกิจกรรม</span>
                             </a>
                         </li>
