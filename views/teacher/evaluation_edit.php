@@ -39,7 +39,7 @@
                             // ดึงข้อมูลกิจกรรมที่เกี่ยวข้อง
                             $sql = "SELECT * FROM evaluation_activity WHERE activity_id = ?";
                             $stmt = $connect->prepare($sql);
-                            $stmt->bind_param("s", $evaluation['evaluation_id']);
+                            $stmt->bind_param("s", $evaluation_id); // ใช้ activity_id แทน
                             $stmt->execute();
                             $activities = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
@@ -60,8 +60,8 @@
                                                         foreach ($answers as $answer) :
                                                         ?>
                                                             <div class="flex items-center space-x-2 mb-2">
-                                                                <input type="text" name="questions[<?php echo $activity['id']; ?>][answers][<?php echo uniqid(); ?>][text]" value="<?php echo htmlspecialchars($answer['text']); ?>" class="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                                                                <input type="number" name="questions[<?php echo $activity['id']; ?>][answers][<?php echo uniqid(); ?>][score]" value="<?php echo $answer['score']; ?>" class="w-20 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required min="0">
+                                                                <input type="text" name="questions[<?php echo $activity['id']; ?>][answers][<?php echo $answer['text']; ?>][text]" value="<?php echo htmlspecialchars($answer['text']); ?>" class="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                                                                <input type="number" name="questions[<?php echo $activity['id']; ?>][answers][<?php echo $answer['text']; ?>][score]" value="<?php echo $answer['score']; ?>" class="w-20 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required min="0">
                                                                 <button type="button" onclick="this.parentNode.remove()" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 transition duration-300 ease-in-out">ลบ</button>
                                                             </div>
                                                         <?php endforeach; ?>
@@ -70,7 +70,6 @@
                                                 </div>
                                             <?php endforeach; ?>
                                         </div>
-                                        <button type="button" onclick="addQuestion(this.previousElementSibling)" class="mt-4 bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">เพิ่มคำถาม</button>
                                     </div>
                                 </div>
                                 <div class="flex space-x-4">

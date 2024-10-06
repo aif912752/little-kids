@@ -53,7 +53,7 @@ $result = $connect->query($sql);
                                     <thead class="bg-slate-200 border border-rounded">
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อหัวข้อ</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่สร้าง</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">รายละเอียด</th>
+                                        <!-- <th class="py-2 border-b-2 border-gray-200 bg-gray-100">รายละเอียด</th> -->
 
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
                                     </thead>
@@ -76,10 +76,9 @@ $result = $connect->query($sql);
 
                                                     </td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['evaluation_date']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white">
-                                                    <button class="appearance-none block w-full bg-green-700 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-green-600 focus:outline-none focus:bg-white focus:border-gray-500"
-                                                    >รายละเอียด</button>
-                                                    </td>
+                                                    <!-- <td class="py-5 border-b border-gray-200 bg-white">
+                                                        <button class="appearance-none block w-full bg-green-700 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-green-600 focus:outline-none focus:bg-white focus:border-gray-500">รายละเอียด</button>
+                                                    </td> -->
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
                                                         <a href="evaluation_edit.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
@@ -150,5 +149,3 @@ if (isset($_SESSION['alert'])) {
 }
 
 ?>
-
-
