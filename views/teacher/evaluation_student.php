@@ -42,7 +42,7 @@ $result = $connect->query($sql);
 
                                 <!-- ชิดขวา -->
                                 <div class="flex justify-end p-3">
-                                    <a href="evaluation_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
+                                    <a href="evaluation_student_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
                                 </div>
 
 
@@ -78,8 +78,8 @@ $result = $connect->query($sql);
                                                     </td> -->
 
                                                     <td class="py-5 border-b border-r border-gray-200 bg-white">
-                                                        <a href="evaluation_edit.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                        <a href="evaluation_delete.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                                        <a href="evaluation_student_edit.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                                        <a href="evaluation_student_delete.php?id=<?php echo $row['evaluation_id']; ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
                                                     </td>
                                                 </tr>
 

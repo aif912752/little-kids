@@ -2,19 +2,19 @@
 include '../../config/database.php'; // เชื่อมต่อฐานข้อมูล
 
 // ดึงข้อมูลครูจากตาราง teacher
-$sql_teachers = "SELECT teacher_id, first_name, last_name FROM teacher";
+$sql_teachers = "SELECT student_id, first_name, last_name FROM students";
 $result_teachers = $connect->query($sql_teachers);
 
 $selected_teacher_id = null;
 $show_evaluation_form = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['select_teacher'])) {
-    $selected_teacher_id = $_POST['teacher_id'];
+    $selected_teacher_id = $_POST['student_id'];
     $show_evaluation_form = true;
 }
 
 // ดึงข้อมูลหัวข้อจากตาราง evaluation เฉพาะของครูที่เลือก
-$sql_evaluation = "SELECT * FROM evaluation WHERE techer_id = ?";
+$sql_evaluation = "SELECT * FROM evaluation_students WHERE students_id = ?";
 $stmt_evaluation = $connect->prepare($sql_evaluation);
 $stmt_evaluation->bind_param("i", $selected_teacher_id);
 $stmt_evaluation->execute();
@@ -48,11 +48,11 @@ $result_evaluation = $stmt_evaluation->get_result();
                     <!-- ฟอร์มเลือกครู -->
                     <form action="" method="post" class="mb-6">
                         <div class="mb-4">
-                            <label for="teacher_id" class="block text-sm font-medium text-gray-700">เลือกครูที่ต้องการประเมิน:</label>
-                            <select name="teacher_id" id="teacher_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                            <label for="student_id" class="block text-sm font-medium text-gray-700">เลือกครูที่ต้องการประเมิน:</label>
+                            <select name="student_id" id="student_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
                                 <option value="">-- เลือกครู --</option>
                                 <?php while ($teacher = $result_teachers->fetch_assoc()): ?>
-                                    <option value="<?php echo $teacher['teacher_id']; ?>" <?php echo ($selected_teacher_id == $teacher['teacher_id']) ? 'selected' : ''; ?>>
+                                    <option value="<?php echo $teacher['student_id']; ?>" <?php echo ($selected_teacher_id == $teacher['student_id']) ? 'selected' : ''; ?>>
                                         <?= htmlspecialchars($teacher['first_name'] . ' ' . $teacher['last_name']) ?>
                                     </option>
                                 <?php endwhile; ?>
@@ -67,7 +67,7 @@ $result_evaluation = $stmt_evaluation->get_result();
 
                     <?php if ($show_evaluation_form && $result_evaluation->num_rows > 0): ?>
                         <form action="" method="post" class="">
-                            <input type="hidden" name="teacher_id" value="<?php echo $selected_teacher_id; ?>">
+                            <input type="hidden" name="student_id" value="<?php echo $selected_teacher_id; ?>">
                             <?php while ($evaluation = $result_evaluation->fetch_assoc()): ?>
                                 <h2 class="text-xl font-semibold mb-4 text-gray-800">
                                     <?php echo htmlspecialchars($evaluation['evaluation_name']); ?>
@@ -127,7 +127,7 @@ $result_evaluation = $stmt_evaluation->get_result();
 
                     <?php
                     if (isset($_POST['submit_evaluation'])) {
-                        $teacher_id = $_POST['teacher_id'];
+                        $student_id = $_POST['student_id'];
                         $evaluation_ids = $_POST['evaluation_id'];
                         $evaluation_activity_ids = $_POST['evaluation_activity_id'];
                         $answers = $_POST['answers'];
@@ -137,9 +137,9 @@ $result_evaluation = $stmt_evaluation->get_result();
                             $evaluation_id = $evaluation_ids[$activity_id];
                             $total_score = $answers[$activity_id];
 
-                            $sql_insert = "INSERT INTO evaluation_to_activity (evaluation_id, evaluation_activity_id, total_score, techer_id) VALUES (?, ?, ?, ?)";
+                            $sql_insert = "INSERT INTO evaluation_to_activity_student (evaluation_id, evaluation_activity_id, total_score, students_id) VALUES (?, ?, ?, ?)";
                             $stmt_insert = $connect->prepare($sql_insert);
-                            $stmt_insert->bind_param("issi", $evaluation_id, $activity_id, $total_score, $teacher_id);
+                            $stmt_insert->bind_param("issi", $evaluation_id, $activity_id, $total_score, $student_id);
 
                             if (!$stmt_insert->execute()) {
                                 echo "<script>showAlert('เกิดข้อผิดพลาด', '" . $stmt_insert->error . "', 'error');</script>";
