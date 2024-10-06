@@ -108,7 +108,7 @@ $result_evaluation = $stmt_evaluation->get_result();
                         </form>
                     <?php elseif ($show_evaluation_form): ?>
                         <div class="text-center text-gray-700">
-                            <h3 class="text-xl font-medium">ไม่มีข้อมูลสำหรับการประเมินครูท่านนี้ในขณะนี้</h3>
+                            <h3 class="text-xl font-medium">ไม่มีข้อมูลสำหรับการประเมินนักเรียนท่านนี้ในขณะนี้</h3>
                         </div>
                     <?php endif; ?>
 
