@@ -8,6 +8,18 @@
     <title>รายงานการประเมินผลกิจกรรมของครู</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <style>
+        .dataTables_length select {
+            width: 50px;
+            /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
+
+        }
+
+        /* .swal2-confirm {
+            background-color: #2563EB !important;
+            color: white !important;
+        } */
+    </style>
 </head>
 
 <body class="bg-surface">
@@ -26,19 +38,34 @@
                             <?php
                             include('../../config/database.php');
 
-                            // Query เพื่อดึงคะแนนรวมจาก evaluation_to_activity
+                            // Query เพื่อดึงคะแนนรวมจาก evaluation_to_activity_student
                             $sql = "
-                                SELECT 
-                                    teacher_id, 
-                                    evaluation_id, 
-                                    evaluation_activity_id, 
-                                    SUM(total_score) AS total_score
-                                FROM evaluation_to_activity
-                                GROUP BY teacher_id, evaluation_id, evaluation_activity_id
-                                ORDER BY teacher_id, evaluation_id
+                            SELECT 
+                                s.student_id, 
+                                s.first_name,
+                                s.last_name,
+                                e.evaluation_id,
+                                e.evaluation_name,
+                                SUM(ea.total_score) AS total_score
+                            FROM evaluation_to_activity_student ea
+                            JOIN students s ON ea.students_id = s.student_id
+                            JOIN evaluation_students e ON ea.evaluation_id = e.evaluation_id
+                            GROUP BY s.student_id, s.first_name, s.last_name, e.evaluation_id, e.evaluation_name
+                            ORDER BY s.student_id
                             ";
+
                             $result = $connect->query($sql);
+
+                            // ตรวจสอบว่ามีข้อผิดพลาดใน query หรือไม่
+                            if (!$result) {
+                                die("Query Error: " . $connect->error);
+                            }
                             ?>
+
+                            <!-- กราฟด้านบน -->
+                            <div class="py-5">
+                                <canvas id="activityChart" width="400" height="200"></canvas>
+                            </div>
 
                             <div class="flex justify-end p-3">
                                 <a href="javascript:void(0)" onclick="openPrintWindow()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ปริ้นรายงาน</a>
@@ -47,21 +74,23 @@
                             <table id="example" class="display pt-8" style="width:100%">
                                 <thead class="bg-slate-200 border border-rounded">
                                     <tr>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ไอดีคุณครู</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">รหัสประเมิน</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">รหัสกิจกรรม</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ลำดับ</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อ</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อการประเมิน</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">คะแนนรวม</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     // ลูปแสดงข้อมูลในตาราง
                                     if ($result->num_rows > 0) {
+                                        $rank = 1; // เริ่มต้นลำดับที่ 1
                                         while ($row = $result->fetch_assoc()) {
                                             echo "<tr>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['teacher_id'] . "</td>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['evaluation_id'] . "</td>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['evaluation_activity_id'] . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $rank++ . "</td>"; // แสดงลำดับ
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['evaluation_name'] . "</td>"; // แสดงชื่อการประเมิน
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['total_score'] . "</td>";
                                             echo "</tr>";
                                         }
@@ -71,50 +100,44 @@
                                     ?>
                                 </tbody>
                             </table>
-                        </div>
 
-                        <!-- แสดงกราฟ -->
-                        <div class="p-5">
-                            <canvas id="activityChart" width="400" height="200"></canvas>
-                        </div>
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                            <script>
+                                const labels = [];
+                                const totalScores = [];
 
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <script>
-                            const labels = [];
-                            const scores = [];
+                                <?php
+                                // เตรียมข้อมูลสำหรับ JavaScript
+                                $result->data_seek(0); // รีเซ็ตผลลัพธ์
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "labels.push('" . $row['first_name'] . " " . $row['last_name'] . "');"; // เพิ่มชื่อเต็มนักเรียนในอาร์เรย์
+                                    echo "totalScores.push(" . $row['total_score'] . ");"; // คะแนนรวม
+                                }
+                                ?>
 
-                            <?php
-                            // เตรียมข้อมูลสำหรับกราฟ
-                            $result->data_seek(0); // รีเซ็ตผลลัพธ์
-                            while ($row = $result->fetch_assoc()) {
-                                echo "labels.push('คุณครู ID: " . $row['teacher_id'] . " - ประเมิน ID: " . $row['evaluation_id'] . "');";
-                                echo "scores.push(" . $row['total_score'] . ");";
-                            }
-                            ?>
-
-                            const ctx = document.getElementById('activityChart').getContext('2d');
-                            const activityChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: labels,
-                                    datasets: [{
-                                        label: 'คะแนนรวม',
-                                        data: scores,
-                                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                                        borderColor: 'rgba(54, 162, 235, 1)',
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
+                                const ctx = document.getElementById('activityChart').getContext('2d');
+                                const activityChart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'คะแนนรวม',
+                                            data: totalScores,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
                                         }
                                     }
-                                }
-                            });
-                        </script>
-                    </div>
+                                });
+                            </script>
+                        </div>
                 </main>
             </div>
         </div>
