@@ -1,37 +1,3 @@
-<?php
-include '../../config/database.php';
-
-// Fetching room data
-$roomQuery = "SELECT room_id, room_name FROM room";
-$roomResult = $connect->query($roomQuery);
-
-// ดึงข้อมูลโดยใช้ LEFT JOIN เพื่อรวมทุกรายนักเรียน
-$sql = "SELECT 
-sm.student_id, 
-sm.weight, 
-sm.height, 
-sm.recorded_at,
-s.first_name, 
-s.last_name,
-s.citizen_id, 
-s.birthdate, 
-s.enrollment_date,
-s.room_id,  -- room_id จากตาราง students
-r.room_name  -- เพิ่ม room_name จากตาราง room
-FROM student_measurements sm
-INNER JOIN (
-SELECT 
-    student_id, 
-    MAX(recorded_at) AS last_recorded 
-FROM student_measurements 
-GROUP BY student_id
-) AS latest ON sm.student_id = latest.student_id AND sm.recorded_at = latest.last_recorded
-INNER JOIN students s ON sm.student_id = s.student_id
-LEFT JOIN room r ON s.room_id = r.room_id;  -- JOIN กับตาราง room
-"; // อย่าลืมเพิ่ม sm.id เพื่อดึง id จาก student_measurements
-$result = $connect->query($sql);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,12 +23,58 @@ $result = $connect->query($sql);
             <?php include '../../src/navbar_teacher.php'; ?>
 
             <div class="w-full page-wrapper xl:px-6 px-0">
+
                 <div class="container px-6 py-8 mx-auto">
                     <h3 class="text-3xl font-medium text-black">รายงานพัฒนาการของนักเรียนภายในชั้นเรียน</h3>
 
                     <div class="flex flex-col mt-8">
                         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                             <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg bg-white p-3">
+
+
+                                <?php
+                                include '../../config/database.php';
+
+                                // Fetching room data
+                                $roomQuery = "SELECT room_id, room_name FROM room";
+                                $roomResult = $connect->query($roomQuery);
+
+
+                                // select room_id  จาก teacher
+                                $sqlteacher = "SELECT room_id FROM teacher WHERE user_id = " . $_SESSION['user_id'];
+                               
+                                $resultteacher = $connect->query($sqlteacher);
+                                if ($resultteacher->num_rows > 0) {
+                                    $row = $resultteacher->fetch_assoc();
+                                    $room_id = $row['room_id'];
+                                }
+                                // ดึงข้อมูลโดยใช้ LEFT JOIN เพื่อรวมทุกรายนักเรียน
+                                $sql = "SELECT 
+    sm.student_id, 
+    sm.weight, 
+    sm.height, 
+    sm.recorded_at,
+    s.first_name, 
+    s.last_name,
+    s.citizen_id, 
+    s.birthdate, 
+    s.enrollment_date,
+    s.room_id,  -- room_id จากตาราง students
+    r.room_name  -- เพิ่ม room_name จากตาราง room
+FROM student_measurements sm
+INNER JOIN (
+    SELECT 
+        student_id, 
+        MAX(recorded_at) AS last_recorded 
+    FROM student_measurements 
+    GROUP BY student_id
+) AS latest ON sm.student_id = latest.student_id AND sm.recorded_at = latest.last_recorded
+INNER JOIN students s ON sm.student_id = s.student_id
+LEFT JOIN room r ON s.room_id = r.room_id
+WHERE s.room_id = $room_id"; 
+                                $result = $connect->query($sql);
+                                ?>
+
 
                                 <table id="example" class="display pt-8" style="width:100%">
                                     <thead class="bg-slate-200 border border-rounded">
@@ -73,6 +85,7 @@ $result = $connect->query($sql);
                                             <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่เก็บข้อมูล่าสุด</th>
                                             <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชั้นที่เรียน</th>
                                             <th class="py-2 border-b-2 border-gray-200 bg-gray-100">BMI</th>
+                                            <th class="py-2 border-b-2 border-gray-200 bg-gray-100">สถานะ</th> <!-- ช่องสำหรับสถานะ -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -85,6 +98,22 @@ $result = $connect->query($sql);
 
                                                 // กำหนดค่า BMI ให้เป็น 'N/A' ถ้าน้ำหนักหรือส่วนสูงไม่ถูกต้อง
                                                 $bmi_display = ($weight == 0 || $height == 0) ? 'N/A' : number_format($bmi, 2);
+
+                                                // ตรวจสอบสถานะ BMI
+                                                $status = '';
+                                                if ($bmi > 0) {
+                                                    if ($bmi < 18.5) {
+                                                        $status = 'น้ำหนักน้อย';
+                                                    } elseif ($bmi >= 18.5 && $bmi < 25) {
+                                                        $status = 'ปกติ';
+                                                    } elseif ($bmi >= 25 && $bmi < 30) {
+                                                        $status = 'น้ำหนักเกิน';
+                                                    } else {
+                                                        $status = 'อ้วน';
+                                                    }
+                                                } else {
+                                                    $status = 'N/A';
+                                                }
                                         ?>
                                                 <tr>
                                                     <td class="py-5 border-b border-l border-gray-200 bg-white">
@@ -95,11 +124,12 @@ $result = $connect->query($sql);
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['recorded_at']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['room_name']; ?></td>
                                                     <td class="py-5 border-b border-gray-200 bg-white"><?php echo $bmi_display; ?></td>
+                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $status; ?></td> <!-- แสดงสถานะ -->
                                                 </tr>
                                         <?php
                                             }
                                         } else {
-                                            echo "<tr><td colspan='6' class='py-5 border-b border-gray-200 bg-white text-center'>ไม่มีข้อมูล</td></tr>";
+                                            echo "<tr><td colspan='7' class='py-5 border-b border-gray-200 bg-white text-center'>ไม่มีข้อมูล</td></tr>";
                                         }
                                         ?>
                                     </tbody>
