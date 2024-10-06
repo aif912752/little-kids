@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 06:37 AM
+-- Generation Time: Oct 06, 2024 at 06:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -24,13 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `evaluation`
+-- Table structure for table `evaluation_to_activity`
 --
 
-CREATE TABLE `evaluation` (
-  `evaluation_id` int(11) NOT NULL COMMENT 'รหัสประจำแบบประเมิน',
-  `score` varchar(3) NOT NULL COMMENT 'คะเเนนเก็บเป็น string',
-  `evaluation_date` date NOT NULL COMMENT 'วันที่ทำการประเมิน',
+CREATE TABLE `evaluation_to_activity` (
+  `id` varchar(50) NOT NULL COMMENT 'ไอดีหลัก pk',
+  `evaluation_id` int(11) NOT NULL COMMENT 'อ้างอิงจากรหัสประเมิน อ้างอิงมาจาก table evaluation ',
+  `evaluation_activity_id` varchar(50) NOT NULL COMMENT 'อ้างอิงจากรหัสกิจกรรมประเมินจาก table evaluation_activity ',
+  `total_score` varchar(50) NOT NULL COMMENT 'คะเเนนรวม ',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -40,20 +41,10 @@ CREATE TABLE `evaluation` (
 --
 
 --
--- Indexes for table `evaluation`
+-- Indexes for table `evaluation_to_activity`
 --
-ALTER TABLE `evaluation`
-  ADD PRIMARY KEY (`evaluation_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `evaluation`
---
-ALTER TABLE `evaluation`
-  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน';
+ALTER TABLE `evaluation_to_activity`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
