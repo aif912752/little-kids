@@ -127,6 +127,11 @@ session_start();
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ปฏิทินกิจกรรม</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link gap-3 py-2.5 my-1 text-base  flex items-center relative  rounded-md text-gray-500  w-full" href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/director/profile.php">
+                                <i class="ti ti-article ps-2 text-2xl"></i> <span>โปรไฟล์</span>
+                            </a>
+                        </li>
                     <?php
                     } else if ($_SESSION['role'] == '3') {
                     ?>

@@ -24,8 +24,7 @@
             include('../../config/database.php');
             $id = $_SESSION['user_id'] ?? '';
             if ($id) {
-
-                $sql = "SELECT * FROM administrators WHERE admin_id = $id";
+                $sql = "SELECT * FROM director WHERE user_id = $id";
                 $result = $connect->query($sql);
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
@@ -35,13 +34,13 @@
                     $user = $result->fetch_assoc();
                 } else {
                     echo "<script>
-                        alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+                        alert('ไม่พบข้อมูลที่ต้องการแก้ไข2');
                         window.location.href = 'profile.php';
                     </script>";
                 }
             } else {
                 echo "<script>
-                        alert('ไม่พบข้อมูลที่ต้องการแก้ไข');
+                        alert('ไม่พบข้อมูลที่ต้องการแก้ไข1');
                         window.location.href = 'profile.php';
                 </script>";
             }
@@ -60,7 +59,7 @@
                                             <div class="w-full md:w-1/2 flex flex-col">
                                                 <label class="font-semibold leading-none">Username</label>
                                                 <input type="text" name="username" value="<?php echo $user['username']  ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                                <input type="hidden" name="id" value="<?php echo $row['admin_id']; ?>">
+                                                <input type="hidden" name="id" value="<?php echo $row['director_id']; ?>">
                                                
                                                 <input type="hidden" name="old_username" value="<?php echo $user['username']; ?>">
                                                 <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
@@ -81,32 +80,18 @@
                                             </div>
                                         </div>
                                         <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none"> เลขประจำตัวประชาชน </label>
-                                                <input type="text" name="citizen_id" value="<?= $row['citizen_id'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
+                                            
+                                            <div class="w-full md:w-1/2 flex flex-col ">
                                                 <label class="font-semibold leading-none">วัน/เดือน/ปี เกิด</label>
                                                 <input type="date" name="birthdate" value="<?= $row['birthdate'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
-                                        </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">เชื้อชาติ</label>
-                                                <input type="text" name="ethnicity" value="<?= $row['ethnicity'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
                                             <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0">
-                                                <label class="font-semibold leading-none">สัญชาติ</label>
-                                                <input type="text" name="nationality" value="<?= $row['nationality'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+                                                <label class="font-semibold leading-none">เบอร์โทรศัพท์</label>
+                                                <input type="text" name="phone_number" value="<?= $row['phone_number'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
                                             </div>
                                         </div>
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full  flex flex-col">
-                                                <label class="font-semibold leading-none">ศาสนา</label>
-                                                <input type="text" name="religion" value="<?= $row['religion'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-
-                                        </div>
+                                        
+                                        
 
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
@@ -119,20 +104,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full flex flex-col">
-                                                <label class="font-semibold leading-none">เบอร์โทรศัพท์</label>
-                                                <input type="text" name="phone_number" value="<?= $row['phone_number'] ?>" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
-                                            </div>
-                                            
-                                        </div>
-
-                                        <div class="md:flex items-center mt-4">
-                                            <div class="w-full md:w-1/2 flex flex-col">
-                                                <label class="font-semibold leading-none">ที่อยู่</label>
-                                                <textarea name="address" rows="4" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"><?= $row['address'] ?></textarea>                      
-                                            </div>
-                                        </div>
+                                        
+                                        
                                     
 
                                         <!-- <div class="md:flex items-start mt-4">
