@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 07:53 AM
+-- Generation Time: Oct 06, 2024 at 08:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `evaluation_activity` (
-  `id` varchar(50) NOT NULL COMMENT 'ไอดีหลัก pk',
+  `id` int(50) NOT NULL,
   `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
   `evaluation_score` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'คะเเนนประเมินในรูปแบบ JSON' CHECK (json_valid(`evaluation_score`))
@@ -39,7 +39,7 @@ CREATE TABLE `evaluation_activity` (
 --
 
 INSERT INTO `evaluation_activity` (`id`, `activity_id`, `evaluation_name`, `evaluation_score`) VALUES
-('', '4', 'กาย', '0');
+(1, '4', 'กาย', '0');
 
 --
 -- Indexes for dumped tables
@@ -50,6 +50,16 @@ INSERT INTO `evaluation_activity` (`id`, `activity_id`, `evaluation_name`, `eval
 --
 ALTER TABLE `evaluation_activity`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `evaluation_activity`
+--
+ALTER TABLE `evaluation_activity`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
