@@ -106,14 +106,14 @@ $result = $connect->query($sql);
 </body>
 
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#example').DataTable(); // เรียกใช้งาน DataTables
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
 <!-- SweetAlert2 -->
 <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 
