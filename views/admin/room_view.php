@@ -1,8 +1,12 @@
 <?php
 
+
 include '../../config/database.php';
-$sql = "SELECT * FROM room ";
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM room WHERE room_id =" . $id;
 $result = $connect->query($sql);
+$row = $result->fetch_assoc();
 
 ?>
 
@@ -12,7 +16,7 @@ $result = $connect->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>จัดการข้อมูลห้อง</title>
+    <title>ห้อง</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
@@ -40,47 +44,59 @@ $result = $connect->query($sql);
                 <!-- Main Content -->
                 <main class="h-full  max-w-full">
                     <div class="container full-container p-0 flex flex-col gap-6">
-                        <div>
-                            <h3 class="text-3xl font-medium text-black">จัดการข้อมูลห้อง</h3>
-                        </div>
+
 
                         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
 
-                            <!-- ชิดขวา -->
-                            <div class="flex justify-end p-3">
-                                <a href="room_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
+                            <div class="text-center p-3">
+                                <h3 class="text-3xl font-medium text-black">ห้อง <?php echo $row['room_name'] ?> </h3>
+                            </div>
+                            <div class="flex justify-between items-start my-4">
+                                <table class="my-3 border bg-green-500">
+                                    <?php
+                                    $sql2 = "SELECT * FROM teacher WHERE room_id =" . $id;
+                                    $result2 = $connect->query($sql2);
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                    ?>
+                                        <tr>
+                                            <td class="p-2 text-white">ชื่อครูประจำชั้น : </td>
+                                            <td class="p-2 text-white"><?= $row2['first_name'] . ' ' . $row2['last_name'] ?> </td>
+                                        </tr>
+                                    <?php } ?>
+                                </table>
+                                <div>
+                                    <a href="room_manage.php" class="px-4 py-2 bg-blue-600 text-white border border-blue-500 rounded hover:bg-blue-700 focus:outline-none">กลับหน้าหลัก</a>
+                                </div>
                             </div>
 
+
+                            <!-- ตาราง -->
                             <table id="example" class="display pt-8" style="width:100%">
                                 <thead class="bg-slate-200 border border-rounded">
-                                    <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อชั้นเรียน</th>
-                                    <th class="py-2 border-b-2 border-gray-200 bg-gray-100 w-80">จัดการ</th>
+                                    <tr>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จำนวน</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อนักเรียน</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
+                                    $sql3 = "SELECT * FROM students WHERE room_id =" . $id;
+                                    $result3 = $connect->query($sql3);
+                                    $i = 0;
+                                    while ($row3 = $result3->fetch_assoc()) {
+                                        $i++;
                                     ?>
-                                            <tr>
-                                                <td class="py-5 border-b border-gray-200 bg-white "><?php echo $row['room_name']; ?></td>
-                                                
-                                                <td class="py-5 border-b border-gray-200 bg-white">
-                                                    <a href="room_view.php?id=<?php echo $row['room_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ดูข้อมูล</a>
-                                                    <a href="room_edit.php?id=<?php echo $row['room_id']; ?>" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                    <a class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                                        onclick="confirmDelete(event, '<?php echo $row['room_id']; ?>')">
-                                                        ลบ
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                        <tr>
+                                            <td class="py-5 border-b border-gray-200 bg-white"><?= $i ?></td>
+                                            <td class="py-5 border-b border-gray-200 bg-white"><?= $row3['first_name'] . ' ' . $row3['last_name']  ?></td>
+                                        </tr>
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
+
+
+
                         </div>
                     </div>
 
@@ -143,25 +159,3 @@ if (isset($_SESSION['alert'])) {
 }
 
 ?>
-
-
-<script>
-    function confirmDelete(event, roomId) {
-        event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานโดยตรง
-
-        Swal.fire({
-            title: 'คุณแน่ใจหรือไม่?',
-            text: "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'ใช่, ลบเลย!',
-            cancelButtonText: 'ยกเลิก'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = 'room_delete.php?id=' + roomId; // ดำเนินการลบเมื่อยืนยัน
-            }
-        });
-    }
-</script>
