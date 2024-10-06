@@ -31,7 +31,7 @@ if ($studentResult) {
             <div class="w-full page-wrapper xl:px-6 px-0">
                 <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
                     <div class="bg-indigo-600 px-6 py-4">
-                        <h1 class="text-2xl font-bold text-white">แบบฟอร์มประเมิน</h1>
+                        <h1 class="text-2xl font-bold text-white">แบบฟอร์มประเมินนักเรียน</h1>
                     </div>
 
                     <?php

@@ -35,7 +35,7 @@ $result = $connect->query($sql);
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <div class="container px-6 py-8 mx-auto ">
-                    <h3 class="text-3xl font-medium text-black">จัดการข้อมูลประเมิน</h3>
+                    <h3 class="text-3xl font-medium text-black">จัดการข้อมูลประเมินครู</h3>
 
 
 
