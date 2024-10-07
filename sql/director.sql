@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 07:45 PM
+-- Generation Time: Oct 07, 2024 at 03:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -34,7 +34,7 @@ CREATE TABLE `director` (
   `last_name` varchar(100) NOT NULL COMMENT 'นามสกุลผู้อำนวยการ',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดผู้อำนวยการ',
   `email` varchar(100) NOT NULL COMMENT 'อีเมล์ผู้อำนวยการ',
-  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
+  `phone_number` varchar(15) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
   `position` varchar(100) NOT NULL COMMENT 'ตำเเหน่งผู้อำนวยการ',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -44,8 +44,7 @@ CREATE TABLE `director` (
 --
 
 INSERT INTO `director` (`director_id`, `Img`, `first_name`, `last_name`, `birthdate`, `email`, `phone_number`, `position`, `user_id`) VALUES
-(1, '', 'กาย', 'กาย', '2024-10-11', 'warunyoo084@gmail.com', '848091046', 'ครูใหญ่', 20),
-(2, '', 'กาย', 'กาย', '2024-10-18', 'warunyoo084@gmail.com', '848091046', 'ไอ่นนท์', 27);
+(5, '', 'ปัญญา', 'จิตใจดี', '2024-10-23', 'warunyoo084@gmail.com', '848091046', 'ผู้อำนวยการ', 33);
 
 --
 -- Indexes for dumped tables
@@ -65,7 +64,7 @@ ALTER TABLE `director`
 -- AUTO_INCREMENT for table `director`
 --
 ALTER TABLE `director`
-  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=3;
+  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
