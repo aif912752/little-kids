@@ -58,7 +58,7 @@ $result = $connect->query($sql);
                                         <?php
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
-                                                $img_src = !empty($row['img']) ? 'uploads/' . $row['img'] : 'path/to/default-image.jpg';
+                                                $img_src = !empty($row['img']) ? '../teacher/uploads/' . $row['img'] : 'path/to/default-image.jpg';
                                         ?>
 
                                                 <tr>
