@@ -67,7 +67,13 @@ $row = $result->fetch_assoc();
                                 <div class="flex gap-4">
                                     <?php
                                     echo '<a href="student_add.php?room_id=' . $id . '" class="px-4 py-2 bg-blue-600 text-white border border-blue-500 rounded hover:bg-blue-700 focus:outline-none">เพิ่มข้อมูลนักเรียน</a>';
-                                    echo '<a href="room_manage.php" class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
+                                    if ($_SESSION['role'] == '1')
+                                    {
+                                        echo '<a href="http://'. $_SERVER['HTTP_HOST'].'/little-kids/views/admin/room_manage.php"   class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
+                                    }else{
+                                        echo '<a href="http://'. $_SERVER['HTTP_HOST'].'/little-kids/views/teacher/student.php"  class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
+                                    }
+                                    
                                     ?>
                                 </div>
                             </div>

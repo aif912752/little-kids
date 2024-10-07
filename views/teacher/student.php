@@ -52,7 +52,7 @@ $result = $connect->query($sql);
                     
                     <!-- ลิงก์เลือกห้อง -->
                     <div class="flex justify-center">
-                        <a href="../admin/room_view.php/?id=<?php echo $row['room_id']; ?>" 
+                        <a href="<?= "http://". $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/room_view.php?id=<?php echo $row['room_id']; ?>" 
                            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
                            เลือกห้องนี้
                         </a>
