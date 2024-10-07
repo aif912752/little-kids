@@ -176,7 +176,7 @@ $result_news = $connect->query($sql_news);
 
                             <div class="py-5 text-center">
                                 <?php
-                                $img_src = !empty($row['img']) ? 'views/teacher/uploads/' . $row['img'] : 'path/to/default-image.jpg';
+                                $img_src = !empty($row['img']) ? 'views/admin/uploads/' . $row['img'] : 'path/to/default-image.jpg';
                                 ?>
                                 <img src="<?php echo htmlspecialchars($img_src); ?>"
                                     class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56 btn-"
