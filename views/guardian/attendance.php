@@ -44,11 +44,7 @@
                         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                             <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
 
-                                <!-- ชิดขวา -->
-                                <div class="flex justify-end p-3">
-                                    <a href="attendance_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
-                                </div>
-
+                                <!-- ชิดขวา --> 
 
                                 <table id="example" class="display pt-8" style="width:100%">
                                     <thead class="bg-slate-200 border border-rounded">
