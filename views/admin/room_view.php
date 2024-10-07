@@ -64,8 +64,11 @@ $row = $result->fetch_assoc();
                                         </tr>
                                     <?php } ?>
                                 </table>
-                                <div>
-                                    <a href="room_manage.php" class="px-4 py-2 bg-blue-600 text-white border border-blue-500 rounded hover:bg-blue-700 focus:outline-none">กลับหน้าหลัก</a>
+                                <div class="flex gap-4">
+                                    <?php
+                                    echo '<a href="student_add.php?room_id=' . $id . '" class="px-4 py-2 bg-blue-600 text-white border border-blue-500 rounded hover:bg-blue-700 focus:outline-none">เพิ่มข้อมูลนักเรียน</a>';
+                                    echo '<a href="room_manage.php" class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
+                                    ?>
                                 </div>
                             </div>
 
@@ -76,6 +79,7 @@ $row = $result->fetch_assoc();
                                     <tr>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จำนวน</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อนักเรียน</th>
+                                        <th class = "py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +93,10 @@ $row = $result->fetch_assoc();
                                         <tr>
                                             <td class="py-5 border-b border-gray-200 bg-white"><?= $i ?></td>
                                             <td class="py-5 border-b border-gray-200 bg-white"><?= $row3['first_name'] . ' ' . $row3['last_name']  ?></td>
+                                            <td class="py-5 border-b border-gray-200 bg-white">
+                                                <a href="student_edit.php?id=<?= $row3['student_id'] ?>&room_id=<?= $id ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
+                                                <a href="student_delete.php?id=<?= $row3['student_id'] ?>&room_id=<?= $id ?>" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">ลบ</a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
 
