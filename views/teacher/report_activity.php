@@ -111,9 +111,7 @@
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_activities . "</td>";
                                             echo "</tr>";
                                         }
-                                    } else {
-                                        echo "<tr><td colspan='2' class='py-5 border-b border-gray-200 bg-white'>No data available</td></tr>";
-                                    }
+                                    } 
                                     ?>
                                 </tbody>
                             </table>

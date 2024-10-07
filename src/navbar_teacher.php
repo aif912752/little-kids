@@ -198,13 +198,13 @@ session_start();
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="student.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/student.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลนักเรียน</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="attendance.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/attendance.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ข้อมูลการมาเรียน</span>
                             </a>
                         </li>
@@ -212,31 +212,31 @@ session_start();
 
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="eventcalendar.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/eventcalendar.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ตารางกิจกรรม</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="child_evelopment.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/child_evelopment.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>พัฒนาการของนักเรียน</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="evaluation.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/evaluation.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>แบบประเมินครู</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="evaluation_student.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/evaluation_student.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>แบบประเมินนักเรียน</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="form_student.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/form_student.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>ประเมินนักเรียน</span>
                             </a>
                         </li>
@@ -264,7 +264,7 @@ session_start();
 
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="profile.php">
+                                href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/teacher/profile.php">
                                 <i class="ti ti-article ps-2 text-2xl"></i> <span>โปรไฟล์</span>
                             </a>
                         </li>

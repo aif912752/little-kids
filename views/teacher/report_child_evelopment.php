@@ -128,9 +128,7 @@ WHERE s.room_id = $room_id";
                                                 </tr>
                                         <?php
                                             }
-                                        } else {
-                                            echo "<tr><td colspan='7' class='py-5 border-b border-gray-200 bg-white text-center'>ไม่มีข้อมูล</td></tr>";
-                                        }
+                                        } 
                                         ?>
                                     </tbody>
                                 </table>
