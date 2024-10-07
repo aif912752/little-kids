@@ -33,35 +33,45 @@ $result = $connect->query($sql);
             <?php include '../../src/navbar_teacher.php'; ?>
 
             <div class=" w-full page-wrapper xl:px-6 px-0">
-       
-          
 
-            <div class="container px-6 py-8 mx-auto">
-    <!-- หัวข้อหลัก -->
 
-    <!-- หัวข้อเลือกห้อง -->
-    <div class="container mx-auto mt-10">
-        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">เลือกห้อง</h1>
 
-        <!-- Grid การจัดเรียงห้อง -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-                    <!-- ชื่อห้อง -->
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center"><?php echo $row['room_name']; ?></h2>
-                    
-                    <!-- ลิงก์เลือกห้อง -->
-                    <div class="flex justify-center">
-                        <a href="<?= "http://". $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/room_view.php?id=<?php echo $row['room_id']; ?>" 
-                           class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                           เลือกห้องนี้
-                        </a>
+                <div class="container px-6 py-8 mx-auto">
+                    <!-- หัวข้อหลัก -->
+
+                    <!-- หัวข้อเลือกห้อง -->
+                    <div class="container mx-auto mt-10">
+                        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">เลือกห้อง</h1>
+
+                        <!-- Grid การจัดเรียงห้อง -->
+                        <div class="grid grid-cols-2 gap-2 mt-12 sm:grid-cols-3 gap-6">
+
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <div
+                                    class="transition-all shadow-md duration-1000 bg-white hover:bg-blue-500  hover:shadow-xl m-2 p-4 relative z-40 group  ">
+                                    <div
+                                        class=" absolute  bg-blue-500/50 top-0 left-0 w-24 h-1 z-30  transition-all duration-200   group-hover:bg-white group-hover:w-1/2  ">
+                                    </div>
+                                    <div class="py-2 px-9 relative  ">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-white" width="48" height="48" viewBox="0 0 14 14">
+                                            <path fill="currentColor" fill-rule="evenodd" d="M12.402 8.976H7.259a2.278 2.278 0 0 0-.193-4.547h-1.68A3.095 3.095 0 0 0 4.609 0h7.793a1.35 1.35 0 0 1 1.348 1.35v6.279c0 .744-.604 1.348-1.348 1.348ZM2.898 4.431a1.848 1.848 0 1 0 0-3.695a1.848 1.848 0 0 0 0 3.695m5.195 2.276c0-.568-.46-1.028-1.027-1.028H2.899a2.649 2.649 0 0 0-2.65 2.65v1.205c0 .532.432.963.964.963h.172l.282 2.61A1 1 0 0 0 2.66 14h.502a1 1 0 0 0 .99-.862l.753-5.404h2.16c.567 0 1.027-.46 1.027-1.027Z" clip-rule="evenodd" />
+                                        </svg>
+                                        <h3 class="mt-8 text-xl font-semibold text-black group-hover:text-white "><?php echo $row['room_name']; ?>
+                                        </h3>
+                                        <!-- ลิงก์เลือกห้อง -->
+                                        <div class="flex justify-center">
+                                            <a href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/room_view.php?id=<?php echo $row['room_id']; ?>"
+                                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+                                                เลือกห้องนี้
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        </div>
                     </div>
                 </div>
-            <?php endwhile; ?>
-        </div>
-    </div>
-</div>
 
 
             </div>
