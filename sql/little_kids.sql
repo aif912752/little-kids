@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 04:50 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: Oct 07, 2024 at 01:26 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,17 +35,15 @@ CREATE TABLE `activity` (
   `activity_description` text DEFAULT NULL COMMENT 'รายละเอียดกิจกรรม',
   `activity_date_start` varchar(255) DEFAULT current_timestamp() COMMENT 'วันที่เริ่มกิจกรรม',
   `activity_date_end` varchar(255) DEFAULT current_timestamp() COMMENT 'เวลาสิ้นสุดกิจกรรม'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `activity`
 --
 
 INSERT INTO `activity` (`id`, `user_id`, `activity_type`, `activity_name`, `activity_description`, `activity_date_start`, `activity_date_end`) VALUES
-(4, 0, 'ตีไก่', 'นวล', 'ไปเที่ยวกัน', '2024-10-13', '2024-10-12'),
-(6, 0, 'ตีไก่', 'ไอ่นนท์', 'หกด', '2024-10-15', '2024-10-15'),
-(8, 0, 'ตีไก่', 'นวล', 'หกดหกดหกด', '2024-10-09', '2024-10-09'),
-(10, 0, 'ไปเที่ยววว', 'กายยยยยย', 'sadfsdf', '2024-10-10', '2024-10-10');
+(3, 0, 'ฟหกฟหกฟหก', 'กกกกก', 'ฟหกฟหก', '2024-10-23 20:46:00', '2024-10-25 20:46:00'),
+(4, 0, 'ตีไก่', 'นวล', 'ไปเที่ยวกัน', '2024-10-12 20:59:00', '2024-10-12 20:59:00');
 
 -- --------------------------------------------------------
 
@@ -67,15 +65,14 @@ CREATE TABLE `administrators` (
   `religion` varchar(50) DEFAULT NULL COMMENT 'ศาสนา',
   `address` text DEFAULT NULL COMMENT 'ที่อยู่ของผู้ดูแลระบบ',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `administrators`
 --
 
 INSERT INTO `administrators` (`admin_id`, `first_name`, `last_name`, `position`, `citizen_id`, `email`, `phone_number`, `birthdate`, `ethnicity`, `nationality`, `religion`, `address`, `user_id`) VALUES
-(1, 'ไอ่นนท์', 'กาย', 'ผู้ดูแลระบบ', 'ไอ่นนท์', 'warunyoo084@gmail.com', 'ไอ่นนท์', '2024-10-16', 'ไอ่นนท์', 'ไอ่นนท์', 'ไอ่นนท์', 'กาย', 26),
-(2, 'supapit', 'intarathaiwong', 'ผู้ดูแลระบบ', '1500999', 'warunyoo084@gmail.com', '0848091046', '2024-10-17', 'ไทย', 'ไทย', 'ไทย', 'หกด', 33);
+(1, 'ไอ่นนท์', 'กาย', 'ผู้ดูแลระบบ', 'ไอ่นนท์', 'warunyoo084@gmail.com', 'ไอ่นนท์', '2024-10-16', 'ไอ่นนท์', 'ไอ่นนท์', 'ไอ่นนท์', 'กาย', 1);
 
 -- --------------------------------------------------------
 
@@ -90,17 +87,18 @@ CREATE TABLE `attendance` (
   `student_lastname` varchar(255) NOT NULL COMMENT 'นามกสุลนักเรียน',
   `attendance_date` date NOT NULL COMMENT 'วันที่ลงเวลา',
   `note` varchar(100) NOT NULL COMMENT 'หมายเหตุ',
-  `room_id` varchar(50) NOT NULL COMMENT 'เก็บวันที่ if ref มาจาก table room ',
   `status` varchar(50) NOT NULL COMMENT 'สถานะการเข้าเรียน'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `attendance`
 --
 
-INSERT INTO `attendance` (`attendance_id`, `student_id`, `student_name`, `student_lastname`, `attendance_date`, `note`, `room_id`, `status`) VALUES
-(30, 20, 'กิจกรรมนัทนาการtest1', 'intarathaiwong', '2024-10-06', 'โดยต่อย', '', 'ขาด'),
-(32, 20, 'กิจกรรมนัทนาการtest1', 'intarathaiwong', '2024-10-06', '', '', 'ขาด');
+INSERT INTO `attendance` (`attendance_id`, `student_id`, `student_name`, `student_lastname`, `attendance_date`, `note`, `status`) VALUES
+(35, 17, 'กาย', 'กาย', '2024-10-06', '', 'มา'),
+(37, 18, 'กหกฟหกฟหก', '', '2024-10-06', '', 'มา'),
+(39, 17, 'กาย', 'กาย', '2024-10-06', '1', 'สาย'),
+(40, 17, 'กาย', 'กาย', '2024-10-06', '', 'มา');
 
 -- --------------------------------------------------------
 
@@ -115,17 +113,18 @@ CREATE TABLE `director` (
   `last_name` varchar(100) NOT NULL COMMENT 'นามสกุลผู้อำนวยการ',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดผู้อำนวยการ',
   `email` varchar(100) NOT NULL COMMENT 'อีเมล์ผู้อำนวยการ',
-  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
+  `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรผู้อำนวยการ',
   `position` varchar(100) NOT NULL COMMENT 'ตำเเหน่งผู้อำนวยการ',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `director`
 --
 
 INSERT INTO `director` (`director_id`, `Img`, `first_name`, `last_name`, `birthdate`, `email`, `phone_number`, `position`, `user_id`) VALUES
-(5, '', 'ผู้อำนวยการ', 'intarathaiwong', '2024-10-23', 'warunyoo084@gmail.com', '0848091046', 'ผู้อำนวยการ', 42);
+(1, '', 'กาย', 'กาย', '2024-10-11', 'warunyoo084@gmail.com', 848091046, 'ครูใหญ่', 2),
+(2, '', 'กาย', 'กาย', '2024-10-18', 'warunyoo084@gmail.com', 848091046, 'ไอ่นนท์', 27);
 
 -- --------------------------------------------------------
 
@@ -141,14 +140,14 @@ CREATE TABLE `evaluation` (
   `evaluation_date` date NOT NULL COMMENT 'วันที่ทำการประเมิน',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `evaluation`
 --
 
 INSERT INTO `evaluation` (`evaluation_id`, `techer_id`, `evaluation_name`, `score`, `evaluation_date`, `created_at`, `updated_at`) VALUES
-(8, 0, 'กายยยยยย', '9', '2024-10-06', '2024-10-06 12:24:08', '2024-10-06 12:24:08');
+(13, 1, '55', '2', '2024-10-06', '2024-10-06 16:55:29', '2024-10-06 16:55:29');
 
 -- --------------------------------------------------------
 
@@ -161,16 +160,14 @@ CREATE TABLE `evaluation_activity` (
   `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
   `evaluation_score` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'คะเเนนประเมินในรูปแบบ JSON' CHECK (json_valid(`evaluation_score`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `evaluation_activity`
 --
 
 INSERT INTO `evaluation_activity` (`id`, `activity_id`, `evaluation_name`, `evaluation_score`) VALUES
-(2, '6', 'test1', '[{\"text\":\"1\",\"score\":5},{\"text\":\"2\",\"score\":4},{\"text\":\"3\",\"score\":3},{\"text\":\"4\",\"score\":2}]'),
-(3, '7', 'ตี2', '[{\"text\":\"1\",\"score\":5},{\"text\":\"2\",\"score\":4},{\"text\":\"3\",\"score\":6},{\"text\":\"4\",\"score\":2},{\"text\":\"5\",\"score\":1}]'),
-(4, '8', 'คำถาม', '[{\"text\":\"\\u0e21\\u0e32\\u0e01\\u0e17\\u0e35\\u0e48\\u0e2a\\u0e38\\u0e14\",\"score\":\"5\"},{\"text\":\"\\u0e19\\u0e49\\u0e2d\\u0e22\",\"score\":\"4\"},{\"text\":\"\\u0e19\\u0e49\\u0e2d\\u0e22\\u0e01\\u0e27\\u0e48\\u0e32\",\"score\":\"3\"}]');
+(5, '13', '2', '[{\"text\":\"2\",\"score\":2}]');
 
 -- --------------------------------------------------------
 
@@ -183,7 +180,17 @@ CREATE TABLE `evaluation_activity_student` (
   `activity_id` varchar(50) NOT NULL COMMENT 'เก็บ id มาจาก table evalution',
   `evaluation_name` varchar(255) NOT NULL COMMENT 'ชื่อกิจกรรม',
   `evaluation_score` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'คะเเนนประเมินในรูปแบบ JSON' CHECK (json_valid(`evaluation_score`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `evaluation_activity_student`
+--
+
+INSERT INTO `evaluation_activity_student` (`id`, `activity_id`, `evaluation_name`, `evaluation_score`) VALUES
+(10, '11', '2', '[{\"text\":\"2\",\"score\":\"2\"}]'),
+(11, '12', '555+500', '[{\"text\":\"2\",\"score\":\"2\"},{\"text\":\"1\",\"score\":\"2\"}]'),
+(12, '13', '11', '[{\"text\":\"3\",\"score\":3},{\"text\":\"23\",\"score\":3}]'),
+(13, '13', '23', '[{\"text\":\"2\",\"score\":3},{\"text\":\"3\",\"score\":3}]');
 
 -- --------------------------------------------------------
 
@@ -199,7 +206,15 @@ CREATE TABLE `evaluation_students` (
   `evaluation_date` date NOT NULL COMMENT 'วันที่ทำการประเมิน',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `evaluation_students`
+--
+
+INSERT INTO `evaluation_students` (`evaluation_id`, `students_id`, `evaluation_name`, `score`, `evaluation_date`, `created_at`, `updated_at`) VALUES
+(12, 18, 'หัวข้อ 1 ', '4', '2024-10-06', '2024-10-06 16:59:17', '2024-10-06 16:59:17'),
+(13, 17, '11', '12', '2024-10-07', '2024-10-07 06:47:07', '2024-10-07 06:47:07');
 
 -- --------------------------------------------------------
 
@@ -215,16 +230,14 @@ CREATE TABLE `evaluation_to_activity` (
   `total_score` varchar(50) NOT NULL COMMENT 'คะเเนนรวม ',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `evaluation_to_activity`
 --
 
 INSERT INTO `evaluation_to_activity` (`id`, `techer_id`, `evaluation_id`, `evaluation_activity_id`, `total_score`, `created_at`, `updated_at`) VALUES
-(1, 0, 6, '2', '5', '2024-10-06 10:52:24', '2024-10-06 10:52:24'),
-(2, 0, 6, '2', '5', '2024-10-06 12:04:59', '2024-10-06 12:04:59'),
-(3, 0, 7, '3', '6', '2024-10-06 12:04:59', '2024-10-06 12:04:59');
+(3, 1, 13, '5', '2', '2024-10-06 16:56:05', '2024-10-06 16:56:05');
 
 -- --------------------------------------------------------
 
@@ -234,12 +247,13 @@ INSERT INTO `evaluation_to_activity` (`id`, `techer_id`, `evaluation_id`, `evalu
 
 CREATE TABLE `evaluation_to_activity_student` (
   `id` int(11) NOT NULL COMMENT 'id หลัก',
+  `students_id` int(50) NOT NULL COMMENT 'ไอดีที่ ref มาจาก table',
   `evaluation_id` int(11) NOT NULL COMMENT 'อ้างอิงจากรหัสประเมิน อ้างอิงมาจาก table evaluation ',
   `evaluation_activity_id` varchar(50) NOT NULL COMMENT 'อ้างอิงจากรหัสกิจกรรมประเมินจาก table evaluation_activity ',
   `total_score` varchar(50) NOT NULL COMMENT 'คะเเนนรวม ',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -259,15 +273,37 @@ CREATE TABLE `guardians` (
   `student_id` int(11) NOT NULL COMMENT 'ชื่อนามสกุลของนักเรียนที่ ref ไปหา',
   `user_id` int(11) NOT NULL COMMENT 'รหัสที่ ref ไปหา user_id',
   `room_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาห้องเรียน'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `guardians`
 --
 
 INSERT INTO `guardians` (`guardian_id`, `img`, `first_name`, `last_name`, `phone_number`, `gender`, `address`, `relation_to_student`, `student_id`, `user_id`, `room_id`) VALUES
-(2, '', 'asdasd', 'asdasd', '08444545', 'Male', 'หกดหกด', 'เเม่เล่า', 21, 35, ''),
-(4, '', 'ผู้ปกครอง', 'ผู้ปกครอง', '084091046', 'Male', 'ผู้ปกครอง', 'ผู้ปกครอง', 23, 45, '');
+(1, '', '3', '3', '0636675523', '', '3', '1', 1, 1, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `news_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `details` text NOT NULL,
+  `img` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่สร้างข่าว'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`news_id`, `title`, `details`, `img`, `created_at`) VALUES
+(1, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33\r\n', '6702cc336f231-user.png', '2024-10-07 07:31:51'),
+(2, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33', '6702cc3b62c90-orderhub.jpg', '2024-10-07 07:31:51'),
+(4, '2', '22', '6702c911750b5-user.webp', '2024-10-07 07:31:51');
 
 -- --------------------------------------------------------
 
@@ -280,16 +316,15 @@ CREATE TABLE `room` (
   `room_name` varchar(255) NOT NULL COMMENT 'ชื่อห้องเรียน',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `room`
 --
 
 INSERT INTO `room` (`room_id`, `room_name`, `created_at`, `updated_at`) VALUES
-(1, 'อนุบาล 2', '2024-10-05 18:12:33', '2024-10-05 18:12:33'),
-(2, 'อนุบาล 3', '2024-10-06 07:03:31', '2024-10-06 07:03:31'),
-(3, 'อนุบาล 1', '2024-10-06 12:14:26', '2024-10-06 12:14:26');
+(1, 'A1', '2024-10-05 18:54:02', '2024-10-05 18:54:02'),
+(2, 'A2', '2024-10-05 18:54:13', '2024-10-05 18:54:13');
 
 -- --------------------------------------------------------
 
@@ -309,44 +344,22 @@ CREATE TABLE `students` (
   `gender` enum('Male','Female','Other') NOT NULL COMMENT 'เพศนักเรียน',
   `citizen_id` varchar(11) NOT NULL COMMENT 'รหัสบัตรประชาชน',
   `enrollment_date` date NOT NULL COMMENT 'วันที่ลงทะเบียนเข้าเรียน',
+  `grade_level` varchar(50) NOT NULL COMMENT 'ชั้นที่เรียน',
   `status` enum('Active','Inactive','Graduated') DEFAULT 'Active' COMMENT 'สถาณะนักเรียน',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser	',
   `guardians_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาผู้ครอง',
   `room_id` varchar(255) NOT NULL COMMENT 'ไอดีที่ ref ไปหาห้องเรียน',
   `student_height` varchar(255) NOT NULL COMMENT 'ส่วนสูงนักเรียน',
   `student_weight` varchar(255) NOT NULL COMMENT 'น้ำหนักนักเรียน'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
-(17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', 'Active', 24, '', '', '', ''),
-(18, '67017e0985bc4-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'Active', 25, '', '', '', ''),
-(21, '670284da00c3e-1.png', 'supapit', 'intarathaiwong', '2024-10-14', 'asd', 'ไอ่นนท์', 'asd', 'Male', '1515151515', '2024-10-23', 'Active', 34, '', '3', '150', '55'),
-(23, '', 'นักเรียน', 'นักเรียน', '2024-10-24', 'ไทย', 'ไทย', 'ไทย', 'Male', '150984454', '2024-10-17', 'Inactive', 44, '', '2', '150', '55');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `student_measurements`
---
-
-CREATE TABLE `student_measurements` (
-  `id` int(11) NOT NULL COMMENT 'ไอดีหลัก pk',
-  `student_id` varchar(50) NOT NULL COMMENT 'ไอดีนักเรียน',
-  `weight` decimal(5,2) NOT NULL COMMENT 'น้ำหนัก (กิโลกรัม)',
-  `height` decimal(5,2) NOT NULL COMMENT 'ส่วนสูง (เซนติเมตร)',
-  `recorded_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'เวลาที่บันทึกข้อมูล'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `student_measurements`
---
-
-INSERT INTO `student_measurements` (`id`, `student_id`, `weight`, `height`, `recorded_at`) VALUES
-(22, '20', 50.00, 140.00, '2024-10-06 12:20:20');
+INSERT INTO `students` (`student_id`, `img`, `first_name`, `last_name`, `birthdate`, `ethnicity`, `nationality`, `religion`, `gender`, `citizen_id`, `enrollment_date`, `grade_level`, `status`, `user_id`, `guardians_id`, `room_id`, `student_height`, `student_weight`) VALUES
+(17, '670145d5111e2-1.png', 'กาย', 'กาย', '2024-10-25', '', '', 'กาย', 'Male', '123465', '0000-00-00', '', 'Active', 24, '', '1', '', ''),
+(18, '670168f02a3bd-1.jpg', 'กหกฟหกฟหก', '', '0000-00-00', 'ไทย', 'ไทย', 'ไทย', 'Male', '150000', '2024-08-01', 'อนุบาล 5', 'Active', 25, '', '2', '', '');
 
 -- --------------------------------------------------------
 
@@ -366,18 +379,19 @@ CREATE TABLE `teacher` (
   `religion` varchar(100) NOT NULL COMMENT 'ศาสนา',
   `citizen_id` int(15) NOT NULL COMMENT 'รหัสบัตรประชาชน',
   `birthdate` date NOT NULL COMMENT 'วันเดือนปีเกิดครู',
-  `phone_number` varchar(50) NOT NULL COMMENT 'เบอร์โทรครู',
+  `phone_number` int(15) NOT NULL COMMENT 'เบอร์โทรครู',
   `teacher_address` varchar(255) NOT NULL COMMENT 'ที่อยู่ครู',
   `room_id` varchar(50) NOT NULL COMMENT 'ชั้นที่สอน',
   `user_id` int(11) NOT NULL COMMENT 'เป็นrefไอดีที่มาจากuser'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `teacher`
 --
 
 INSERT INTO `teacher` (`teacher_id`, `img`, `first_name`, `last_name`, `position`, `email`, `ethnicity`, `nationality`, `religion`, `citizen_id`, `birthdate`, `phone_number`, `teacher_address`, `room_id`, `user_id`) VALUES
-(5, '', 'ครู', 'ครู', 'ครู', 'warunyoo084@gmail.com', 'ไทย', 'ไทย', 'ไทย', 2147483647, '2024-10-10', '08480910416', 'ฟหกดห', '1', 43);
+(1, '', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 'กาย', 0, '0000-00-00', 0, '', '', 3),
+(2, '', 'กกกกก', 'asdasdasd', 'กกกกก', 'warunyoo084@gmail.com', 'กกกกก', 'กกกกก', 'กกกกก', 0, '2024-10-17', 0, 'asdasdas', 'กกกกก', 28);
 
 -- --------------------------------------------------------
 
@@ -391,18 +405,25 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `role` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `role`) VALUES
-(33, 'gaizaza1412', '123456789', 'supapit', 1),
-(42, 'director1', '123456789', 'ผู้อำนวยการ', 2),
-(43, 'teacher', '123456789', 'ครู', 3),
-(44, '150984454', '150984454', 'นักเรียน', 5),
-(45, 'test1', '123456789', 'ผู้ปกครอง', 4);
+(1, 'admin', '123456789', 'adminnon', 1),
+(2, 'director', '123456789', 'director1', 2),
+(3, 'teacher', '123456789', 'teacher1', 3),
+(4, 'ruler', '123456789', 'ruler1', 4),
+(5, '', '', 'student1', 5),
+(19, '123456', '123456', 'กาย', 2),
+(20, '0848091046', '123456789', 'กาย', 2),
+(24, '', '', 'กาย', 5),
+(25, '', '', 'กหกฟหกฟหก', 5),
+(26, 'dddd', '123456789', 'ไอ่นนท์', 1),
+(27, 'guardians', '123456789', 'กาย', 4),
+(28, 'teacher2', '123456789', 'กกกกก', 3);
 
 --
 -- Indexes for dumped tables
@@ -475,6 +496,12 @@ ALTER TABLE `guardians`
   ADD PRIMARY KEY (`guardian_id`);
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`news_id`);
+
+--
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
@@ -485,12 +512,6 @@ ALTER TABLE `room`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`student_id`);
-
---
--- Indexes for table `student_measurements`
---
-ALTER TABLE `student_measurements`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `teacher`
@@ -512,49 +533,49 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสกิจกรรม', AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสกิจกรรม', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ดูแลระบบ', AUTO_INCREMENT=4;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ดูแลระบบ', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการลงเวลา', AUTO_INCREMENT=33;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการลงเวลา', AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `director`
 --
 ALTER TABLE `director`
-  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=6;
+  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `evaluation`
 --
 ALTER TABLE `evaluation`
-  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=9;
+  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `evaluation_activity`
 --
 ALTER TABLE `evaluation_activity`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `evaluation_activity_student`
 --
 ALTER TABLE `evaluation_activity_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id หลัก';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id หลัก', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `evaluation_students`
 --
 ALTER TABLE `evaluation_students`
-  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน';
+  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `evaluation_to_activity`
@@ -566,43 +587,43 @@ ALTER TABLE `evaluation_to_activity`
 -- AUTO_INCREMENT for table `evaluation_to_activity_student`
 --
 ALTER TABLE `evaluation_to_activity_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id หลัก';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id หลัก', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `guardians`
 --
 ALTER TABLE `guardians`
-  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=5;
+  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `student_measurements`
---
-ALTER TABLE `student_measurements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีหลัก pk', AUTO_INCREMENT=23;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=6;
+  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
