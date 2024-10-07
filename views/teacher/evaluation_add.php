@@ -68,7 +68,7 @@ if ($teacherResult) {
                 <?php endforeach; ?>
             </select>
             <input type="hidden" name="selected_teacher_id" id="selectedTeacherId">
-            <div id="selectedTeacherIdDisplay" class="text-gray-700 font-medium mt-2"></div>
+            <!-- <div id="selectedTeacherIdDisplay" class="text-gray-700 font-medium mt-2"></div> -->
                             </div>
                             <script>
                                 function showTeacherId() {
