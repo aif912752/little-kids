@@ -22,13 +22,12 @@
             <?php
             include '../../config/database.php';
 
-
             // เอา user_id ไปเอาหา student_id 
             $sql_student_id = "SELECT student_id FROM students WHERE user_id = " . $_SESSION['user_id'];
             $result_student_id = $connect->query($sql_student_id);
             $student_id = $result_student_id->fetch_assoc()['student_id'] ?? 0;
-        
-            $sql = "SELECT * FROM attendance  WHERE student_id = $student_id";
+
+            $sql = "SELECT * FROM attendance WHERE student_id = $student_id";
             $result = $connect->query($sql);
 
             // ดึงจำนวนครูจากตาราง teacher
@@ -45,7 +44,52 @@
             $sql_activity_count = "SELECT COUNT(*) as activity_count FROM activity";
             $result_activity_count = $connect->query($sql_activity_count);
             $activity_count = $result_activity_count->fetch_assoc()['activity_count'] ?? 0;
+
+            // เพิ่มเติม: ดึงจำนวนผู้ปกครองจากตาราง guardians
+            $sql_guardian_count = "SELECT COUNT(*) as guardian_count FROM guardians";
+            $result_guardian_count = $connect->query($sql_guardian_count);
+            $guardian_count = $result_guardian_count->fetch_assoc()['guardian_count'] ?? 0;
+
+            // คำนวณจำนวนรวมทั้งหมด
+            $total_count = $teacher_count + $student_count + $guardian_count;
+
+            // Fetch activity data
+            $sql_activity = "SELECT DATE(activity_date_start) as date, COUNT(*) as count FROM activity GROUP BY DATE(activity_date_start) ORDER BY date DESC LIMIT 11";
+            $result_activity = $connect->query($sql_activity);
+            $activity_data = [];
+            $dates = [];
+
+            while ($row = $result_activity->fetch_assoc()) {
+                $activity_data[] = $row['count'];
+                $dates[] = date('M d', strtotime($row['date']));
+            }
+
+            // Fetch news data
+            $sql_news = "SELECT DATE(created_at) as date, COUNT(*) as count FROM news GROUP BY DATE(created_at) ORDER BY date DESC LIMIT 11";
+            $result_news = $connect->query($sql_news);
+            $news_data = [];
+
+            while ($row = $result_news->fetch_assoc()) {
+                $news_data[] = $row['count'];
+            }
+
+
+            // Ensure both arrays have 11 elements, fill with 0 if necessary
+            $activity_data = array_pad($activity_data, 11, 0);
+            $news_data = array_pad($news_data, 11, 0);
+            $dates = array_pad($dates, 11, '');
+
+            // Reverse the arrays to display oldest data first
+            $activity_data = array_reverse($activity_data);
+            $news_data = array_reverse($news_data);
+            $dates = array_reverse($dates);
+
+            // Convert PHP arrays to JSON for use in JavaScript
+            $activity_json = json_encode($activity_data);
+            $news_json = json_encode($news_data);
+            $dates_json = json_encode($dates);
             ?>
+
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
                 <!-- Main Content -->
@@ -302,59 +346,16 @@
 
                         </div>
 
-                        <div class="col-span-2">
-                            <div class="card h-full">
-                                <div class="card-body">
-                                    <h4 class="text-gray-500 text-lg font-semibold mb-5">ข้อมูลการมาเรียน</h4>
-                                    <div class="relative overflow-x-auto">
-                                        <!-- table -->
-                                        <table class="text-left w-full whitespace-nowrap text-sm text-gray-500">
-                                            <thead>
-                                                <tr class="text-sm">
-                                                    <th scope="col" class="p-4 font-semibold">ชื่อ-นามสกุล</th>
-                                                    <th scope="col" class="p-4 font-semibold">วันที่</th>
-                                                    <th scope="col" class="p-4 font-semibold">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <?php
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {
-                                                ?>
-
-                                                        <tr>
-                                                            <td class="p-4 text-sm">
-                                                                <div class="flex gap-6 items-center">
-                                                                    <div class="h-12 w-12 inline-block"><img
-                                                                            src="./assets/images/profile/user-1.jpg" alt=""
-                                                                            class="rounded-full w-100"></div>
-                                                                    <div class="flex flex-col gap-1 text-gray-500">
-                                                                        <h3 class=" font-bold"><?php echo $row['student_name'] . ' ' . $row['student_lastname']; ?></h3>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="p-4">
-                                                                <h3 class="font-medium"><?php echo $row['attendance_date']; ?></h3>
-                                                            </td>
-
-                                                            <td class="p-4">
-                                                                <span
-                                                                    class="inline-flex items-center py-2 px-4 rounded-3xl font-semibold bg-teal-400 text-teal-500"><?php echo $row['status']; ?></span>
-                                                            </td>
-                                                        </tr>
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+
+                        <div class="col-span-12 mt-5">
+                            <div class="grid gap-2 grid-cols-1 lg:grid-cols-2">
+                                <div class="bg-white shadow-lg p-4" id="chartline"></div>
+                                <div class="bg-white shadow-lg" id="chartpie"></div>
                             </div>
                         </div>
+
                     </div>
 
 
@@ -366,6 +367,101 @@
     </div>
     <!--end of project-->
     </main>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        var chart = document.querySelector('#chartline')
+        var options = {
+            series: [{
+                name: 'กิจกรรม',
+                type: 'area',
+                data: <?php echo $activity_json; ?>
+            }, {
+                name: 'ข่าวสาร',
+                type: 'line',
+                data: <?php echo $news_json; ?>
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            fill: {
+                type: 'solid',
+                opacity: [0.35, 1],
+            },
+            labels: <?php echo $dates_json; ?>,
+            markers: {
+                size: 0
+            },
+            yaxis: [{
+                    title: {
+                        text: 'จำนวนกิจกรรม',
+                    },
+                },
+                {
+                    opposite: true,
+                    title: {
+                        text: 'จำนวนข่าวสาร',
+                    },
+                }
+            ],
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function(y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0) + " รายการ";
+                        }
+                        return y;
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(chart, options);
+        chart.render();
+    </script>
+    <script>
+        var chart = document.querySelector('#chartpie')
+        var options = {
+            series: [<?php echo $teacher_count; ?>, <?php echo $student_count; ?>, <?php echo $guardian_count; ?>],
+            chart: {
+                height: 350,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    dataLabels: {
+                        name: {
+                            fontSize: '22px',
+                        },
+                        value: {
+                            fontSize: '16px',
+                        },
+                        total: {
+                            show: true,
+                            label: 'จำนวนทั้งหมด',
+                            formatter: function(w) {
+                                return <?php echo $total_count; ?>
+                            }
+                        }
+                    }
+                }
+            },
+            labels: ['ครู', 'นักเรียน', 'ผู้ปกครอง'],
+        };
+        var chart = new ApexCharts(chart, options);
+        chart.render();
+    </script>
 </body>
 
 
