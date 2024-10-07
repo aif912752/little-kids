@@ -11,14 +11,7 @@
     <style>
         .dataTables_length select {
             width: 50px;
-            /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
-
         }
-
-        /* .swal2-confirm {
-            background-color: #2563EB !important;
-            color: white !important;
-        } */
     </style>
 </head>
 
@@ -56,7 +49,6 @@
 
                             $result = $connect->query($sql);
 
-                            // ตรวจสอบว่ามีข้อผิดพลาดใน query หรือไม่
                             if (!$result) {
                                 die("Query Error: " . $connect->error);
                             }
@@ -78,24 +70,21 @@
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อ</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อการประเมิน</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">คะแนนรวม</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    // ลูปแสดงข้อมูลในตาราง
                                     if ($result->num_rows > 0) {
-                                        $rank = 1; // เริ่มต้นลำดับที่ 1
+                                        $rank = 1;
                                         while ($row = $result->fetch_assoc()) {
                                             echo "<tr>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $rank++ . "</td>"; // แสดงลำดับ
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $rank++ . "</td>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
-                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['evaluation_name'] . "</td>"; // แสดงชื่อการประเมิน
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['evaluation_name'] . "</td>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $row['total_score'] . "</td>";
                                             echo "</tr>";
                                         }
                                     } else {
-                                        echo "<tr><td colspan='4' class='py-5 border-b border-gray-200 bg-white'>ไม่มีข้อมูล</td></tr>";
                                     }
                                     ?>
                                 </tbody>
@@ -107,11 +96,10 @@
                                 const totalScores = [];
 
                                 <?php
-                                // เตรียมข้อมูลสำหรับ JavaScript
-                                $result->data_seek(0); // รีเซ็ตผลลัพธ์
+                                $result->data_seek(0);
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "labels.push('" . $row['first_name'] . " " . $row['last_name'] . "');"; // เพิ่มชื่อเต็มนักเรียนในอาร์เรย์
-                                    echo "totalScores.push(" . $row['total_score'] . ");"; // คะแนนรวม
+                                    echo "labels.push('" . $row['first_name'] . " " . $row['last_name'] . "');";
+                                    echo "totalScores.push(" . $row['total_score'] . ");";
                                 }
                                 ?>
 
@@ -151,7 +139,15 @@
 
 <script>
     $(document).ready(function() {
-        $('#example').DataTable(); // เรียกใช้งาน DataTables
+        $('#example').DataTable({
+            "pageLength": 10, // แสดงผลทีละ 10 รายการ
+            "lengthMenu": [5, 10, 20, 50],
+            "searching": true,
+            "ordering": true,
+            "order": [
+                [0, "asc"]
+            ], // ลำดับเริ่มต้นคือคอลัมน์แรก (ลำดับ)
+        });
     });
 </script>
 
