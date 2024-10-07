@@ -26,7 +26,7 @@
                             <div class="bg-gradient-to-b from-blue-500 to-blue-300 h-96"></div>
                             <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
                                 <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
-                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลกิจกรรม</p>
+                                    <p class="text-3xl font-bold leading-7 text-center">เพิ่มข้อมูลข่าวสาร</p>
                                     <form action="news_insert.php" method="post" enctype="multipart/form-data">
                                         <div class="md:flex items-center mt-4">
                                             <div class="w-full md:w-1/2 flex flex-col">
@@ -56,7 +56,7 @@
                                                             <input id="img" name="img" type="file" class="h-full w-full opacity-0" accept="image/*" onchange="previewImage(this);">
                                                         </div>
                                                         <div id="preview" class="mt-3 hidden">
-                                                            <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-full h-auto rounded-lg shadow-lg">
+                                                            <img id="preview-img" src="#" alt="ตัวอย่างรูปภาพ" class="max-w-md h-auto rounded-lg shadow-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -72,7 +72,7 @@
                                             <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
                                                 บันทึก
                                             </button>
-                                            <a href="student.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
+                                            <a href="news.php" class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-red-600 rounded hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:outline-none">ยกเลิก</a>
 
                                         </div>
                                     </form>

@@ -114,8 +114,8 @@ session_start();
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link gap-3 py-2.5 my-1 text-base   flex items-center relative  rounded-md text-gray-500  w-full"
-                                href="news.php">
-                                <i class="ti ti-article ps-2 text-2xl"></i> <span>ข่าวสาร</span>
+                            href="<?= "http://" . $_SERVER['HTTP_HOST'] ?>/little-kids/views/admin/news.php">
+                            <i class="ti ti-article ps-2 text-2xl"></i> <span>ข่าวสาร</span>
                             </a>
                         </li>
 
