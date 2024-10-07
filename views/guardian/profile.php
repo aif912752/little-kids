@@ -53,7 +53,7 @@
                             if ($guardian['img'] != null) {
                                 echo '<img src="uploads/' . $guardian['img'] . '" class="w-40 h-40 border-4 border-white rounded-full">';
                             } else {
-                                echo '<img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">';
+                                echo '<img src="../../public/user.png" class="w-40 border-4 border-white rounded-full">';
                             }
                             ?>
 
