@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2024 at 02:13 PM
+-- Generation Time: Oct 07, 2024 at 03:04 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -79,18 +79,9 @@ CREATE TABLE `attendance` (
   `student_lastname` varchar(255) NOT NULL COMMENT 'นามกสุลนักเรียน',
   `attendance_date` date NOT NULL COMMENT 'วันที่ลงเวลา',
   `note` varchar(100) NOT NULL COMMENT 'หมายเหตุ',
+  `room_id` varchar(50) NOT NULL COMMENT 'เก็บวันที่ if ref มาจาก table room ',
   `status` varchar(50) NOT NULL COMMENT 'สถานะการเข้าเรียน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`attendance_id`, `student_id`, `student_name`, `student_lastname`, `attendance_date`, `note`, `status`) VALUES
-(35, 17, 'กาย', 'กาย', '2024-10-06', '', 'มา'),
-(37, 18, 'กหกฟหกฟหก', '', '2024-10-06', '', 'มา'),
-(39, 17, 'กาย', 'กาย', '2024-10-06', '1', 'สาย'),
-(40, 17, 'กาย', 'กาย', '2024-10-06', '', 'มา');
 
 -- --------------------------------------------------------
 
@@ -331,8 +322,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `role`) VALUES
-(1, 'admin', '123456789', 'adminnon', 1),
-(28, 'teacher', '123456789', 'กกกกก', 3);
+(1, 'admin', '123456789', 'adminnon', 1);
 
 --
 -- Indexes for dumped tables
@@ -460,13 +450,13 @@ ALTER TABLE `administrators`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการลงเวลา', AUTO_INCREMENT=41;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการลงเวลา', AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `director`
 --
 ALTER TABLE `director`
-  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=3;
+  MODIFY `director_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีผู้อำนวยการ', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `evaluation`
@@ -484,13 +474,13 @@ ALTER TABLE `evaluation_activity`
 -- AUTO_INCREMENT for table `evaluation_activity_student`
 --
 ALTER TABLE `evaluation_activity_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id หลัก', AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id หลัก', AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `evaluation_students`
 --
 ALTER TABLE `evaluation_students`
-  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=14;
+  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำแบบประเมิน', AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `evaluation_to_activity`
@@ -508,25 +498,25 @@ ALTER TABLE `evaluation_to_activity_student`
 -- AUTO_INCREMENT for table `guardians`
 --
 ALTER TABLE `guardians`
-  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=2;
+  MODIFY `guardian_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ปกครอง', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=19;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประจำตัว', AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `student_measurements`
@@ -538,13 +528,13 @@ ALTER TABLE `student_measurements`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=3;
+  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีครู', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
