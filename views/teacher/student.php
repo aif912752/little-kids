@@ -1,9 +1,11 @@
 <?php
 include '../../config/database.php';
-$sql = "SELECT * FROM students join room ON students.room_id = room.room_id";
+// Query เพื่อดึงข้อมูลห้องจากตาราง room
+$sql = "SELECT room_id, room_name FROM room";
 $result = $connect->query($sql);
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +16,14 @@ $result = $connect->query($sql);
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-    
-       
-    <style>
-            .dataTables_length select {
-                width: 50px;
-                /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
 
-            }
+
+    <style>
+        .dataTables_length select {
+            width: 50px;
+            /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
+
+        }
     </style>
 </head>
 
@@ -31,91 +33,36 @@ $result = $connect->query($sql);
             <?php include '../../src/navbar_teacher.php'; ?>
 
             <div class=" w-full page-wrapper xl:px-6 px-0">
+       
+          
 
-                <div class="container px-6 py-8 mx-auto ">
-                    <h3 class="text-3xl font-medium text-black">จัดการข้อมูลนักเรียน</h3>
+            <div class="container px-6 py-8 mx-auto">
+    <!-- หัวข้อหลัก -->
 
+    <!-- หัวข้อเลือกห้อง -->
+    <div class="container mx-auto mt-10">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-700">เลือกห้อง</h1>
 
-
-                    <div class="flex flex-col mt-8">
-                        <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
-
-                                <!-- ชิดขวา -->
-                                <div class="flex justify-end p-3">
-                                    <a href="student_add.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">เพิ่มข้อมูล</a>
-                                </div>
-
-
-                                <table id="example" class="display pt-8" style="width:100%">
-                                    <thead class="bg-slate-200 border border-rounded">
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อ-นามสกุล</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">เลขบัตรประชาชน</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วัน/เดือน/ปี</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">วันที่ลงทะเบียนเข้าเรียน</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชั้นที่เรียน</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">สถานะ</th>
-                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php
-                                      if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            $img_src = !empty($row['img']) ? 'uploads/' . $row['img'] : 'path/to/default-image.jpg';
-                                    ?>
-
-                                                <tr>
-                                                    <td class="py-5 border-b border-l border-gray-200 bg-white">
-                                                        <div class="flex items-center text-sm">
-                                                            <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                                                                <img class="object-cover w-full h-full rounded-full" src="<?php echo $img_src; ?>" alt="" loading="lazy" />
-                                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                                            </div>
-                                                            <div>
-                                                                <p class="font-semibold text-black"> <?php echo $row['first_name'] . ' ' . $row['last_name']; ?></p>
-                                                            </div>
-                                                        </div>
-
-                                                    </td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['citizen_id']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['birthdate']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['enrollment_date']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white"><?php echo $row['room_name']; ?></td>
-                                                    <td class="py-5 border-b border-gray-200 bg-white">
-                                                        <?php
-                                                            if($row['status'] == 'Active'){
-                                                                echo 'กำลังศึกษา';
-                                                            }else if($row['status'] == 'Inactive'){
-                                                                echo 'ไม่ศึกษา';
-                                                            }else if($row['status'] == 'Graduated'){
-                                                                echo 'สำเร็จการศึกษา';
-                                                            }
-                                                            
-                                                        ?>
-                                                     </td>
-
-                                                    <td class="py-5 border-b border-r border-gray-200 bg-white">
-                                                        <a href="student_edit.php?id=<?php echo $row['student_id']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">แก้ไข</a>
-                                                        <a class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                                        onclick="confirmDelete(event, '<?php echo $row['student_id']; ?>')">
-                                                        ลบ
-                                                        </a>
-                                                        
-                                                    </td>
-                                                </tr>
-
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+        <!-- Grid การจัดเรียงห้อง -->
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <!-- ชื่อห้อง -->
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center"><?php echo $row['room_name']; ?></h2>
+                    
+                    <!-- ลิงก์เลือกห้อง -->
+                    <div class="flex justify-center">
+                        <a href="../admin/room_view.php/?id=<?php echo $row['room_id']; ?>" 
+                           class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+                           เลือกห้องนี้
+                        </a>
                     </div>
                 </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
+</div>
+
 
             </div>
         </div>
