@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 10:10 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Oct 07, 2024 at 01:46 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,17 +31,18 @@ CREATE TABLE `news` (
   `news_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `details` text NOT NULL,
-  `img` varchar(100) DEFAULT NULL
+  `img` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่สร้างข่าว'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`news_id`, `title`, `details`, `img`) VALUES
-(1, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33\r\n', ''),
-(2, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33', NULL),
-(3, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33', NULL);
+INSERT INTO `news` (`news_id`, `title`, `details`, `img`, `created_at`) VALUES
+(1, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33\r\n', '6702cc336f231-user.png', '2024-10-07 07:31:51'),
+(2, 'คนตื่นดวง หรือจะสู้ ฅนตื่นธรรม', 'มาร่วมตีแผ่กระแสที่แรงที่สุดในสังคม กับรายการ #โหนกระแส \r\nเวลา จันทร์-ศุกร์ เวลา 12.35 น. ทางช่อง3HD กดเลข33', '6702cc3b62c90-orderhub.jpg', '2024-10-07 07:31:51'),
+(4, '2', '22', '6702c911750b5-user.webp', '2024-10-07 07:31:51');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +62,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
