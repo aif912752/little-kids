@@ -111,9 +111,7 @@
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_activities . "</td>";
                                             echo "</tr>";
                                         }
-                                    } else {
-                                        echo "<tr><td colspan='2' class='py-5 border-b border-gray-200 bg-white'>No data available</td></tr>";
-                                    }
+                                    } 
                                     ?>
                                 </tbody>
                             </table>
@@ -212,6 +210,8 @@ if (isset($_SESSION['alert'])) {
     const months = [];
     const totalActivities = [];
     <?php
+// ตรวจสอบว่ามีข้อมูลใน $result หรือไม่
+if ($result->num_rows > 0) {
     // เตรียมข้อมูลสำหรับ JavaScript
     $result->data_seek(0); // รีเซ็ตผลลัพธ์
     while ($row = $result->fetch_assoc()) {
@@ -223,7 +223,9 @@ if (isset($_SESSION['alert'])) {
         echo "months.push('".$monthName." ".$year."');"; // เพิ่มเดือนและปีในอาร์เรย์
         echo "totalActivities.push(".$total_activities.");"; // เพิ่มจำนวนกิจกรรมในอาร์เรย์
     }
-    ?>
+}
+?>
+
     
     const ctx = document.getElementById('activityChart').getContext('2d');
     const activityChart = new Chart(ctx, {
