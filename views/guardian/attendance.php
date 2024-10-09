@@ -28,8 +28,36 @@
             $result_student_id = $connect->query($sql_student_id);
             $student_id = $result_student_id->fetch_assoc()['student_id'] ?? 0;
 
-            $sql = "SELECT * FROM attendance  WHERE student_id = $student_id";
-            $result = $connect->query($sql);
+            if(isset($_GET['day_attendance'])){
+                $_SESSION['day_attendance'] = $_GET['day_attendance'];
+            }
+            if(isset($_GET['day_attendance_end'])){
+                $_SESSION['day_attendance_end'] = $_GET['day_attendance_end'];
+            }
+            
+            if(isset($_SESSION['day_attendance']) && isset($_SESSION['day_attendance_end'])){
+                $day_attendance = $_SESSION['day_attendance'];
+                $day_attendance_end = $_SESSION['day_attendance_end'];
+                $sql = "SELECT * FROM attendance WHERE attendance_date BETWEEN '$day_attendance' AND '$day_attendance_end' AND student_id = $student_id";
+                $result = $connect->query($sql);
+            }
+            else if(isset($_SESSION['day_attendance_end'])){
+                $day_attendance_end = $_SESSION['day_attendance_end'];
+                $sql = "SELECT * FROM attendance WHERE attendance_date = '$day_attendance_end' AND student_id = $student_id";
+                $result = $connect->query($sql);
+            }
+            else if(isset($_SESSION['day_attendance'])){
+                $day_attendance = $_SESSION['day_attendance'];
+                $sql = "SELECT * FROM attendance WHERE attendance_date = '$day_attendance' AND student_id = $student_id";
+                $result = $connect->query($sql);
+            }else{
+                //ถ้าไม่มีให้ค้นหาวันล่าสุด 
+                $sql = "SELECT * FROM attendance  WHERE student_id = $student_id AND attendance_date = (SELECT MAX(attendance_date) FROM attendance WHERE student_id = $student_id)";
+                $result = $connect->query($sql);
+            }
+
+            
+            
 
 
             ?>
@@ -45,6 +73,14 @@
                             <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
 
                                 <!-- ชิดขวา --> 
+                                <div class="flex justify-between p-3">
+                                    <div>
+                                        <label for="search" class="text-sm font-medium text-gray-700">ค้นหาวันที่</label>
+                                        <input type="date" class="border border-gray-200 p-2" placeholder="ค้นหาวันที่" id="dateInput" value="<?= isset($_SESSION['day_attendance']) ?  $_SESSION['day_attendance']:'' ?>" /> - 
+                                        <input type="date" class="border border-gray-200 p-2" placeholder="ค้นหาวันที่" id="dateInput_end" value="<?= isset($_SESSION['day_attendance_end']) ?  $_SESSION['day_attendance_end']:'' ?>" /> 
+                                    </div>
+                                    
+                                </div>
 
                                 <table id="example" class="display pt-8" style="width:100%">
                                     <thead class="bg-slate-200 border border-rounded">
@@ -115,7 +151,20 @@
 </body>
 
 </html>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('dateInput').addEventListener('change', function(event) {
+            const selectedDate = event.target.value;
+            console.log(selectedDate);
+            window.location.href = `attendance.php?day_attendance=${selectedDate}`;
+        });
+        document.getElementById('dateInput_end').addEventListener('change', function(event) {
+            const selectedDate = event.target.value;
+            console.log(selectedDate);
+            window.location.href = `attendance.php?day_attendance_end=${selectedDate}`;
+        });
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script>
