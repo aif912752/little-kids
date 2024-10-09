@@ -28,40 +28,76 @@
                 if(isset($_GET['day_attendance_end'])){
                     $_SESSION['day_attendance_end'] = $_GET['day_attendance_end'];
                 }
-                
-                if(isset($_SESSION['day_attendance']) && isset($_SESSION['day_attendance_end'])){
-                    $day_attendance = $_SESSION['day_attendance'];
-                    $day_attendance_end = $_SESSION['day_attendance_end'];
-                    $sql = "SELECT * FROM attendance WHERE attendance_date BETWEEN '$day_attendance' AND '$day_attendance_end'";
-                    $result = $connect->query($sql);
-                }
-                else if(isset($_SESSION['day_attendance_end'])){
-                    $day_attendance_end = $_SESSION['day_attendance_end'];
-                    $sql = "SELECT * FROM attendance WHERE attendance_date = '$day_attendance_end'";
-                    $result = $connect->query($sql);
-                }
-                else if(isset($_SESSION['day_attendance'])){
-                    $day_attendance = $_SESSION['day_attendance'];
-                    $sql = "SELECT * FROM attendance WHERE attendance_date = '$day_attendance'";
-                    $result = $connect->query($sql);
-                }else{
-                    //ถ้าไม่มีให้ค้นหาวันล่าสุด 
-                    $sql = "SELECT * FROM attendance WHERE attendance_date = (SELECT MAX(attendance_date) FROM attendance)";
-                    $result = $connect->query($sql);
-                }
 
                 // ค้นหา ห้องทั้งหมด
                 if(isset($_GET['room_id'])){
                     $_SESSION['room_id'] = $_GET['room_id'];
                 }
+                
+                
+                
+
+                
                 if (isset($_SESSION['room_id'])) {
                   
-                    $sql = "SELECT * FROM attendance WHERE room_id = '".$_SESSION['room_id']."'";
-                    $result = $connect->query($sql);
+                    if (isset($_SESSION['day_attendance']) && isset($_SESSION['day_attendance_end'])) {
+                        $day_attendance = $_SESSION['day_attendance'];
+                        $day_attendance_end = $_SESSION['day_attendance_end'];
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date BETWEEN '$day_attendance' AND '$day_attendance_end' AND room_id = ".$_SESSION['room_id']."
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                       
+                        $result = $connect->query($sql);
+                    } else if (isset($_SESSION['day_attendance_end'])) {
+                        $day_attendance_end = $_SESSION['day_attendance_end'];
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date = '$day_attendance_end'  AND room_id = ".$_SESSION['room_id']."
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                        $result = $connect->query($sql);
+                    } else if (isset($_SESSION['day_attendance'])) {
+                        $day_attendance = $_SESSION['day_attendance'];
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date = '$day_attendance'  AND room_id = ".$_SESSION['room_id']."
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                        $result = $connect->query($sql);
+                    } else {
+                        // ถ้าไม่มีให้ค้นหาวันล่าสุด 
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date = (SELECT MAX(attendance_date) FROM attendance)  AND room_id = ".$_SESSION['room_id']."
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                        $result = $connect->query($sql);
+                    }
                 }else{
-                    $sql = "SELECT * FROM attendance";
-                    $result = $connect->query($sql);
+                    if (isset($_SESSION['day_attendance']) && isset($_SESSION['day_attendance_end'])) {
+                        $day_attendance = $_SESSION['day_attendance'];
+                        $day_attendance_end = $_SESSION['day_attendance_end'];
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date BETWEEN '$day_attendance' AND '$day_attendance_end' 
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                       
+                        $result = $connect->query($sql);
+                    } else if (isset($_SESSION['day_attendance_end'])) {
+                        $day_attendance_end = $_SESSION['day_attendance_end'];
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date = '$day_attendance_end' 
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                        $result = $connect->query($sql);
+                    } else if (isset($_SESSION['day_attendance'])) {
+                        $day_attendance = $_SESSION['day_attendance'];
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date = '$day_attendance' 
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                        $result = $connect->query($sql);
+                    } else {
+                        // ถ้าไม่มีให้ค้นหาวันล่าสุด 
+                        $sql = "SELECT * FROM attendance 
+                                WHERE attendance_date = (SELECT MAX(attendance_date) FROM attendance) 
+                                ORDER BY attendance_date ASC";  // Order by attendance_date ascending
+                        $result = $connect->query($sql);
+                    }
                 }
+
+
                 $sqlroom = "SELECT * FROM room ";
                 $resultroom = $connect->query($sqlroom);
 
