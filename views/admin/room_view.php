@@ -1,10 +1,33 @@
 <?php
 include '../../config/database.php';
+
+if (!isset($_GET['id'])) {
+    die("Error: Room ID not provided.");
+}
+
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM room WHERE room_id =" . $id;
-$result = $connect->query($sql);
+$sql = "SELECT * FROM room WHERE room_id = ?";
+$stmt = $connect->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
+    die("Error: Room not found.");
+}
+
 $row = $result->fetch_assoc();
+
+// Get the next room_id
+$sql_next_room = "SELECT * FROM room WHERE room_id > ? ORDER BY room_id ASC LIMIT 1";
+$stmt_next_room = $connect->prepare($sql_next_room);
+$stmt_next_room->bind_param("i", $id);
+$stmt_next_room->execute();
+$result_next_room = $stmt_next_room->get_result();
+$next_room_exists = $result_next_room->num_rows > 0;
+$next_room = $result_next_room->fetch_assoc();
+$next_room_id = $next_room ? $next_room['room_id'] : null;
 
 ?>
 
@@ -62,16 +85,25 @@ $row = $result->fetch_assoc();
                                         </tr>
                                     <?php } ?>
                                 </table>
+
                                 <div class="flex gap-4">
+                                    <?php if ($next_room_exists): ?>
+                                        <div class="text-right mb-4">
+                                            <a href="promote_all_students.php?current_room_id=<?= $id ?>&next_room_id=<?= $next_room_id ?>"
+                                                class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                                onclick="return confirm('คุณแน่ใจหรือไม่ที่จะเลื่อนชั้นนักเรียนทั้งหมดในห้องนี้?');">
+                                                เลื่อนชั้นทั้งหมด
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
                                     <?php
                                     echo '<a href="student_add.php?room_id=' . $id . '" class="px-4 py-2 bg-blue-600 text-white border border-blue-500 rounded hover:bg-blue-700 focus:outline-none">เพิ่มข้อมูลนักเรียน</a>';
-                                    if ($_SESSION['role'] == '1')
-                                    {
-                                        echo '<a href="http://'. $_SERVER['HTTP_HOST'].'/little-kids/views/admin/room_manage.php"   class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
-                                    }else{
-                                        echo '<a href="http://'. $_SERVER['HTTP_HOST'].'/little-kids/views/teacher/student.php"  class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
+                                    if ($_SESSION['role'] == '1') {
+                                        echo '<a href="http://' . $_SERVER['HTTP_HOST'] . '/little-kids/views/admin/room_manage.php"   class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
+                                    } else {
+                                        echo '<a href="http://' . $_SERVER['HTTP_HOST'] . '/little-kids/views/teacher/student.php"  class="px-4 py-2 bg-red-600 text-white border border-red-500 rounded hover:bg-red-700 focus:outline-none">กลับหน้าหลัก</a>';
                                     }
-                                    
+
                                     ?>
                                 </div>
                             </div>
@@ -83,7 +115,7 @@ $row = $result->fetch_assoc();
                                     <tr>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จำนวน</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อนักเรียน</th>
-                                        <th class = "py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">จัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -119,6 +151,18 @@ $row = $result->fetch_assoc();
         <!--end of project-->
     </main>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_GET['promoted']) && $_GET['promoted'] == 'bulk_success'): ?>
+            Swal.fire({
+                title: 'สำเร็จ!',
+                text: 'เลื่อนชั้นนักเรียนทั้งหมดเรียบร้อยแล้ว',
+                icon: 'success',
+                confirmButtonText: 'ตกลง'
+            });
+        <?php endif; ?>
+    });
+</script>
 
 </html>
 
