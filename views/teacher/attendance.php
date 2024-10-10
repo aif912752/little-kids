@@ -6,7 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>จัดการข้อมูลผู้ดูแลระบบ</title>
+    <style>
+        .dataTables_length select {
+            width: 50px;
+            /* ทำให้ขนาดของ select ปรับตามเนื้อหา */
 
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
@@ -122,7 +128,7 @@
                                 <div class ="w-full p-3">
                                     
                                     <select name='room_id' id="room_id" class="w-full border border-gray-200 p-2">
-                                        <option value="">เลือกห้อง</option>
+                                        
                                         <?php
                                         if ($resultroom->num_rows > 0) {
                                             while ($rowroom = $resultroom->fetch_assoc()) {
