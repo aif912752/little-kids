@@ -111,9 +111,6 @@
 
                 $sqlroom = "SELECT * FROM room ";
                 $resultroom = $connect->query($sqlroom);
-
-
-
 ?>
             <div class=" w-full page-wrapper xl:px-6 px-0">
 
@@ -125,8 +122,7 @@
                     <div class="flex flex-col mt-8">
                         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                             <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
-                                <div class ="w-full p-3">
-                                    
+                                <div class ="w-full p-3"> 
                                     <select name='room_id' id="room_id" class="w-full border border-gray-200 p-2">
                                         
                                         <?php

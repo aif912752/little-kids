@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-    <title>รายงานการมาเรียนกิจกรรมของนักเรียน</title>
+    <title>รายงานการมาเรียนของนักเรียน</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
@@ -80,6 +80,7 @@
     SELECT 
         YEAR(attendance_date) AS year, 
         MONTH(attendance_date) AS month,
+        SUM(CASE WHEN status = 'มา' THEN 1 ELSE 0 END) AS total_present,
         SUM(CASE WHEN status = 'ขาด' THEN 1 ELSE 0 END) AS total_absent,
         SUM(CASE WHEN status = 'ลา' THEN 1 ELSE 0 END) AS total_leave,
         SUM(CASE WHEN status = 'สาย' THEN 1 ELSE 0 END) AS total_late
@@ -96,6 +97,7 @@
                                 <thead class="bg-slate-200 border border-rounded">
                                     <tr>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">เดือน</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">มา</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ขาด</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ลา</th>
                                         <th class="py-2 border-b-2 border-gray-200 bg-gray-100">มาสาย</th>
@@ -108,6 +110,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             $month = $row['month'];
                                             $year = $row['year'];
+                                            $total_present = $row['total_present'];
                                             $total_absent = $row['total_absent'];
                                             $total_leave = $row['total_leave'];
                                             $total_late = $row['total_late'];
@@ -117,6 +120,7 @@
 
                                             echo "<tr>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . getThaiMonth($month) . " " . $year . "</td>";
+                                            echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_present . "</td>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_absent . "</td>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_leave . "</td>";
                                             echo "<td class='py-5 border-b border-gray-200 bg-white'>" . $total_late . "</td>";
@@ -126,9 +130,94 @@
                                     ?>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
 
+
+                            
+                        </div>
+                        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg  bg-white p-3">
+                    <?php 
+
+                                if(isset($_GET['month'])){
+                                    $_SESSION['month'] = $_GET['month'];
+                                }
+
+                                if(isset($_SESSION['month'])){
+                                    $sql2 = "SELECT 
+                                    student_id,
+                                    student_name,
+                                    student_lastname,
+                                    SUM(CASE WHEN status = 'มา' THEN 1 ELSE 0 END) AS total_present,
+                                    SUM(CASE WHEN status = 'สาย' THEN 1 ELSE 0 END) AS total_late,
+                                    SUM(CASE WHEN status = 'ลา' THEN 1 ELSE 0 END) AS total_leave,
+                                    SUM(CASE WHEN status = 'ขาด' THEN 1 ELSE 0 END) AS total_absent
+                                FROM 
+                                    attendance WHERE attendance_date BETWEEN '".$_SESSION['month']."-01'  AND '".$_SESSION['month']."-31'
+                                GROUP BY 
+                                    student_id, student_name, student_lastname";  
+                                    
+                                }
+                                else{
+                                    $sql2 = "SELECT 
+                                    student_id,
+                                    student_name,
+                                    student_lastname,
+                                    SUM(CASE WHEN status = 'มา' THEN 1 ELSE 0 END) AS total_present,
+                                    SUM(CASE WHEN status = 'สาย' THEN 1 ELSE 0 END) AS total_late,
+                                    SUM(CASE WHEN status = 'ลา' THEN 1 ELSE 0 END) AS total_leave,
+                                    SUM(CASE WHEN status = 'ขาด' THEN 1 ELSE 0 END) AS total_absent
+                                FROM 
+                                    attendance WHERE attendance_date BETWEEN '".date('Y-m')."-01'  AND '".date('Y-m')."-31'
+                                GROUP BY 
+                                    student_id, student_name, student_lastname";
+                                }
+                               
+                                $result2 = $connect->query($sql2);
+
+                        
+                            ?>
+                            <div class="flex justify-between p-3">
+                                <div>
+                                <input type="month" onchange="refreshWithMonth(this.value)"  class="border border-gray-200 rounded p-2" id="month" name="month" value="<?php echo isset($_SESSION['month']) ? $_SESSION['month'] : date('Y-m'); ?>">
+                                </div>
+                                <a href="javascript:void(0)" onclick="openPrintWindow2()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ปริ้นรายงาน</a>
+                            </div>
+                            <table id="example2" class="display pt-8" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ชื่อนักเรียน</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">มา</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ขาด</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">ลา</th>
+                                        <th class="py-2 border-b-2 border-gray-200 bg-gray-100">มาสาย</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        if($result2 -> num_rows > 0){
+                                            while($row = $result2 -> fetch_assoc()){
+                                                $student_id = $row['student_id'];
+                                                $student_name = $row['student_name'];
+                                                $student_lastname = $row['student_lastname'];
+
+                                                $total_present = $row['total_present'];
+                                                $total_late = $row['total_late'];
+                                                $total_leave = $row['total_leave'];
+                                                $total_absent = $row['total_absent'];
+
+                                                echo "<tr>";
+                                                echo "<td class='py-5 border-b border-gray-200 bg-white'>".$student_name." ".$student_lastname."</td>";
+                                                echo "<td class='py-5 border-b border-gray-200 bg-white'>".$total_present."</td>";
+                                                echo "<td class='py-5 border-b border-gray-200 bg-white'>".$total_absent."</td>";
+                                                echo "<td class='py-5 border-b border-gray-200 bg-white'>".$total_leave."</td>";
+                                                echo "<td class='py-5 border-b border-gray-200 bg-white'>".$total_late."</td>";
+                                                echo "</tr>";
+                                            }
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                    </div>
+                    </div>
 
                 </main>
 
@@ -151,6 +240,7 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable(); // เรียกใช้งาน DataTables
+        $('#example2').DataTable(); // เรียกใช้งาน DataTables
     });
 </script>
 
@@ -274,7 +364,21 @@ if (isset($_SESSION['alert'])) {
         }
     });
 </script>
+<?php
+function getThaiMonth2($date) {
+    // แปลงวันที่ให้เป็นเดือนและปีพุทธศักราช
+    $timestamp = strtotime($date . "-01"); // เพิ่มวันที่เพราะ input type="month" คืนค่าเป็น Y-m
+    $thaiMonths = [
+        1 => 'มกราคม', 2 => 'กุมภาพันธ์', 3 => 'มีนาคม', 4 => 'เมษายน',
+        5 => 'พฤษภาคม', 6 => 'มิถุนายน', 7 => 'กรกฎาคม', 8 => 'สิงหาคม',
+        9 => 'กันยายน', 10 => 'ตุลาคม', 11 => 'พฤศจิกายน', 12 => 'ธันวาคม'
+    ];
+    $month = (int)date('m', $timestamp);
+    $year = (int)date('Y', $timestamp) + 543; // เพิ่ม 543 ปีสำหรับปีพุทธศักราช
 
+    return $thaiMonths[$month] . ' ' . $year;
+}
+?>
 <!-- JavaScript สำหรับเปิดหน้าใหม่และปริ้น -->
 <script>
     function openPrintWindow() {
@@ -296,5 +400,30 @@ if (isset($_SESSION['alert'])) {
         newWindow.document.close();
         newWindow.focus();
         newWindow.print();
+    }
+    function openPrintWindow2() {
+        // ดึงข้อมูลตารางออกมาเป็น HTML
+        var printContents = document.getElementById('example2').outerHTML;
+
+        // สร้างหน้าต่างใหม่
+        var newWindow = window.open('', '_blank', 'width=800, height=600');
+
+        // เขียนข้อมูล HTML ลงในหน้าต่างใหม่ พร้อมหัวข้อ
+        newWindow.document.write('<html><head><title>Print Report</title>');
+        newWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; text-align: left; border: 1px solid #ddd; } th { background-color: #f2f2f2; } h1 { text-align: center; margin-bottom: 20px; }</style>');
+        newWindow.document.write('</head><body>');
+        newWindow.document.write('<center><img src="../../assets/images/5.jpg" width="50"><br><br>รายงานการมาเรียนของนักเรียน </center>'); // หัวข้อรายงาน
+        newWindow.document.write('เดือน <?php echo isset($_SESSION['month']) ? getThaiMonth2($_SESSION['month']) : getThaiMonth2(date('Y-m')); ?> <br><br>'); // หัวข้อรายงาน
+        newWindow.document.write(printContents);
+        newWindow.document.write('</body></html>');
+
+        // รอให้โหลดข้อมูลเสร็จแล้วสั่งปริ้น
+        newWindow.document.close();
+        newWindow.focus();
+        newWindow.print();
+    }
+    function refreshWithMonth(selectedMonth) {
+        // รีเฟรชหน้าเว็บพร้อมส่งค่า month ผ่าน $_GET
+        window.location.href = "report_attendance.php?month=" + selectedMonth;
     }
 </script>
