@@ -22,13 +22,18 @@
             <?php include '../../src/navbar_teacher.php'; ?>
             <?php  
                 include '../../config/database.php';
+                if(empty($_SESSION['room_id']))
+                {   
+                    unset($_SESSION['room_id']); 
+                }
                 if(isset($_GET['day_attendance'])){
                     $_SESSION['day_attendance'] = $_GET['day_attendance'];
                 }
                 if(isset($_GET['day_attendance_end'])){
                     $_SESSION['day_attendance_end'] = $_GET['day_attendance_end'];
                 }
-
+                
+               
                 // ค้นหา ห้องทั้งหมด
                 if(isset($_GET['room_id'])){
                     $_SESSION['room_id'] = $_GET['room_id'];
@@ -224,9 +229,15 @@
         });
 
         document.getElementById('room_id').addEventListener('change', function(event) {
+
             const selectedRoom = event.target.value;
-            console.log(selectedRoom);
-            window.location.href = `attendance.php?room_id=${selectedRoom}`;
+            if(event.target.value != ''){
+                console.log(selectedRoom);
+                window.location.href = `attendance.php?room_id=${selectedRoom}`;
+            }else{
+                window.location.href = `attendance.php`;
+            }
+           
         });
 
 
