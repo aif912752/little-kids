@@ -3,10 +3,8 @@
 include('../../config/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $teacherId = $_POST['selected_teacher_id'];
-
     // เตรียมคำสั่ง SQL สำหรับบันทึกหัวข้อและคำถาม
-    $sqlEvaluation = "INSERT INTO evaluation (techer_id, evaluation_name, score, evaluation_date, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW(), NOW())";
+    $sqlEvaluation = "INSERT INTO evaluation (evaluation_name, score, evaluation_date, created_at, updated_at) VALUES (?, ?, NOW(), NOW(), NOW())";
     $sqlActivity = "INSERT INTO evaluation_activity (id, activity_id, evaluation_name, evaluation_score) VALUES (?, ?, ?, ?)";
 
     // เริ่ม transaction
@@ -39,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $scoreStr = strval($totalScore);
 
             // บันทึกหัวข้อลงในตาราง evaluation
-            $stmtEvaluation->bind_param("iss", $teacherId, $topicName, $scoreStr);
+            $stmtEvaluation->bind_param("ss", $topicName, $scoreStr);
             $stmtEvaluation->execute();
 
             // ดึง id ของหัวข้อที่เพิ่งบันทึกลงไป (จะใช้เป็น activity_id)
@@ -83,9 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // แสดงป๊อปอัพเมื่อบันทึกสำเร็จและเปลี่ยนเส้นทางกลับไปยัง evaluation.php
         echo "<script>
-            alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
-            window.location.href = 'evaluation.php';
-        </script>";
+       alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+       window.location.href = 'evaluation.php';
+     </script>";
     } catch (Exception $e) {
         // Rollback ในกรณีที่เกิดข้อผิดพลาด
         $connect->rollback();
@@ -97,4 +95,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $connect->close();
-?>
